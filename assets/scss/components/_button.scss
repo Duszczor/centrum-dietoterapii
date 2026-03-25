@@ -1,0 +1,52 @@
+@use "../base/variables" as *;
+
+// =============================================================================
+// BUTTON — Reusable Button Component
+// =============================================================================
+
+.btn {
+  display: inline-block;
+  padding: $spacing-md $spacing-2xl;
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  line-height: 1;
+  border-radius: $border-radius-lg;
+  border: 2px solid transparent;
+  transition: $transition-base;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 0.25rem;
+  }
+
+  // Primary — solid green
+  &--primary {
+    background-color: $color-primary;
+    color: $color-white;
+    border-color: $color-primary;
+
+    &:hover {
+      background-color: $color-primary-dark;
+      border-color: $color-primary-dark;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba($color-primary, 0.35);
+    }
+  }
+
+  // Outline — transparent with white border (for use on dark backgrounds)
+  &--outline {
+    background-color: transparent;
+    color: $color-white;
+    border-color: $color-white;
+
+    &:hover {
+      background-color: $color-white;
+      color: $color-primary;
+      transform: translateY(-2px);
+    }
+  }
+}

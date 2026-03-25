@@ -1,0 +1,29 @@
+@use "../base/variables" as *;
+
+// =============================================================================
+// GRID — Layout Utilities
+// Container, section spacing, and global layout helpers.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Container
+// Centered wrapper with max-width and horizontal padding
+// -----------------------------------------------------------------------------
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin-inline: auto;
+  padding-inline: $container-padding;
+}
+
+// -----------------------------------------------------------------------------
+// Section
+// Consistent vertical spacing for all page sections
+// -----------------------------------------------------------------------------
+.section {
+  padding-block: $spacing-3xl;
+
+  @media (max-width: $breakpoint-md) {
+    padding-block: $spacing-2xl;
+  }
+}

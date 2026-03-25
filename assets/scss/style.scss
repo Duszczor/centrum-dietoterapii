@@ -1,0 +1,15 @@
+// =============================================================================
+// MAIN STYLESHEET — Import Order Matters
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// 1. Base — Variables first, everything else depends on them
+// -----------------------------------------------------------------------------
+@use "base/variables" as *;
+@use "base/reset";
+@use "base/typography";
+@use "layout/grid";
+@use "layout/header";
+@use "components/button";
+@use "components/nav";
+@use "components/hero";

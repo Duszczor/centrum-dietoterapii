@@ -1,0 +1,17 @@
+{
+  "name": "dietitian-theme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "sass assets/scss/style.scss assets/dist/style.css --watch",
+    "build": "sass assets/scss/style.scss assets/dist/style.css --style=compressed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "sass": "^1.97.3"
+  }
+}

@@ -1,0 +1,183 @@
+@use "../base/variables" as *;
+
+// =============================================================================
+// NAV — Primary Navigation Component
+// =============================================================================
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 88px;
+  gap: $spacing-lg;
+
+  &__logo {
+    position: relative;
+    z-index: 120;
+    flex-shrink: 0;
+
+    img {
+      width: auto;
+      max-height: 52px;
+    }
+  }
+
+  &__logo-text {
+    font-family: $font-heading;
+    font-size: clamp(1.25rem, 1rem + 0.9vw, 1.75rem);
+    font-weight: $font-weight-bold;
+    color: $color-white;
+    letter-spacing: 0.02em;
+    transition: $transition-fast;
+
+    &:hover {
+      color: $color-primary-light;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: clamp($spacing-lg, 1vw + 1rem, $spacing-xl);
+
+    li {
+      display: flex;
+      align-items: center;
+    }
+
+    a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-family: $font-body;
+      font-size: $font-size-base;
+      font-weight: $font-weight-medium;
+      color: $color-white;
+      transition: $transition-fast;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0.35rem;
+        width: 100%;
+        height: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        background-color: currentColor;
+        transition: transform 0.25s ease;
+      }
+
+      &:hover::after,
+      &:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 0.35rem;
+      }
+    }
+
+    .current-menu-item > a::after,
+    .current_page_item > a::after,
+    .current-menu-ancestor > a::after,
+    .current-page-ancestor > a::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &__toggle {
+    position: relative;
+    z-index: 120;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    color: $color-white;
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 0.25rem;
+      border-radius: 999px;
+    }
+  }
+
+  &__toggle-bar {
+    display: block;
+    width: 26px;
+    height: 2px;
+    border-radius: 999px;
+    background-color: currentColor;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease;
+  }
+
+  &__toggle[aria-expanded="true"] {
+    .site-nav__toggle-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .site-nav__toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-nav__toggle-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  .site-header.is-scrolled & {
+    &__logo-text,
+    &__menu a,
+    &__toggle {
+      color: $color-text;
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    min-height: 80px;
+
+    &__toggle {
+      display: inline-flex;
+    }
+
+    &__menu {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: $spacing-xl;
+      padding: calc($spacing-3xl + 4rem) $container-padding $spacing-3xl;
+      background: linear-gradient(180deg, #f7f2ea 0%, #ffffff 100%);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-1rem);
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+      z-index: 110;
+
+      a {
+        color: $color-text;
+        font-size: $font-size-xl;
+      }
+
+      &.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+    }
+  }
+}

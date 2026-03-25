@@ -1,0 +1,74 @@
+@use "variables" as *;
+
+// =============================================================================
+// TYPOGRAPHY — Global Text Styles
+// Defines headings, body text, and utility text classes.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Google Fonts Import
+// -----------------------------------------------------------------------------
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap");
+
+// -----------------------------------------------------------------------------
+// Headings
+// -----------------------------------------------------------------------------
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-heading;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-heading;
+  color: $color-text;
+}
+
+h1 {
+  font-size: $font-size-4xl;
+}
+h2 {
+  font-size: $font-size-3xl;
+}
+h3 {
+  font-size: $font-size-2xl;
+}
+h4 {
+  font-size: $font-size-xl;
+}
+
+// -----------------------------------------------------------------------------
+// Body Text
+// -----------------------------------------------------------------------------
+p {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text;
+}
+
+// -----------------------------------------------------------------------------
+// Responsive Typography
+// Scale down headings on smaller screens
+// -----------------------------------------------------------------------------
+@media (max-width: $breakpoint-md) {
+  h1 {
+    font-size: $font-size-3xl;
+  }
+  h2 {
+    font-size: $font-size-2xl;
+  }
+  h3 {
+    font-size: $font-size-xl;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  h1 {
+    font-size: $font-size-2xl;
+  }
+  h2 {
+    font-size: $font-size-xl;
+  }
+}
