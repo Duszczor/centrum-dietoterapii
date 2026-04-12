@@ -1,6 +1,4 @@
-<?php
-$contact_banner_image = esc_url(get_template_directory_uri() . '/assets/images/contact-banner/contact-banner.jpg');
-?>
+<?php $contact_banner_image = esc_url(dietitian_get_asset_uri('images/contact-banner/contact-banner.jpg')); ?>
 
 <section
     class="contact-banner"
@@ -13,13 +11,13 @@ $contact_banner_image = esc_url(get_template_directory_uri() . '/assets/images/c
     <div class="contact-banner__container">
         <div class="contact-banner__content">
             <h2 class="contact-banner__title" id="contact-banner-title">
-                <?php esc_html_e('Zadbajmy o Twoje zdrowie już dziś!', 'dietitian-theme'); ?>
+                Zadbajmy o Twoje zdrowie już dziś!
             </h2>
 
             <span class="contact-banner__line" aria-hidden="true"></span>
 
-            <a href="#contact" class="hero__cta contact-banner__cta">
-                <?php esc_html_e('Kontakt', 'dietitian-theme'); ?>
+            <a href="#contact" class="btn btn--primary contact-banner__cta">
+                Kontakt
             </a>
         </div>
     </div>

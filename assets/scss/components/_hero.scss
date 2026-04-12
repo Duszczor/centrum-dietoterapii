@@ -94,28 +94,8 @@
   }
 
   &__cta {
-    display: inline-flex;
-    align-items: center;
-    padding: 1.05rem 2.75rem;
-    background: linear-gradient(135deg, #6faf9d 0%, #4e8f7f 100%);
-    border: none;
-    border-radius: $border-radius-pill;
-    color: $color-white;
-    font-weight: $font-weight-medium;
-    font-size: clamp(0.95rem, 1vw, 1.05rem);
-    text-decoration: none;
     letter-spacing: 0.04em;
-    box-shadow: 0 4px 18px rgba(53, 90, 80, 0.35);
-    transition:
-      filter 0.25s ease,
-      box-shadow 0.25s ease,
-      transform 0.25s ease;
-
-    &:hover {
-      filter: brightness(0.9);
-      box-shadow: 0 8px 28px rgba(53, 90, 80, 0.5);
-      transform: scale(1.03);
-    }
+    font-size: clamp(0.95rem, 1vw, 1.05rem);
   }
 
   &__scroll {

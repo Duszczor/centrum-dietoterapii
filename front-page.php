@@ -1,12 +1,9 @@
 <?php get_header(); ?>
 
 <main id="main-content">
-    <?php get_template_part('template-parts/sections/hero'); ?>
-    <?php get_template_part('template-parts/sections/offer-cards'); ?>
-    <?php get_template_part('template-parts/sections/contact-banner'); ?>
-    <?php get_template_part('template-parts/sections/consultation-preview'); ?>
-    <?php get_template_part('template-parts/sections/pricing'); ?>
-    <?php get_template_part('template-parts/sections/contact'); ?>
+    <?php foreach (dietitian_get_home_sections() as $section_slug) : ?>
+        <?php get_template_part('template-parts/sections/' . $section_slug); ?>
+    <?php endforeach; ?>
 </main>
 
 <?php get_footer(); ?>

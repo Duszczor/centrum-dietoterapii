@@ -1,15 +1,17 @@
-<nav class="site-nav" aria-label="<?php esc_attr_e('Primary Navigation', 'dietitian-theme'); ?>">
+<nav class="site-nav" aria-label="Primary Navigation">
+
+    <?php $navigation_items = dietitian_get_primary_navigation_items(); ?>
 
     <a href="<?php echo esc_url(home_url('/')); ?>" class="site-nav__logo" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
         <img
-            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo/logo.png'); ?>"
+            src="<?php echo esc_url(dietitian_get_asset_uri('images/logo/logo.png')); ?>"
             alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
             class="site-nav__logo-image">
     </a>
 
     <button
         class="site-nav__toggle"
-        aria-label="<?php esc_attr_e('Toggle navigation', 'dietitian-theme'); ?>"
+        aria-label="Toggle navigation"
         aria-expanded="false"
         aria-controls="primary-menu"
         type="button">
@@ -19,11 +21,15 @@
     </button>
 
     <ul class="site-nav__menu" id="primary-menu">
-        <li><a href="#about"><?php esc_html_e('O mnie', 'dietitian-theme'); ?></a></li>
-        <li><a href="#offer"><?php esc_html_e('Oferta', 'dietitian-theme'); ?></a></li>
-        <li><a href="#knowledge-base"><?php esc_html_e('Baza wiedzy', 'dietitian-theme'); ?></a></li>
+        <?php foreach ($navigation_items as $item) : ?>
+            <li>
+                <a href="<?php echo esc_attr($item['href']); ?>" class="site-nav__link">
+                    <?php echo esc_html($item['label']); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
     </ul>
 
-    <a href="#contact" class="site-nav__cta"><?php esc_html_e('Kontakt', 'dietitian-theme'); ?></a>
+    <a href="#contact" class="site-nav__cta">Kontakt</a>
 
 </nav>

@@ -1,6 +1,8 @@
 <?php
 $privacy_url = function_exists('get_privacy_policy_url') ? get_privacy_policy_url() : '';
 $home_url = home_url('/');
+$contact = dietitian_get_contact_data();
+$footer_navigation_items = dietitian_get_footer_navigation_items();
 ?>
 
 <footer class="site-footer" aria-labelledby="site-footer-title">
@@ -20,9 +22,9 @@ $home_url = home_url('/');
             <div class="site-footer__column">
                 <p class="site-footer__eyebrow">Kontakt</p>
                 <div class="site-footer__contact-list">
-                    <a href="tel:+48668156568" class="site-footer__link">668-156-568</a>
-                    <a href="mailto:kontakt@centrum-dietoterapii.pl" class="site-footer__link">kontakt@centrum-dietoterapii.pl</a>
-                    <p class="site-footer__meta">Łowicz</p>
+                    <a href="<?php echo esc_url($contact['phone_href']); ?>" class="site-footer__link"><?php echo esc_html($contact['phone_display']); ?></a>
+                    <a href="<?php echo esc_url($contact['email_href']); ?>" class="site-footer__link"><?php echo esc_html($contact['email_display']); ?></a>
+                    <p class="site-footer__meta"><?php echo esc_html($contact['city']); ?></p>
                     <p class="site-footer__meta">Konsultacje stacjonarne i online</p>
                 </div>
             </div>
@@ -30,11 +32,11 @@ $home_url = home_url('/');
             <nav class="site-footer__column" aria-label="Skróty w stopce">
                 <p class="site-footer__eyebrow">Na skróty</p>
                 <ul class="site-footer__nav-list">
-                    <li><a href="<?php echo esc_url($home_url); ?>" class="site-footer__link">Start</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/#offer')); ?>" class="site-footer__link">Oferta</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/#knowledge-base')); ?>" class="site-footer__link">Jak przebiega wizyta</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/#pricing')); ?>" class="site-footer__link">Cennik</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/#contact')); ?>" class="site-footer__link">Kontakt</a></li>
+                    <?php foreach ($footer_navigation_items as $item) : ?>
+                        <li>
+                            <a href="<?php echo esc_url($item['href']); ?>" class="site-footer__link"><?php echo esc_html($item['label']); ?></a>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </nav>
 
@@ -42,8 +44,8 @@ $home_url = home_url('/');
                 <p class="site-footer__eyebrow">Pierwszy krok</p>
                 <p class="site-footer__cta-text">Masz pytanie przed rozpoczęciem współpracy? Skontaktuj się i wybierz najlepszą formę konsultacji.</p>
                 <div class="site-footer__cta-group">
-                    <a href="tel:+48668156568" class="site-footer__cta">Zadzwoń</a>
-                    <a href="mailto:kontakt@centrum-dietoterapii.pl" class="site-footer__secondary-link">Napisz e-mail</a>
+                    <a href="<?php echo esc_url($contact['phone_href']); ?>" class="btn btn--primary site-footer__cta">Zadzwoń</a>
+                    <a href="<?php echo esc_url($contact['email_href']); ?>" class="btn btn--footer-outline site-footer__secondary-link">Napisz e-mail</a>
                 </div>
             </div>
         </div>

@@ -34,7 +34,7 @@ function dietitian_setup(): void
 
     // Register navigation menu locations
     register_nav_menus([
-        'primary' => __('Primary Menu', 'dietitian-theme'),
+        'primary' => 'Primary Menu',
     ]);
 }
 

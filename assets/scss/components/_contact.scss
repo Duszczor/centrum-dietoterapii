@@ -289,31 +289,8 @@
   }
 
   &__ghost-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     min-width: 146px;
-    padding: 0.95rem 1.35rem;
-    border-radius: vars.$border-radius-pill;
-    border: 1px solid rgba(74, 124, 111, 0.2);
-    color: vars.$color-primary-dark;
-    background-color: rgba(255, 255, 255, 0.78);
-    font-family: vars.$font-body;
-    font-size: 0.98rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition:
-      border-color 0.25s ease,
-      background-color 0.25s ease,
-      color 0.25s ease,
-      transform 0.25s ease;
-
-    &:hover,
-    &:focus-visible {
-      border-color: rgba(74, 124, 111, 0.42);
-      background-color: vars.$color-white;
-      transform: translateY(-1px);
-    }
+    justify-content: center;
   }
 
   &__map-shell {
