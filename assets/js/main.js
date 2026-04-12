@@ -51,178 +51,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  if (navigationToggle && navigationMenu) {
-    const navigationLinks = Array.from(
-      navigationMenu.querySelectorAll("a[href]"),
-    );
-
-    const syncNavigationState = (isOpen) => {
-      const shouldUseMobileMenu = mobileNavigationQuery.matches;
-
-      navigationMenu.classList.toggle("is-open", shouldUseMobileMenu && isOpen);
-      navigationToggle.setAttribute(
-        "aria-expanded",
-        shouldUseMobileMenu && isOpen ? "true" : "false",
-      );
-      navigationMenu.setAttribute(
-        "aria-hidden",
-        shouldUseMobileMenu && !isOpen ? "true" : "false",
-      );
-      document.body.classList.toggle(
-        "no-scroll",
-        shouldUseMobileMenu && isOpen,
-      );
-    };
-
-    const closeNavigation = ({ returnFocus = false } = {}) => {
-      syncNavigationState(false);
-
-      if (returnFocus) {
-        navigationToggle.focus();
-      }
-    };
-
-    const openNavigation = () => {
-      syncNavigationState(true);
-
-      if (navigationLinks.length > 0) {
-        navigationLinks[0].focus();
-      }
-    };
-
-    navigationToggle.addEventListener("click", () => {
-      const isOpen = navigationToggle.getAttribute("aria-expanded") === "true";
-
-      if (isOpen) {
-        closeNavigation({ returnFocus: true });
-        return;
-      }
-
-      openNavigation();
+  if (window.Dietitian?.initNavigation) {
+    window.Dietitian.initNavigation({
+      navigationToggle,
+      navigationMenu,
+      mobileNavigationQuery,
     });
-
-    navigationLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        closeNavigation();
-      });
-    });
-
-    document.addEventListener("click", (event) => {
-      const isOpen = navigationToggle.getAttribute("aria-expanded") === "true";
-
-      if (
-        !isOpen ||
-        navigationMenu.contains(event.target) ||
-        navigationToggle.contains(event.target)
-      ) {
-        return;
-      }
-
-      closeNavigation();
-    });
-
-    document.addEventListener("keydown", (event) => {
-      const isOpen = navigationToggle.getAttribute("aria-expanded") === "true";
-
-      if (!mobileNavigationQuery.matches || !isOpen) {
-        return;
-      }
-
-      if (event.key === "Escape") {
-        event.preventDefault();
-        closeNavigation({ returnFocus: true });
-        return;
-      }
-
-      if (event.key !== "Tab" || navigationLinks.length === 0) {
-        return;
-      }
-
-      const firstLink = navigationLinks[0];
-      const lastLink = navigationLinks[navigationLinks.length - 1];
-
-      if (event.shiftKey && document.activeElement === firstLink) {
-        event.preventDefault();
-        lastLink.focus();
-      }
-
-      if (!event.shiftKey && document.activeElement === lastLink) {
-        event.preventDefault();
-        firstLink.focus();
-      }
-    });
-
-    const handleNavigationViewportChange = (event) => {
-      if (!event.matches) {
-        closeNavigation();
-        navigationMenu.removeAttribute("aria-hidden");
-        return;
-      }
-
-      syncNavigationState(false);
-    };
-
-    if (typeof mobileNavigationQuery.addEventListener === "function") {
-      mobileNavigationQuery.addEventListener(
-        "change",
-        handleNavigationViewportChange,
-      );
-    } else if (typeof mobileNavigationQuery.addListener === "function") {
-      mobileNavigationQuery.addListener(handleNavigationViewportChange);
-    }
-
-    handleNavigationViewportChange(mobileNavigationQuery);
   }
 
-  inPageLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const targetSelector = link.getAttribute("href");
-
-      if (!targetSelector || targetSelector === "#") {
-        return;
-      }
-
-      const targetElement = document.querySelector(targetSelector);
-
-      if (!targetElement) {
-        return;
-      }
-
-      event.preventDefault();
-      const targetTop =
-        targetElement.getBoundingClientRect().top +
-        window.scrollY -
-        getHeaderOffset();
-
-      window.scrollTo({ top: targetTop, behavior: "smooth" });
-      setActiveLink(targetSelector);
+  if (window.Dietitian?.initSmoothScroll) {
+    window.Dietitian.initSmoothScroll({
+      inPageLinks,
+      getHeaderOffset,
+      setActiveLink,
     });
-  });
+  }
 
-  if ("IntersectionObserver" in window && sectionLinks.length > 0) {
-    const observedSections = sectionLinks
-      .map((link) => document.querySelector(link.getAttribute("href")))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (entryA, entryB) =>
-              entryB.intersectionRatio - entryA.intersectionRatio,
-          )[0];
-
-        if (visibleEntry?.target?.id) {
-          setActiveLink(`#${visibleEntry.target.id}`);
-        }
-      },
-      {
-        rootMargin: `-${getHeaderOffset()}px 0px -45% 0px`,
-        threshold: [0.2, 0.45, 0.7],
-      },
-    );
-
-    observedSections.forEach((section) => observer.observe(section));
+  if (window.Dietitian?.initSectionObserver) {
+    window.Dietitian.initSectionObserver({
+      sectionLinks,
+      getHeaderOffset,
+      setActiveLink,
+    });
   }
 });

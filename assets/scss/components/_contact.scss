@@ -1,17 +1,18 @@
-@use "../base/variables" as vars;
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
 
 .contact {
   padding: clamp(4.5rem, 8vw, 7rem) 0 clamp(5rem, 8vw, 7.5rem);
   background:
     radial-gradient(
       circle at top left,
-      rgba(232, 243, 240, 0.72),
+      rgba($color-primary-light, 0.72),
       transparent 32%
     ),
     linear-gradient(180deg, #fbfcf8 0%, #f3f5ec 100%);
 
   &__container {
-    max-width: 1240px;
+    max-width: $container-max-width-medium;
     margin: 0 auto;
     padding: 0 clamp(1rem, 4vw, 2rem);
   }
@@ -28,10 +29,9 @@
     justify-content: center;
     margin: 0 0 0.95rem;
     padding: 0.45rem 0.9rem;
-    border-radius: vars.$border-radius-pill;
-    background-color: rgba(74, 124, 111, 0.1);
-    color: vars.$color-primary-dark;
-    font-family: vars.$font-body;
+    border-radius: $border-radius-pill;
+    background-color: rgba($color-primary, 0.1);
+    color: $color-primary-dark;
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -40,18 +40,17 @@
 
   &__title {
     margin: 0;
-    font-family: vars.$font-heading;
+    font-family: $font-heading;
     font-size: clamp(2.15rem, 4vw, 3.3rem);
     line-height: 1.1;
-    color: vars.$color-text;
+    color: $color-text;
   }
 
   &__subtitle {
     margin: 1rem 0 0;
-    font-family: vars.$font-body;
     font-size: clamp(0.98rem, 1.5vw, 1.05rem);
     line-height: 1.65;
-    color: vars.$color-text-light;
+    color: $color-text-light;
   }
 
   &__grid {
@@ -63,11 +62,13 @@
   }
 
   &__card {
-    background-color: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(74, 124, 111, 0.12);
-    border-radius: 22px;
+    @include card-surface(
+      $border-color: rgba($color-primary, 0.12),
+      $radius: 22px,
+      $background: rgba($color-white, 0.88),
+      $shadow: 0 18px 40px rgba($color-primary-dark, 0.08)
+    );
     padding: clamp(1.5rem, 2.3vw, 2rem);
-    box-shadow: 0 18px 40px rgba(53, 90, 80, 0.08);
     backdrop-filter: blur(10px);
     transition:
       transform 0.25s ease,
@@ -75,50 +76,46 @@
       border-color 0.25s ease;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 24px 48px rgba(53, 90, 80, 0.12);
-      border-color: rgba(74, 124, 111, 0.2);
+      @include hover-lift(-2px, 0 24px 48px rgba($color-primary-dark, 0.12));
+      border-color: rgba($color-primary, 0.2);
     }
   }
 
   &__card--primary {
     background: linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
-    border-color: rgba(74, 124, 111, 0.24);
-    box-shadow: 0 24px 46px rgba(53, 90, 80, 0.16);
+    border-color: rgba($color-primary, 0.24);
+    box-shadow: 0 24px 46px rgba($color-primary-dark, 0.16);
 
     &:hover {
-      box-shadow: 0 28px 56px rgba(53, 90, 80, 0.2);
-      border-color: rgba(74, 124, 111, 0.3);
+      box-shadow: 0 28px 56px rgba($color-primary-dark, 0.2);
+      border-color: rgba($color-primary, 0.3);
     }
   }
 
   &__eyebrow {
     margin: 0 0 0.85rem;
-    font-family: vars.$font-body;
     font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: vars.$color-primary;
+    color: $color-primary;
   }
 
   &__card-title,
   &__map-title {
     margin: 0;
-    font-family: vars.$font-body;
     font-size: clamp(1.35rem, 2vw, 1.6rem);
     line-height: 1.15;
-    color: vars.$color-text;
+    color: $color-text;
     font-weight: 700;
   }
 
   &__card-intro,
   &__map-intro {
     margin: 0.75rem 0 0;
-    font-family: vars.$font-body;
     font-size: 0.98rem;
     line-height: 1.65;
-    color: vars.$color-text-light;
+    color: $color-text-light;
   }
 
   &__address {
@@ -127,10 +124,9 @@
     flex-direction: column;
     gap: 0.7rem;
     font-style: normal;
-    font-family: vars.$font-body;
     font-size: 1.08rem;
     line-height: 1.55;
-    color: vars.$color-text;
+    color: $color-text;
     font-weight: 600;
   }
 
@@ -146,10 +142,9 @@
     li {
       position: relative;
       padding-left: 1rem;
-      font-family: vars.$font-body;
       font-size: 0.98rem;
       line-height: 1.65;
-      color: vars.$color-text-light;
+      color: $color-text-light;
 
       &::before {
         content: "";
@@ -159,7 +154,7 @@
         width: 0.38rem;
         height: 0.38rem;
         border-radius: 50%;
-        background-color: vars.$color-primary;
+        background-color: $color-primary;
       }
     }
   }
@@ -178,8 +173,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: vars.$color-primary-light;
-    color: vars.$color-primary-dark;
+    background-color: $color-primary-light;
+    color: $color-primary-dark;
     font-size: 0.85rem;
     line-height: 1;
     margin-top: 0.05rem;
@@ -196,8 +191,7 @@
   &__microcopy,
   &__text {
     margin: 0;
-    font-family: vars.$font-body;
-    color: vars.$color-text-light;
+    color: $color-text-light;
     line-height: 1.75;
     font-size: 0.98rem;
   }
@@ -217,14 +211,13 @@
     display: inline-flex;
     align-items: flex-start;
     gap: 0.75rem;
-    color: vars.$color-text;
-    font-family: vars.$font-body;
+    color: $color-text;
     text-decoration: none;
     transition: color 0.2s ease;
 
     &:hover,
     &:focus-visible {
-      color: vars.$color-primary-dark;
+      color: $color-primary-dark;
     }
   }
 
@@ -240,19 +233,19 @@
     line-height: 1.2;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: vars.$color-text-light;
+    color: $color-text-light;
   }
 
   &__detail-value {
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.4;
-    color: vars.$color-text;
+    color: $color-text;
 
     &--primary {
       font-size: clamp(1.5rem, 2.3vw, 1.95rem);
       line-height: 1.05;
-      color: vars.$color-primary-dark;
+      color: $color-primary-dark;
     }
   }
 
@@ -261,10 +254,9 @@
     align-items: center;
     margin: 0.95rem 0 0;
     padding: 0.38rem 0.75rem;
-    border-radius: vars.$border-radius-pill;
-    background-color: vars.$color-primary-light;
-    color: vars.$color-primary-dark;
-    font-family: vars.$font-body;
+    border-radius: $border-radius-pill;
+    background-color: $color-primary-light;
+    color: $color-primary-dark;
     font-size: 0.76rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -305,13 +297,13 @@
   &__map-frame {
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 22px 48px rgba(53, 90, 80, 0.1);
+    box-shadow: 0 22px 48px rgba($color-primary-dark, 0.1);
   }
 
   &__map-copy {
     padding: clamp(1.5rem, 2.3vw, 2rem);
     background: linear-gradient(180deg, #ffffff 0%, #f7f9f3 100%);
-    border: 1px solid rgba(74, 124, 111, 0.12);
+    border: 1px solid rgba($color-primary, 0.12);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -320,8 +312,8 @@
 
   &__map-frame {
     min-height: 320px;
-    border: 1px solid rgba(74, 124, 111, 0.12);
-    background-color: #dfe8dc;
+    border: 1px solid rgba($color-primary, 0.12);
+    background-color: $color-surface-muted;
 
     iframe {
       width: 100%;
@@ -339,11 +331,10 @@
     align-self: flex-start;
     margin-top: 0.4rem;
     padding: 0.82rem 1.1rem;
-    border-radius: vars.$border-radius-pill;
-    border: 1px solid rgba(74, 124, 111, 0.18);
+    border-radius: $border-radius-pill;
+    border: 1px solid rgba($color-primary, 0.18);
     background-color: rgba(255, 255, 255, 0.85);
-    color: vars.$color-primary-dark;
-    font-family: vars.$font-body;
+    color: $color-primary-dark;
     font-size: 0.94rem;
     font-weight: 600;
     text-decoration: none;
@@ -355,13 +346,13 @@
     &:hover,
     &:focus-visible {
       transform: translateY(-1px);
-      border-color: rgba(74, 124, 111, 0.32);
-      background-color: vars.$color-white;
+      border-color: rgba($color-primary, 0.32);
+      background-color: $color-white;
     }
   }
 }
 
-@media (max-width: vars.$breakpoint-lg) {
+@media (max-width: $breakpoint-lg) {
   .contact {
     &__grid {
       grid-template-columns: 1fr;
@@ -373,7 +364,7 @@
   }
 }
 
-@media (max-width: vars.$breakpoint-md) {
+@media (max-width: $breakpoint-md) {
   .contact {
     &__grid {
       grid-template-columns: 1fr;
@@ -386,7 +377,7 @@
   }
 }
 
-@media (max-width: vars.$breakpoint-sm) {
+@media (max-width: $breakpoint-sm) {
   .contact {
     &__card,
     &__map-copy,

@@ -1,4 +1,5 @@
 @use "../base/variables" as *;
+@use "../base/mixins" as *;
 
 .offer-cards {
   padding: clamp(4rem, 9vw, 7rem) 1.5rem;
@@ -8,10 +9,10 @@
       rgba($color-primary, 0.08),
       transparent 36%
     ),
-    linear-gradient(180deg, #f8fbfa 0%, #fefefe 100%);
+    linear-gradient(180deg, $color-surface-soft 0%, $color-surface-plain 100%);
 
   &__container {
-    max-width: 1160px;
+    max-width: $container-max-width-content;
     margin: 0 auto;
   }
 
@@ -28,7 +29,6 @@
   }
 
   &__intro {
-    margin: 0;
     max-width: 650px;
     margin: 0 auto;
     font-size: clamp(1rem, 1.5vw, 1.2rem);
@@ -52,14 +52,19 @@
   text-align: left;
   height: 100%;
   padding: clamp(2rem, 3vw, 2.5rem);
-  background-color: $color-white;
-  border: 1px solid rgba($color-primary-dark, 0.08);
-  border-radius: 12px;
-  transition: all 0.3s ease-out;
+  @include card-surface(
+    $border-color: rgba($color-primary-dark, 0.08),
+    $radius: 12px,
+    $background: $color-white,
+    $shadow: none
+  );
+  transition:
+    transform 0.3s ease-out,
+    box-shadow 0.3s ease-out,
+    border-color 0.3s ease-out;
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 32px rgba($color-primary-dark, 0.12);
+    @include hover-lift(-8px, 0 16px 32px rgba($color-primary-dark, 0.12));
     border-color: rgba($color-primary, 0.2);
 
     .offer-card__icon {
@@ -80,7 +85,10 @@
     --icon-accent: #7aa958;
     background: rgba($color-primary, 0.08);
     border: 1px solid rgba($color-primary, 0.1);
-    transition: all 0.3s ease-out;
+    transition:
+      transform 0.3s ease-out,
+      box-shadow 0.3s ease-out,
+      border-color 0.3s ease-out;
   }
 
   &__icon {
@@ -100,7 +108,7 @@
     font-family: $font-body;
     font-size: clamp(1.35rem, 2vw, 1.75rem);
     font-weight: $font-weight-bold;
-    color: #252523;
+    color: $color-text;
     line-height: 1.2;
     min-height: 3.6rem;
     display: flex;
@@ -165,18 +173,6 @@
     }
   }
 
-  &__cta {
-    width: 100%;
-    margin-top: auto;
-    transition: all 0.3s ease-out;
-    padding: 0.95rem 1.5rem;
-    font-weight: 600;
-    font-size: 1rem;
-    height: auto;
-    min-height: 48px;
-    display: none;
-  }
-
   &--featured {
     border-color: rgba($color-primary-dark, 0.08);
     background-color: $color-white;
@@ -199,7 +195,7 @@
     }
 
     .offer-card__heading {
-      color: #252523;
+      color: $color-text;
     }
 
     .offer-card__subtitle {

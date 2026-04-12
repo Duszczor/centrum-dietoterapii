@@ -2,10 +2,10 @@
 
 .consultation-preview {
   padding: clamp(4rem, 8vw, 6.5rem) 1.5rem;
-  background: #f6f6f6;
+  background: $color-bg-neutral;
 
   &__container {
-    max-width: 1160px;
+    max-width: $container-max-width-content;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;

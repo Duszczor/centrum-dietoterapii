@@ -1,4 +1,4 @@
-@use "../base/variables" as vars;
+@use "../base/variables" as *;
 
 .site-footer {
   position: relative;
@@ -6,7 +6,7 @@
   background:
     radial-gradient(
       circle at top left,
-      rgba(111, 175, 157, 0.2),
+      rgba($color-primary-vivid, 0.2),
       transparent 28%
     ),
     linear-gradient(180deg, #233831 0%, #16231f 100%);
@@ -62,7 +62,6 @@
   &__cta-text,
   &__copyright {
     margin: 0;
-    font-family: vars.$font-body;
     font-size: 0.98rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.72);
@@ -76,12 +75,11 @@
 
   &__eyebrow {
     margin: 0;
-    font-family: vars.$font-body;
     font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #a6d0c2;
+    color: $color-footer-accent;
   }
 
   &__contact-list,
@@ -104,7 +102,6 @@
   &__secondary-link {
     color: rgba(255, 255, 255, 0.88);
     text-decoration: none;
-    font-family: vars.$font-body;
     font-size: 0.98rem;
     line-height: 1.6;
     transition:
@@ -114,7 +111,7 @@
 
     &:hover,
     &:focus-visible {
-      color: #d9f1e8;
+      color: $color-footer-link-hover;
     }
   }
 
@@ -165,7 +162,7 @@
   }
 }
 
-@media (max-width: vars.$breakpoint-lg) {
+@media (max-width: $breakpoint-lg) {
   .site-footer {
     &__top {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -173,7 +170,7 @@
   }
 }
 
-@media (max-width: vars.$breakpoint-md) {
+@media (max-width: $breakpoint-md) {
   .site-footer {
     &__top {
       grid-template-columns: 1fr;
@@ -194,7 +191,7 @@
   }
 }
 
-@media (max-width: vars.$breakpoint-sm) {
+@media (max-width: $breakpoint-sm) {
   .site-footer {
     &__container {
       padding-top: 3.25rem;

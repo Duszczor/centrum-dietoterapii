@@ -27,7 +27,7 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 1240px;
+    max-width: $container-max-width-medium;
     margin: 0 auto;
     padding: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 4vw, 2.5rem);
     display: flex;
@@ -57,7 +57,7 @@
     width: 56px;
     height: 3px;
     border-radius: 999px;
-    background: #6faf9d;
+    background: $color-primary-vivid;
   }
 
   &__cta {

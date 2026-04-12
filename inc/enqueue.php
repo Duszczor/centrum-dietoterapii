@@ -24,11 +24,42 @@ function dietitian_enqueue_assets(): void
         filemtime(get_template_directory() . '/assets/dist/style.css')
     );
 
-    // Main JavaScript file (deferred, loaded after HTML is parsed)
+    // Navigation module
+    wp_enqueue_script(
+        'dietitian-navigation-module',
+        get_template_directory_uri() . '/assets/js/modules/navigation.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/modules/navigation.js'),
+        true
+    );
+
+    // Smooth-scroll module
+    wp_enqueue_script(
+        'dietitian-smooth-scroll-module',
+        get_template_directory_uri() . '/assets/js/modules/smooth-scroll.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/modules/smooth-scroll.js'),
+        true
+    );
+
+    // Section observer module
+    wp_enqueue_script(
+        'dietitian-section-observer-module',
+        get_template_directory_uri() . '/assets/js/modules/section-observer.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/modules/section-observer.js'),
+        true
+    );
+
+    // Main JavaScript file (bootstrap/composition layer)
     wp_enqueue_script(
         'dietitian-main',
         get_template_directory_uri() . '/assets/js/main.js',
-        [],
+        [
+            'dietitian-navigation-module',
+            'dietitian-smooth-scroll-module',
+            'dietitian-section-observer-module',
+        ],
         filemtime(get_template_directory() . '/assets/js/main.js'),
         true // Load in footer
     );
