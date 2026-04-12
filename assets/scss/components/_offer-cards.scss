@@ -1,0 +1,134 @@
+@use "../base/variables" as *;
+
+.offer-cards {
+  padding: clamp(4rem, 9vw, 7rem) 1.5rem;
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba($color-primary, 0.08),
+      transparent 36%
+    ),
+    linear-gradient(180deg, #f8fbfa 0%, #fefefe 100%);
+
+  &__container {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    margin: 0 0 clamp(2rem, 4vw, 3rem);
+    font-family: $font-heading;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: $color-text;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    border: 1px solid rgba($color-primary-dark, 0.08);
+    background-color: $color-white;
+  }
+}
+
+.offer-card {
+  display: grid;
+  grid-template-rows: auto 6.2rem 1fr;
+  align-items: flex-start;
+  justify-items: center;
+  text-align: left;
+  height: 100%;
+  padding: clamp(2rem, 3vw, 2.5rem) clamp(1.2rem, 2vw, 1.75rem) 2rem;
+  border-right: 1px solid rgba($color-primary-dark, 0.08);
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &__icon-wrap {
+    position: relative;
+    width: 124px;
+    height: 124px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 1.4rem;
+    color: $color-primary;
+    background: #f5f7f6;
+  }
+
+  &__icon {
+    width: 68px;
+    height: 68px;
+  }
+
+  &__heading {
+    margin: 0;
+    font-family: $font-body;
+    font-size: clamp(1.55rem, 2vw, 2rem);
+    font-weight: $font-weight-bold;
+    color: #252523;
+    line-height: 1.18;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__list {
+    width: 100%;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    color: rgba($color-text, 0.72);
+    font-size: 1.01rem;
+    line-height: 1.5;
+
+    li {
+      position: relative;
+      padding-left: 1.3rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.62rem;
+        width: 0.42rem;
+        height: 0.42rem;
+        border-radius: 999px;
+        background: rgba($color-primary-dark, 0.65);
+      }
+    }
+
+    li + li {
+      margin-top: 0.52rem;
+    }
+  }
+
+  &--featured {
+    .offer-card__icon-wrap {
+      color: $color-white;
+      background: $color-primary-dark;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .offer-cards {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .offer-card {
+    grid-template-rows: auto auto auto;
+    border-right: none;
+    border-bottom: 1px solid rgba($color-primary-dark, 0.08);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

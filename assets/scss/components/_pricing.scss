@@ -1,0 +1,323 @@
+@use "../base/variables" as vars;
+
+.pricing {
+  padding: clamp(4rem, 8vw, 8rem) 0;
+  background-color: #eef1e4;
+
+  &__container {
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+    max-width: 1320px;
+  }
+
+  &__title {
+    font-family: vars.$font-heading;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+    color: vars.$color-text;
+  }
+
+  &__subtitle {
+    font-family: vars.$font-body;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    text-align: center;
+    color: vars.$color-text-light;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    align-items: stretch;
+
+    @media (max-width: 1100px) {
+      grid-template-columns: 1fr;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+  }
+
+  &__card {
+    background-color: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 18px;
+    padding: clamp(1.7rem, 2.2vw, 2.3rem);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 22px 40px rgba(43, 51, 39, 0.12);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 26px 46px rgba(43, 51, 39, 0.16);
+      border-color: vars.$color-primary;
+    }
+
+    &--featured {
+      border-color: vars.$color-primary;
+      background-color: #f8fbf7;
+      box-shadow: 0 24px 44px rgba(74, 124, 111, 0.18);
+      transform: translateY(-0.85rem);
+
+      &:hover {
+        transform: translateY(-1rem);
+        box-shadow: 0 28px 52px rgba(74, 124, 111, 0.24);
+      }
+
+      @media (max-width: 1100px) {
+        transform: none;
+
+        &:hover {
+          transform: translateY(-4px);
+        }
+      }
+    }
+  }
+
+  &__card-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: vars.$color-primary;
+    color: #fff;
+    padding: 0.55rem 1.1rem;
+    border-radius: vars.$border-radius-pill;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: vars.$font-body;
+    white-space: nowrap;
+  }
+
+  &__card-header {
+    margin-bottom: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+  }
+
+  &__card-kicker {
+    margin: 0;
+    font-family: vars.$font-body;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: vars.$color-primary;
+  }
+
+  &__card-title {
+    font-family: vars.$font-body;
+    font-size: clamp(1.35rem, 2vw, 1.65rem);
+    font-weight: 700;
+    color: vars.$color-text;
+    line-height: 1.1;
+    text-align: left;
+    margin: 0;
+  }
+
+  &__card-subtitle {
+    margin: 0;
+    font-family: vars.$font-body;
+    font-size: 1rem;
+    font-weight: 500;
+    color: vars.$color-text-light;
+  }
+
+  &__price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #ecefe8;
+    min-height: 7rem;
+  }
+
+  &__price--split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1rem;
+    position: relative;
+  }
+
+  &__price-option {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  &__price-label {
+    font-family: vars.$font-body;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: vars.$color-text-light;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  &__price-main {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+
+  &__price-value {
+    font-family: vars.$font-heading;
+    font-size: clamp(2.5rem, 4vw, 3.35rem);
+    font-weight: 700;
+    color: vars.$color-primary;
+    line-height: 1;
+  }
+
+  &__price-currency {
+    font-family: vars.$font-body;
+    font-size: 1rem;
+    font-weight: 600;
+    color: vars.$color-text-light;
+  }
+
+  &__price-divider {
+    position: absolute;
+    left: calc(50% - 0.5px);
+    top: 0.15rem;
+    bottom: 0.15rem;
+    width: 1px;
+    background-color: #dfe6d6;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-grow: 1;
+  }
+
+  &__lead {
+    margin: 0;
+    font-family: vars.$font-body;
+    font-size: clamp(0.98rem, 1.25vw, 1.05rem);
+    line-height: 1.7;
+    color: vars.$color-text;
+    font-weight: 500;
+
+    &--accent {
+      color: vars.$color-primary-dark;
+    }
+  }
+
+  &__feature-highlight {
+    color: vars.$color-primary-dark;
+    font-weight: 500;
+    background-color: vars.$color-primary-light;
+    padding: 0.9rem 1rem 0.9rem 2rem;
+    border-radius: 12px;
+  }
+
+  &__feature-alert {
+    color: #a64534;
+    font-weight: 600;
+    text-transform: none;
+    background-color: rgba(214, 81, 69, 0.08);
+    padding: 0.9rem 1rem 0.9rem 2rem;
+    border-radius: 12px;
+  }
+
+  &__text {
+    margin: 0;
+    font-family: vars.$font-body;
+    font-size: clamp(0.92rem, 1.35vw, 0.98rem);
+    line-height: 1.8;
+    color: vars.$color-text;
+
+    &--accent {
+      color: vars.$color-primary;
+    }
+  }
+
+  &__subfeatures {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+
+    li {
+      position: relative;
+      margin-bottom: 0;
+      padding-left: 1.15rem;
+      font-family: vars.$font-body;
+      font-size: clamp(0.92rem, 1.35vw, 0.98rem);
+      line-height: 1.72;
+      color: vars.$color-text-light;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.8rem;
+        width: 0.38rem;
+        height: 0.38rem;
+        border-radius: 50%;
+        background-color: vars.$color-primary;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: vars.$breakpoint-sm) {
+  .pricing {
+    &__cards {
+      gap: 1.5rem;
+    }
+
+    &__card {
+      border-radius: 16px;
+      box-shadow: 0 16px 28px rgba(43, 51, 39, 0.11);
+    }
+
+    &__card-header {
+      gap: 0.35rem;
+    }
+
+    &__price {
+      margin-bottom: 1.5rem;
+      min-height: auto;
+    }
+
+    &__price--split {
+      grid-template-columns: 1fr;
+    }
+
+    &__price-divider {
+      display: none;
+    }
+
+    &__subfeatures {
+      li {
+        font-size: 0.95rem;
+      }
+    }
+
+    &__lead,
+    &__text {
+      font-size: 0.95rem;
+    }
+  }
+}

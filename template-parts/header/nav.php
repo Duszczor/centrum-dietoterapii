@@ -1,26 +1,11 @@
 <nav class="site-nav" aria-label="<?php esc_attr_e('Primary Navigation', 'dietitian-theme'); ?>">
 
-    <?php if (has_custom_logo()) : ?>
-        <div class="site-nav__logo">
-            <?php the_custom_logo(); ?>
-        </div>
-    <?php else : ?>
-        <div class="site-nav__logo">
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="site-nav__logo-text">
-                <?php bloginfo('name'); ?>
-            </a>
-        </div>
-    <?php endif; ?>
-
-    <?php
-    wp_nav_menu([
-        'theme_location' => 'primary',
-        'container'      => false,
-        'menu_id'        => 'primary-menu',
-        'menu_class'     => 'site-nav__menu',
-        'fallback_cb'    => false,
-    ]);
-    ?>
+    <a href="<?php echo esc_url(home_url('/')); ?>" class="site-nav__logo" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
+        <img
+            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo/logo.png'); ?>"
+            alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
+            class="site-nav__logo-image">
+    </a>
 
     <button
         class="site-nav__toggle"
@@ -32,5 +17,13 @@
         <span class="site-nav__toggle-bar"></span>
         <span class="site-nav__toggle-bar"></span>
     </button>
+
+    <ul class="site-nav__menu" id="primary-menu">
+        <li><a href="#about"><?php esc_html_e('O mnie', 'dietitian-theme'); ?></a></li>
+        <li><a href="#offer"><?php esc_html_e('Oferta', 'dietitian-theme'); ?></a></li>
+        <li><a href="#knowledge-base"><?php esc_html_e('Baza wiedzy', 'dietitian-theme'); ?></a></li>
+    </ul>
+
+    <a href="#contact" class="site-nav__cta"><?php esc_html_e('Kontakt', 'dietitian-theme'); ?></a>
 
 </nav>

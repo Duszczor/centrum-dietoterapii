@@ -5,15 +5,24 @@
 // =============================================================================
 
 .btn {
-  display: inline-block;
-  padding: $spacing-md $spacing-2xl;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.75rem;
+  padding: 1rem 2rem;
   font-family: $font-body;
-  font-size: $font-size-base;
+  font-size: 1rem;
   font-weight: $font-weight-medium;
   line-height: 1;
-  border-radius: $border-radius-lg;
-  border: 2px solid transparent;
-  transition: $transition-base;
+  letter-spacing: 0.01em;
+  border-radius: 18px;
+  border: 1px solid transparent;
+  transition:
+    transform 0.24s ease,
+    background-color 0.24s ease,
+    border-color 0.24s ease,
+    box-shadow 0.24s ease,
+    color 0.24s ease;
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
@@ -23,25 +32,32 @@
     outline-offset: 0.25rem;
   }
 
-  // Primary — solid green
   &--primary {
-    background-color: $color-primary;
+    background: linear-gradient(
+      135deg,
+      $color-primary 0%,
+      $color-primary-dark 100%
+    );
     color: $color-white;
-    border-color: $color-primary;
+    border-color: rgba($color-primary-dark, 0.08);
+    box-shadow: 0 18px 34px rgba($color-primary-dark, 0.22);
 
     &:hover {
-      background-color: $color-primary-dark;
-      border-color: $color-primary-dark;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba($color-primary, 0.35);
+      background: linear-gradient(
+        135deg,
+        rgba($color-primary, 0.94) 0%,
+        $color-primary-dark 100%
+      );
+      border-color: rgba($color-primary-dark, 0.12);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 22px 42px rgba($color-primary-dark, 0.28);
     }
   }
 
-  // Outline — transparent with white border (for use on dark backgrounds)
   &--outline {
     background-color: transparent;
     color: $color-white;
-    border-color: $color-white;
+    border-color: rgba($color-white, 0.72);
 
     &:hover {
       background-color: $color-white;

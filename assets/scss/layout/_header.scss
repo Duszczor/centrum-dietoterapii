@@ -1,42 +1,29 @@
 @use "../base/variables" as *;
 
 // =============================================================================
-// HEADER LAYOUT — Shared site header shell
+// HEADER LAYOUT — Static top bar
 // =============================================================================
 
 .site-header {
-  position: fixed;
+  position: absolute;
   inset: 0 0 auto;
   z-index: 100;
   width: 100%;
-  transition: $transition-base;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.35) 0%,
-      rgba(0, 0, 0, 0) 100%
-    );
-    opacity: 1;
-    transition: $transition-base;
-    pointer-events: none;
-  }
+  padding-inline: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 
   > .container {
     position: relative;
     z-index: 1;
+    max-width: 1280px;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
   }
 
-  &.is-scrolled {
-    background-color: rgba($color-white, 0.96);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-    backdrop-filter: blur(14px);
-
-    &::before {
-      opacity: 0;
+  @media (max-width: $breakpoint-md) {
+    > .container {
+      padding-inline: 1rem;
     }
   }
 }

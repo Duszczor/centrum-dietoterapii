@@ -1,0 +1,158 @@
+@use "../base/variables" as *;
+
+.consultation-preview {
+  padding: clamp(4rem, 8vw, 6.5rem) 1.5rem;
+  background: #f6f6f6;
+
+  &__container {
+    max-width: 1160px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(1.5rem, 4vw, 4.2rem);
+    align-items: start;
+  }
+
+  &__content {
+    max-width: 650px;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-body;
+    font-size: clamp(2.05rem, 3vw, 2.95rem);
+    font-weight: $font-weight-bold;
+    color: #1f2422;
+    line-height: 1.12;
+  }
+
+  &__line {
+    display: block;
+    width: 88px;
+    height: 3px;
+    margin-top: 1rem;
+    border-radius: 999px;
+    background: #345e3a;
+  }
+
+  p {
+    margin: 1.55rem 0 0;
+    font-size: 1.04rem;
+    line-height: 1.72;
+    color: rgba($color-text, 0.84);
+
+    strong {
+      color: #1f4b28;
+      font-weight: 700;
+    }
+  }
+
+  &__lead {
+    margin-top: 2rem;
+  }
+
+  &__subheading {
+    margin-top: 1.55rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba($color-text, 0.88);
+  }
+
+  &__list {
+    margin: 0.8rem 0 0;
+    padding: 0.95rem 1rem 1rem;
+    list-style: none;
+    border-left: 3px solid rgba($color-primary-dark, 0.35);
+    background: rgba(255, 255, 255, 0.65);
+    color: rgba($color-text, 0.87);
+    font-size: 1rem;
+    line-height: 1.6;
+
+    li {
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.6rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 999px;
+      background: rgba($color-primary-dark, 0.72);
+    }
+
+    li + li {
+      margin-top: 0.28rem;
+    }
+  }
+
+  &__summary {
+    margin-top: 1.8rem;
+    font-weight: 700;
+    color: rgba($color-text, 0.9);
+  }
+
+  &__cta {
+    display: inline-flex;
+    margin-top: 2.6rem;
+    text-transform: uppercase;
+  }
+
+  &__media {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4 / 5.4;
+    justify-self: center;
+    border-radius: 4px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .consultation-preview {
+    &__container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    &__media {
+      max-width: 460px;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .consultation-preview {
+    padding-inline: 1rem;
+
+    &__container {
+      gap: 1.8rem;
+    }
+
+    &__title {
+      font-size: clamp(1.8rem, 8vw, 2.25rem);
+    }
+
+    p,
+    &__list {
+      font-size: 1rem;
+    }
+
+    &__list {
+      padding: 0.9rem 0.9rem 0.95rem;
+    }
+
+    &__media {
+      max-width: 100%;
+      aspect-ratio: 4 / 5;
+    }
+  }
+}

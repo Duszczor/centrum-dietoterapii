@@ -13,7 +13,7 @@ $color-primary-light: #e8f3f0; // Soft background tints
 $color-text: #2c2c2c; // Main body text
 $color-text-light: #6b7280; // Subtitles, captions
 $color-white: #ffffff;
-$color-overlay: rgba(0, 0, 0, 0.45); // Hero image overlay
+$color-overlay: rgba(0, 0, 0, 0.35); // Hero image overlay
 
 // -----------------------------------------------------------------------------
 // Typography
@@ -59,13 +59,23 @@ $container-padding: 1.5rem; // Horizontal padding on small screens
 // -----------------------------------------------------------------------------
 $border-radius-sm: 4px;
 $border-radius-md: 8px;
-$border-radius-lg: 50px; // Pill shape for buttons
+$border-radius-lg: 50px;
+$border-radius-pill: 999px; // True pill / capsule shape
 
 // -----------------------------------------------------------------------------
 // Transitions
 // -----------------------------------------------------------------------------
-$transition-base: all 0.3s ease;
-$transition-fast: all 0.15s ease;
+$transition-base:
+  color 0.3s ease,
+  background-color 0.3s ease,
+  transform 0.3s ease,
+  border-color 0.3s ease,
+  box-shadow 0.3s ease,
+  opacity 0.3s ease;
+$transition-fast:
+  color 0.15s ease,
+  background-color 0.15s ease,
+  transform 0.15s ease;
 
 // -----------------------------------------------------------------------------
 // Breakpoints

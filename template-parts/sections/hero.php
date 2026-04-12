@@ -1,26 +1,27 @@
-<section class="hero" aria-labelledby="hero-title">
+<?php
+$hero_image_uri = esc_url(get_template_directory_uri() . '/assets/images/hero/hero-bg.webp');
+?>
+<section
+    class="hero"
+    style="background-image: url('<?php echo $hero_image_uri; ?>');"
+    aria-labelledby="hero-title">
 
     <div class="hero__overlay" aria-hidden="true"></div>
 
-    <div class="container hero__container">
-        <div class="hero__content">
-
+    <div class="hero__content">
+        <div class="hero__heading">
+            <p class="hero__label"><?php esc_html_e('Indywidualna Dietoterapia', 'dietitian-theme'); ?></p>
             <h1 class="hero__title" id="hero-title">
-                <span class="hero__title-name"><?php echo esc_html(get_bloginfo('name')); ?></span>
-                <span class="hero__title-role"><?php echo esc_html(get_bloginfo('description')); ?></span>
+                <?php esc_html_e('Dietetyk kliniczny Łowicz', 'dietitian-theme'); ?>
             </h1>
-
-            <p class="hero__description">
-                <?php esc_html_e('Pomagam odzyskać zdrowie i lepsze samopoczucie dzięki indywidualnie dopasowanemu planowi żywienia i praktycznemu wsparciu na co dzień.', 'dietitian-theme'); ?>
-            </p>
-
-            <div class="hero__actions">
-                <a href="#contact" class="btn btn--primary">
-                    <?php esc_html_e('Umów konsultację', 'dietitian-theme'); ?>
-                </a>
-            </div>
-
+            <p class="hero__name"><?php esc_html_e('mgr Natalia Polit', 'dietitian-theme'); ?></p>
         </div>
-    </div>
 
+        <div class="hero__desc">
+            <p><?php esc_html_e('Pomagam odzyskać energię, poprawić wyniki zdrowotne i zrozumieć przyczyny dolegliwości dzięki indywidualnej dietoterapii.', 'dietitian-theme'); ?></p>
+            <p><?php esc_html_e('Dzięki wprowadzonym zmianom poprawisz swoje wyniki, odzyskasz energię i zmienisz swoje nawyki trwale.', 'dietitian-theme'); ?></p>
+        </div>
+
+        <a href="#offer" class="hero__cta"><?php esc_html_e('Zobacz ofertę', 'dietitian-theme'); ?></a>
+    </div>
 </section>

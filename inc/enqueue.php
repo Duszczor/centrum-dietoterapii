@@ -8,6 +8,14 @@
  */
 function dietitian_enqueue_assets(): void
 {
+    // Google Fonts — loaded here for correct <head> placement and browser resource prioritization
+    wp_enqueue_style(
+        'dietitian-google-fonts',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap',
+        [],
+        null
+    );
+
     // Main stylesheet (compiled from SCSS)
     wp_enqueue_style(
         'dietitian-style',

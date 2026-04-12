@@ -1,169 +1,169 @@
 @use "../base/variables" as *;
 
 // =============================================================================
-// HERO — Full Screen Hero Section
+// HERO — Full-width background image, single headline
 // =============================================================================
 
 .hero {
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  background-image: url("../images/hero/hero-bg.webp");
+  flex-direction: column;
   background-size: cover;
-  background-position: center;
+  background-position: center 40%;
   background-repeat: no-repeat;
-  isolation: isolate;
+  background-color: $color-primary-dark; // fallback while image loads
 
-  &::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    height: min(18vh, 10rem);
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.78) 100%
-    );
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  // -------------------------------------------------------------------------
-  // Dark overlay on top of background image
-  // -------------------------------------------------------------------------
   &__overlay {
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(
-        120deg,
-        rgba(24, 24, 24, 0.62) 0%,
-        rgba(24, 24, 24, 0.46) 45%,
-        rgba(24, 24, 24, 0.24) 100%
-      ),
-      rgba($color-primary-dark, 0.16);
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.3) 55%,
+      transparent 100%
+    );
     z-index: 0;
   }
 
-  &__container {
+  &__content {
     position: relative;
     z-index: 1;
-    width: 100%;
-    padding-top: clamp(7rem, 10vh, 9rem);
-    padding-bottom: clamp(4rem, 8vh, 6rem);
-  }
-
-  &__content {
-    max-width: 44rem;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: $spacing-lg;
+    justify-content: center;
+    gap: 1.75rem;
+    padding: clamp(9rem, 14vh, 12rem) clamp(1.5rem, 6vw, 4rem)
+      clamp(4rem, 8vh, 6rem) clamp(2rem, 8vw, 6rem);
+    text-align: left;
+  }
+
+  &__label {
+    margin: 0 0 0.5rem;
+    font-family: $font-body;
+    font-size: 0.7rem;
+    font-weight: $font-weight-medium;
+    color: rgba($color-white, 0.55);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   &__title {
-    display: grid;
-    gap: $spacing-sm;
+    margin: 0;
     font-family: $font-heading;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
     font-weight: $font-weight-bold;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
     color: $color-white;
-    line-height: $line-height-heading;
     text-wrap: balance;
+    max-width: 22ch;
   }
 
-  &__title-name {
-    font-size: clamp(3rem, 7vw, 5.4rem);
-    letter-spacing: -0.03em;
+  &__name {
+    margin: 0;
+    font-family: $font-body;
+    font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+    font-weight: $font-weight-medium;
+    color: rgba($color-white, 0.7);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
-  &__title-role {
+  &__desc {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    max-width: 480px;
+
+    p {
+      margin: 0;
+      font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+      color: $color-white;
+      line-height: 1.8;
+      opacity: 0.88;
+    }
+  }
+
+  &__cta {
     display: inline-flex;
     align-items: center;
-    width: fit-content;
-    padding: 0.45rem 0.9rem;
-    border: 1px solid rgba($color-white, 0.2);
-    border-radius: 999px;
-    background-color: rgba($color-white, 0.12);
-    font-family: $font-body;
-    font-size: $font-size-sm;
+    padding: 1.05rem 2.75rem;
+    background: linear-gradient(135deg, #6faf9d 0%, #4e8f7f 100%);
+    border: none;
+    border-radius: $border-radius-pill;
+    color: $color-white;
     font-weight: $font-weight-medium;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    backdrop-filter: blur(10px);
+    font-size: clamp(0.95rem, 1vw, 1.05rem);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 18px rgba(53, 90, 80, 0.35);
+    transition:
+      filter 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+
+    &:hover {
+      filter: brightness(0.9);
+      box-shadow: 0 8px 28px rgba(53, 90, 80, 0.5);
+      transform: scale(1.03);
+    }
   }
 
-  &__description {
-    font-family: $font-body;
-    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
-    color: rgba($color-white, 0.88);
-    line-height: $line-height-base;
-    max-width: 36rem;
-    text-wrap: pretty;
-  }
-
-  &__actions {
+  &__scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
     display: flex;
     align-items: center;
-    gap: $spacing-md;
-    padding-top: $spacing-sm;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    opacity: 1;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+    animation: hero-scroll-bounce 1.8s ease-in-out infinite;
+
+    &:hover {
+      opacity: 1;
+      transform: translateX(-50%) translateY(2px);
+    }
   }
 
-  .btn {
-    min-width: 14rem;
+  &__scroll-arrow {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid rgba($color-white, 0.9);
+    border-bottom: 2px solid rgba($color-white, 0.9);
+    transform: rotate(45deg) translateY(-4px);
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.5));
   }
 
-  // -------------------------------------------------------------------------
-  // Responsive
-  // -------------------------------------------------------------------------
-  @media (max-width: $breakpoint-md) {
-    min-height: min(100vh, 52rem);
-    background-position: 62% center;
-
-    &__container {
-      padding-top: 7.5rem;
-      padding-bottom: 4rem;
+  @keyframes hero-scroll-bounce {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
     }
-
-    &__content {
-      align-items: center;
-      text-align: center;
-      margin-inline: auto;
-    }
-
-    &__title-name {
-      font-size: clamp(2.75rem, 11vw, 4.25rem);
-    }
-
-    &__title-role {
-      margin-inline: auto;
-    }
-
-    &__actions {
-      width: 100%;
-      justify-content: center;
+    50% {
+      transform: translateX(-50%) translateY(6px);
     }
   }
 
   @media (max-width: $breakpoint-sm) {
-    min-height: auto;
-
-    &__container {
-      padding-top: 7rem;
-      padding-bottom: 3.5rem;
-    }
-
-    &__title-name {
-      font-size: clamp(2.25rem, 14vw, 3.25rem);
-    }
-
-    &__description {
-      font-size: $font-size-base;
-    }
-
-    .btn {
-      width: 100%;
-      min-width: 0;
+    &__title {
+      font-size: clamp(2rem, 10vw, 3rem);
     }
   }
 }
