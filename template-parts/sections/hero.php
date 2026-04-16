@@ -1,8 +1,29 @@
-<?php $hero_image_uri = dietitian_get_asset_uri('images/hero/hero-bg.webp'); ?>
-<section
-    class="hero"
-    style="background-image: url('<?php echo $hero_image_uri; ?>');"
-    aria-labelledby="hero-title">
+<?php
+$hero_image_uri = dietitian_get_asset_uri('images/hero/hero-bg.webp');
+$hero_image_768_uri = dietitian_get_asset_uri('images/hero/hero-bg-768.webp');
+$hero_image_1280_uri = dietitian_get_asset_uri('images/hero/hero-bg-1280.webp');
+$hero_image_1920_uri = dietitian_get_asset_uri('images/hero/hero-bg-1920.webp');
+$hero_image_srcset = $hero_image_768_uri . ' 768w, ' . $hero_image_1280_uri . ' 1280w, ' . $hero_image_1920_uri . ' 1920w, ' . $hero_image_uri . ' 2560w';
+?>
+<section class="hero" aria-labelledby="hero-title">
+
+    <picture class="hero__media" aria-hidden="true">
+        <source
+            srcset="<?php echo $hero_image_srcset; ?>"
+            sizes="100vw"
+            type="image/webp">
+        <img
+            class="hero__image"
+            src="<?php echo $hero_image_1280_uri; ?>"
+            srcset="<?php echo $hero_image_srcset; ?>"
+            sizes="100vw"
+            alt=""
+            width="1280"
+            height="852"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async">
+    </picture>
 
     <div class="hero__overlay" aria-hidden="true"></div>
 

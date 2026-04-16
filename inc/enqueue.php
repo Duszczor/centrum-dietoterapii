@@ -66,3 +66,23 @@ function dietitian_enqueue_assets(): void
 }
 
 add_action('wp_enqueue_scripts', 'dietitian_enqueue_assets');
+
+/**
+ * Preload hero image on the front page to improve LCP.
+ */
+function dietitian_preload_hero_image(): void
+{
+    if (!is_front_page()) {
+        return;
+    }
+
+    $hero_image_uri = dietitian_get_asset_uri('images/hero/hero-bg.webp');
+    $hero_image_768_uri = dietitian_get_asset_uri('images/hero/hero-bg-768.webp');
+    $hero_image_1280_uri = dietitian_get_asset_uri('images/hero/hero-bg-1280.webp');
+    $hero_image_1920_uri = dietitian_get_asset_uri('images/hero/hero-bg-1920.webp');
+    $hero_image_srcset = $hero_image_768_uri . ' 768w, ' . $hero_image_1280_uri . ' 1280w, ' . $hero_image_1920_uri . ' 1920w, ' . $hero_image_uri . ' 2560w';
+
+    echo '<link rel="preload" as="image" href="' . $hero_image_1280_uri . '" imagesrcset="' . $hero_image_srcset . '" imagesizes="100vw" type="image/webp" fetchpriority="high">';
+}
+
+add_action('wp_head', 'dietitian_preload_hero_image', 1);

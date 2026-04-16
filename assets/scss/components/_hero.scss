@@ -9,10 +9,22 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-size: cover;
-  background-position: center 40%;
-  background-repeat: no-repeat;
   background-color: $color-primary-dark; // fallback while image loads
+
+  &__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    margin: 0;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
 
   &__overlay {
     position: absolute;
@@ -142,8 +154,11 @@
   }
 
   @media (max-width: $breakpoint-sm) {
-    background-size: auto 120%;
-    background-position: 73% 50%;
+    &__image {
+      object-position: 73% 50%;
+      transform: scale(1.12);
+      transform-origin: center;
+    }
 
     &__overlay {
       background: linear-gradient(
