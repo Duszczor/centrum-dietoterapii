@@ -1,4 +1,4 @@
-<?php $contact_banner_image = esc_url(dietitian_get_asset_uri('images/contact-banner/contact-banner.jpg')); ?>
+<?php $contact_banner_image = dietitian_get_asset_uri('images/contact-banner/contact-banner.jpg'); ?>
 
 <section
     class="contact-banner"

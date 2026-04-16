@@ -18,13 +18,13 @@
                         <span class="contact__info-icon" aria-hidden="true">
                             <?php echo dietitian_get_icon_svg('home'); ?>
                         </span>
-                        <span><?php echo esc_html($contact['address_lines'][0]); ?></span>
+                        <span><?php echo $contact['address_lines'][0]; ?></span>
                     </span>
                     <span class="contact__info-row">
                         <span class="contact__info-icon" aria-hidden="true">
                             <?php echo dietitian_get_icon_svg('pin'); ?>
                         </span>
-                        <span><?php echo esc_html($contact['address_lines'][1]); ?></span>
+                        <span><?php echo $contact['address_lines'][1]; ?></span>
                     </span>
                 </address>
                 <ul class="contact__meta-list">
@@ -38,29 +38,29 @@
                 <h3 class="contact__card-title">Napisz lub zadzwoń</h3>
                 <p class="contact__cta-badge">Najszybsza forma kontaktu</p>
                 <div class="contact__details">
-                    <a class="contact__detail-link" href="<?php echo esc_url($contact['phone_href']); ?>">
+                    <a class="contact__detail-link" href="<?php echo $contact['phone_href']; ?>">
                         <span class="contact__info-icon" aria-hidden="true">
                             <?php echo dietitian_get_icon_svg('phone'); ?>
                         </span>
                         <span class="contact__detail-copy">
                             <span class="contact__detail-label">Telefon</span>
-                            <span class="contact__detail-value contact__detail-value--primary"><?php echo esc_html($contact['phone_display']); ?></span>
+                            <span class="contact__detail-value contact__detail-value--primary"><?php echo $contact['phone_display']; ?></span>
                         </span>
                     </a>
-                    <a class="contact__detail-link" href="<?php echo esc_url($contact['email_href']); ?>">
+                    <a class="contact__detail-link" href="<?php echo $contact['email_href']; ?>">
                         <span class="contact__info-icon" aria-hidden="true">
                             <?php echo dietitian_get_icon_svg('mail'); ?>
                         </span>
                         <span class="contact__detail-copy">
                             <span class="contact__detail-label">E-mail</span>
-                            <span class="contact__detail-value"><?php echo esc_html($contact['email_display']); ?></span>
+                            <span class="contact__detail-value"><?php echo $contact['email_display']; ?></span>
                         </span>
                     </a>
                 </div>
                 <p class="contact__microcopy">Najszybciej umówisz termin telefonicznie. Jeśli wolisz, napisz e-mail i wrócę do Ciebie z odpowiedzią.</p>
                 <div class="contact__actions">
-                    <a href="<?php echo esc_url($contact['phone_href']); ?>" class="btn btn--primary contact__cta">Zadzwoń</a>
-                    <a href="<?php echo esc_url($contact['email_href']); ?>" class="btn btn--ghost contact__ghost-link">Napisz e-mail</a>
+                    <a href="<?php echo $contact['phone_href']; ?>" class="btn btn--primary contact__cta">Zadzwoń</a>
+                    <a href="<?php echo $contact['email_href']; ?>" class="btn btn--ghost contact__ghost-link">Napisz e-mail</a>
                 </div>
             </article>
         </div>
@@ -71,15 +71,15 @@
                 <h3 class="contact__map-title">Dojazd do gabinetu</h3>
                 <p class="contact__map-intro">Praktyczne informacje przed pierwszą wizytą:</p>
                 <ul class="contact__map-points">
-                    <li>Adres: <?php echo esc_html($contact['address_lines'][0] . ', ' . $contact['address_lines'][1]); ?></li>
+                    <li>Adres: <?php echo $contact['address_lines'][0] . ', ' . $contact['address_lines'][1]; ?></li>
                     <li>Spotkania stacjonarne odbywają się po wcześniejszym umówieniu terminu</li>
                     <li>Jeśli jedziesz pierwszy raz, sprawdź trasę i zapisz adres w nawigacji przed wyjściem</li>
                 </ul>
-                <a class="contact__map-link" href="<?php echo esc_url($contact['map_url']); ?>" target="_blank" rel="noreferrer">Otwórz w Google Maps</a>
+                <a class="contact__map-link" href="<?php echo $contact['map_url']; ?>" target="_blank" rel="noreferrer">Otwórz w Google Maps</a>
             </div>
             <div class="contact__map-frame">
                 <iframe
-                    src="<?php echo esc_url($contact['map_embed_url']); ?>"
+                    src="<?php echo $contact['map_embed_url']; ?>"
                     title="Mapa dojazdu do gabinetu przy ulicy Tuszewskiej 76 w Łowiczu"
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"

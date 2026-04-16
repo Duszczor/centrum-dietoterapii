@@ -1,16 +1,84 @@
+@use "sass:map";
 @use "../base/variables" as *;
 
 // =============================================================================
 // NAV — Primary Navigation Component
 // =============================================================================
 
+$nav-tokens: (
+  z-top: 120,
+  z-panel: 110,
+  transition-fast: 0.24s,
+  transition-base: 0.25s,
+  shell-height-desktop: 90px,
+  shell-height-mobile: 84px,
+  menu-gap-desktop: clamp(1.25rem, 2vw, 2.25rem),
+  menu-panel-top: calc(100% + 0.85rem),
+  menu-panel-top-sm: calc(100% + 0.65rem),
+  menu-panel-radius: 20px,
+  menu-item-radius: 14px,
+  menu-item-height-mobile: 3.5rem,
+  link-underline-bottom: 0.8rem,
+  link-underline-bottom-mobile: 0.7rem,
+  toggle-size: 48px,
+  toggle-bar-width: 26px,
+  toggle-bar-height: 2px,
+  toggle-bar-gap: 5px,
+  toggle-border-radius: 14px,
+  toggle-shift-open: 7px,
+);
+
+@function nav-token($key) {
+  @return map.get($nav-tokens, $key);
+}
+
+@mixin nav-link-base($color) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0.85rem 0;
+  font-family: $font-body;
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.08rem);
+  font-weight: $font-weight-medium;
+  letter-spacing: 0.01em;
+  color: $color;
+  transition:
+    color nav-token(transition-fast) ease,
+    transform nav-token(transition-fast) ease;
+}
+
+@mixin nav-link-underline($left: 0, $right: 0, $bottom: 0.8rem) {
+  &::after {
+    content: "";
+    position: absolute;
+    left: $left;
+    right: $right;
+    bottom: $bottom;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background-color: currentColor;
+    transition: transform nav-token(transition-fast) ease;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
 .site-nav {
+  // ---------------------------------------------------------------------------
+  // Shell
+  // ---------------------------------------------------------------------------
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  min-height: 90px;
+  min-height: nav-token(shell-height-desktop);
   margin: 0;
   padding-block: 0.35rem;
   transition:
@@ -18,15 +86,18 @@
     padding 0.28s ease,
     transform 0.28s ease;
 
+  // ---------------------------------------------------------------------------
+  // Brand
+  // ---------------------------------------------------------------------------
   &__logo {
     position: relative;
-    z-index: 120;
+    z-index: nav-token(z-top);
     display: inline-flex;
     align-items: center;
     flex-shrink: 0;
     transition:
-      transform 0.25s ease,
-      opacity 0.25s ease;
+      transform nav-token(transition-base) ease,
+      opacity nav-token(transition-base) ease;
 
     &:hover {
       transform: scale(1.02);
@@ -55,13 +126,16 @@
     color: $color-white;
   }
 
+  // ---------------------------------------------------------------------------
+  // Desktop Menu
+  // ---------------------------------------------------------------------------
   &__menu {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: clamp(1.25rem, 2vw, 2.25rem);
+    gap: nav-token(menu-gap-desktop);
     padding: 0;
     white-space: nowrap;
 
@@ -72,42 +146,12 @@
     }
 
     a {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 52px;
-      padding: 0.85rem 0;
-      font-family: $font-body;
-      font-size: clamp(1rem, 0.95rem + 0.2vw, 1.08rem);
-      font-weight: $font-weight-medium;
-      letter-spacing: 0.01em;
-      color: rgba($color-white, 0.9);
-      transition:
-        color 0.24s ease,
-        transform 0.24s ease;
+      @include nav-link-base(rgba($color-white, 0.9));
+      @include nav-link-underline(0, 0, nav-token(link-underline-bottom));
 
       &:hover,
       &:focus-visible {
         color: $color-white;
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0.8rem;
-        height: 2px;
-        transform: scaleX(0);
-        transform-origin: left;
-        background-color: currentColor;
-        transition: transform 0.24s ease;
-      }
-
-      &:hover::after,
-      &:focus-visible::after {
-        transform: scaleX(1);
       }
 
       &:focus-visible {
@@ -117,7 +161,9 @@
       }
     }
 
+    // Current-item classes are compatible with custom markup and wp_nav_menu.
     .site-nav__link.is-active::after,
+    .current-menu-parent > a::after,
     .current-menu-item > a::after,
     .current_page_item > a::after,
     .current-menu-ancestor > a::after,
@@ -130,10 +176,14 @@
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // Desktop CTA
+  // ---------------------------------------------------------------------------
   &__cta {
     margin-left: auto;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     padding: 0.8rem 2rem;
     min-height: 44px;
     border-radius: $border-radius-pill;
@@ -164,24 +214,31 @@
     }
   }
 
+  .site-nav__link--contact {
+    display: none;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Mobile Toggle
+  // ---------------------------------------------------------------------------
   &__toggle {
     position: relative;
-    z-index: 120;
+    z-index: nav-token(z-top);
     display: none;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 5px;
-    width: 48px;
-    height: 48px;
+    gap: nav-token(toggle-bar-gap);
+    width: nav-token(toggle-size);
+    height: nav-token(toggle-size);
     border: 1.5px solid rgba($color-white, 0.7);
-    border-radius: 14px;
+    border-radius: nav-token(toggle-border-radius);
     background: transparent;
     color: $color-white;
     transition:
-      background-color 0.24s ease,
-      border-color 0.24s ease,
-      transform 0.24s ease;
+      background-color nav-token(transition-fast) ease,
+      border-color nav-token(transition-fast) ease,
+      transform nav-token(transition-fast) ease;
 
     &:hover {
       background-color: rgba($color-white, 0.14);
@@ -192,24 +249,24 @@
     &:focus-visible {
       outline: 2px solid rgba($color-white, 0.7);
       outline-offset: 0.25rem;
-      border-radius: 14px;
+      border-radius: nav-token(toggle-border-radius);
     }
   }
 
   &__toggle-bar {
     display: block;
-    width: 26px;
-    height: 2px;
+    width: nav-token(toggle-bar-width);
+    height: nav-token(toggle-bar-height);
     border-radius: $border-radius-pill;
     background-color: currentColor;
     transition:
-      transform 0.25s ease,
-      opacity 0.25s ease;
+      transform nav-token(transition-base) ease,
+      opacity nav-token(transition-base) ease;
   }
 
   &__toggle[aria-expanded="true"] {
     .site-nav__toggle-bar:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
+      transform: translateY(nav-token(toggle-shift-open)) rotate(45deg);
     }
 
     .site-nav__toggle-bar:nth-child(2) {
@@ -217,28 +274,39 @@
     }
 
     .site-nav__toggle-bar:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
+      transform: translateY(calc(nav-token(toggle-shift-open) * -1))
+        rotate(-45deg);
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // Mobile Menu Panel
+  // ---------------------------------------------------------------------------
   @media (max-width: $breakpoint-md) {
-    min-height: 84px;
+    justify-content: space-between;
+    min-height: nav-token(shell-height-mobile);
     gap: $spacing-md;
 
     &__toggle {
       display: inline-flex;
-      margin-left: 0.75rem;
+      margin-left: auto;
+      margin-right: 0;
     }
 
     &__cta {
+      display: none;
       padding: 0.5rem 1.1rem;
       min-height: 38px;
       font-size: 0.88rem;
     }
 
     &__menu {
+      .site-nav__link--contact {
+        display: inline-flex;
+      }
+
       position: absolute;
-      top: calc(100% + 0.85rem);
+      top: nav-token(menu-panel-top);
       right: 0;
       left: 0;
       display: flex;
@@ -248,7 +316,7 @@
       margin-left: 0;
       padding: 0.7rem;
       border: 1px solid rgba($color-text, 0.08);
-      border-radius: 20px;
+      border-radius: nav-token(menu-panel-radius);
       background: rgba(255, 255, 255, 0.99);
       box-shadow: 0 24px 46px rgba(0, 0, 0, 0.14);
       backdrop-filter: blur(14px);
@@ -257,10 +325,10 @@
       pointer-events: none;
       transform: translateY(-10px) scale(0.985);
       transition:
-        opacity 0.25s ease,
-        transform 0.25s ease,
-        visibility 0.25s ease;
-      z-index: 110;
+        opacity nav-token(transition-base) ease,
+        transform nav-token(transition-base) ease,
+        visibility nav-token(transition-base) ease;
+      z-index: nav-token(z-panel);
 
       li {
         width: 100%;
@@ -268,12 +336,12 @@
 
       a {
         width: 100%;
-        min-height: 3.5rem;
+        min-height: nav-token(menu-item-height-mobile);
         justify-content: flex-start;
         padding: 0.9rem 1rem;
         color: $color-text;
         font-size: 1rem;
-        border-radius: 14px;
+        border-radius: nav-token(menu-item-radius);
 
         &:hover,
         &:focus-visible,
@@ -281,11 +349,18 @@
           background-color: rgba($color-primary, 0.08);
         }
 
-        &::after {
-          left: 1rem;
-          right: 1rem;
-          bottom: 0.7rem;
-        }
+        @include nav-link-underline(
+          1rem,
+          1rem,
+          nav-token(link-underline-bottom-mobile)
+        );
+      }
+
+      .current-menu-item > a,
+      .current_page_item > a,
+      .current-menu-ancestor > a,
+      .current-page-ancestor > a {
+        background-color: rgba($color-primary, 0.08);
       }
 
       &.is-open {
@@ -305,8 +380,21 @@
     gap: $spacing-sm;
 
     &__menu {
-      top: calc(100% + 0.65rem);
+      top: nav-token(menu-panel-top-sm);
       padding: 0.65rem;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Reduced Motion
+  // ---------------------------------------------------------------------------
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    & * {
+      animation: none !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }

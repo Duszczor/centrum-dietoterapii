@@ -1,4 +1,4 @@
-<?php $consultation_preview_image = esc_url(dietitian_get_asset_uri('images/consultation-preview/consultation-preview.jpg')); ?>
+<?php $consultation_preview_image = dietitian_get_asset_uri('images/consultation-preview/consultation-preview.jpg'); ?>
 
 <section
     class="consultation-preview"

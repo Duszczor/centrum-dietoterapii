@@ -1,4 +1,4 @@
-<?php $hero_image_uri = esc_url(dietitian_get_asset_uri('images/hero/hero-bg.webp')); ?>
+<?php $hero_image_uri = dietitian_get_asset_uri('images/hero/hero-bg.webp'); ?>
 <section
     class="hero"
     style="background-image: url('<?php echo $hero_image_uri; ?>');"

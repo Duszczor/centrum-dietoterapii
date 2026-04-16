@@ -9,10 +9,10 @@ $footer_navigation_items = dietitian_get_footer_navigation_items();
     <div class="site-footer__container container">
         <div class="site-footer__top">
             <div class="site-footer__brand">
-                <a href="<?php echo esc_url($home_url); ?>" class="site-footer__logo" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                <a href="<?php echo $home_url; ?>" class="site-footer__logo" aria-label="<?php echo get_bloginfo('name'); ?>">
                     <img
-                        src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo/logo.png'); ?>"
-                        alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
+                        src="<?php echo get_template_directory_uri() . '/assets/images/logo/logo.png'; ?>"
+                        alt="<?php echo get_bloginfo('name'); ?>"
                         class="site-footer__logo-image">
                 </a>
                 <h2 class="site-footer__title" id="site-footer-title"><?php bloginfo('name'); ?></h2>
@@ -22,9 +22,9 @@ $footer_navigation_items = dietitian_get_footer_navigation_items();
             <div class="site-footer__column">
                 <p class="site-footer__eyebrow">Kontakt</p>
                 <div class="site-footer__contact-list">
-                    <a href="<?php echo esc_url($contact['phone_href']); ?>" class="site-footer__link"><?php echo esc_html($contact['phone_display']); ?></a>
-                    <a href="<?php echo esc_url($contact['email_href']); ?>" class="site-footer__link"><?php echo esc_html($contact['email_display']); ?></a>
-                    <p class="site-footer__meta"><?php echo esc_html($contact['city']); ?></p>
+                    <a href="<?php echo $contact['phone_href']; ?>" class="site-footer__link"><?php echo $contact['phone_display']; ?></a>
+                    <a href="<?php echo $contact['email_href']; ?>" class="site-footer__link"><?php echo $contact['email_display']; ?></a>
+                    <p class="site-footer__meta"><?php echo $contact['city']; ?></p>
                     <p class="site-footer__meta">Konsultacje stacjonarne i online</p>
                 </div>
             </div>
@@ -34,7 +34,7 @@ $footer_navigation_items = dietitian_get_footer_navigation_items();
                 <ul class="site-footer__nav-list">
                     <?php foreach ($footer_navigation_items as $item) : ?>
                         <li>
-                            <a href="<?php echo esc_url($item['href']); ?>" class="site-footer__link"><?php echo esc_html($item['label']); ?></a>
+                            <a href="<?php echo $item['href']; ?>" class="site-footer__link"><?php echo $item['label']; ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -44,19 +44,19 @@ $footer_navigation_items = dietitian_get_footer_navigation_items();
                 <p class="site-footer__eyebrow">Pierwszy krok</p>
                 <p class="site-footer__cta-text">Masz pytanie przed rozpoczęciem współpracy? Skontaktuj się i wybierz najlepszą formę konsultacji.</p>
                 <div class="site-footer__cta-group">
-                    <a href="<?php echo esc_url($contact['phone_href']); ?>" class="btn btn--primary site-footer__cta">Zadzwoń</a>
-                    <a href="<?php echo esc_url($contact['email_href']); ?>" class="btn btn--footer-outline site-footer__secondary-link">Napisz e-mail</a>
+                    <a href="<?php echo $contact['phone_href']; ?>" class="btn btn--primary site-footer__cta">Zadzwoń</a>
+                    <a href="<?php echo $contact['email_href']; ?>" class="btn btn--footer-outline site-footer__secondary-link">Napisz e-mail</a>
                 </div>
             </div>
         </div>
 
         <div class="site-footer__bottom">
-            <p class="site-footer__copyright">&copy; <?php echo esc_html(date('Y')); ?> <?php bloginfo('name'); ?></p>
+            <p class="site-footer__copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?></p>
             <div class="site-footer__bottom-links">
                 <?php if (!empty($privacy_url)) : ?>
-                    <a href="<?php echo esc_url($privacy_url); ?>" class="site-footer__bottom-link">Polityka prywatności</a>
+                    <a href="<?php echo $privacy_url; ?>" class="site-footer__bottom-link">Polityka prywatności</a>
                 <?php endif; ?>
-                <a href="<?php echo esc_url(home_url('/#contact')); ?>" class="site-footer__bottom-link">Umów konsultację</a>
+                <a href="<?php echo home_url('/#contact'); ?>" class="site-footer__bottom-link">Umów konsultację</a>
             </div>
         </div>
     </div>

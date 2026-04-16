@@ -9,20 +9,20 @@
 
         <div class="offer-cards__grid">
             <?php foreach ($offer_cards as $card) : ?>
-                <article class="offer-card offer-card--<?php echo esc_attr($card['modifier']); ?>">
+                <article class="offer-card offer-card--<?php echo $card['modifier']; ?>">
                     <span class="offer-card__icon-wrap" aria-hidden="true">
                         <?php echo dietitian_get_icon_svg($card['icon'], 'offer-card__icon'); ?>
                     </span>
 
                     <div class="offer-card__content">
-                        <h3 class="offer-card__heading"><?php echo esc_html($card['title']); ?></h3>
-                        <p class="offer-card__subtitle"><?php echo esc_html($card['subtitle']); ?></p>
-                        <p class="offer-card__description"><?php echo esc_html($card['description']); ?></p>
+                        <h3 class="offer-card__heading"><?php echo $card['title']; ?></h3>
+                        <p class="offer-card__subtitle"><?php echo $card['subtitle']; ?></p>
+                        <p class="offer-card__description"><?php echo $card['description']; ?></p>
                     </div>
 
                     <ul class="offer-card__list">
                         <?php foreach ($card['items'] as $item) : ?>
-                            <li><?php echo esc_html($item); ?></li>
+                            <li><?php echo $item; ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </article>

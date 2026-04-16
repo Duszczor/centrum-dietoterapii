@@ -2,7 +2,7 @@
 
 function dietitian_get_icon_svg(string $icon, string $class_name = ''): string
 {
-    $class_attribute = $class_name !== '' ? ' class="' . esc_attr($class_name) . '"' : '';
+    $class_attribute = $class_name !== '' ? ' class="' . $class_name . '"' : '';
 
     $icons = [
         'gut-health' => <<<SVG
