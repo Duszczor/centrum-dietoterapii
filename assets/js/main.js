@@ -74,4 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
       setActiveLink,
     });
   }
+
+  if (window.Dietitian?.initPageMotion) {
+    window.Dietitian.initPageMotion();
+  }
 });

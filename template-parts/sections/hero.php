@@ -29,18 +29,19 @@ $hero_image_srcset = $hero_image_768_uri . ' 768w, ' . $hero_image_1280_uri . ' 
 
     <div class="hero__content">
         <div class="hero__heading">
-            <p class="hero__label">Indywidualna Dietoterapia</p>
+            <p class="hero__label">Dietetyk kliniczny Łowicz</p>
             <h1 class="hero__title" id="hero-title">
-                Dietetyk kliniczny Łowicz
+                Dietoterapia dopasowana do Twojego zdrowia i codzienności
             </h1>
             <p class="hero__name">mgr Natalia Polit</p>
         </div>
 
         <div class="hero__desc">
-            <p>Pomagam odzyskać energię, poprawić wyniki zdrowotne i zrozumieć przyczyny dolegliwości dzięki indywidualnej dietoterapii.</p>
-            <p>Dzięki wprowadzonym zmianom poprawisz swoje wyniki, odzyskasz energię i zmienisz swoje nawyki trwale.</p>
+            <p>Pomagam odzyskać energię, poprawić wyniki zdrowotne i zrozumieć przyczyny dolegliwości dzięki planowi żywieniowemu skrojonemu pod Ciebie.</p>
+            <p class="hero__desc-secondary">Wspólnie wprowadzamy zmiany, które są realne do utrzymania i działają długofalowo.</p>
         </div>
 
-        <a href="#offer" class="btn btn--primary hero__cta">Zobacz ofertę</a>
+        <a href="#offer" class="btn btn--primary hero__cta">Sprawdź obszary wsparcia</a>
+        <p class="hero__cta-note">Pierwszy krok: zobacz, w czym mogę Ci pomóc.</p>
     </div>
 </section>

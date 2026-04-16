@@ -24,7 +24,8 @@
     font-size: clamp(1rem, 2.5vw, 1.25rem);
     text-align: center;
     color: $color-text-light;
-    margin-bottom: clamp(2rem, 5vw, 4rem);
+    margin: 0 auto clamp(2rem, 5vw, 4rem);
+    max-width: 62ch;
   }
 
   &__cards {
@@ -275,6 +276,26 @@
     }
   }
 
+  &__footer {
+    margin-top: clamp(1.8rem, 3.5vw, 2.8rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  &__footer-cta {
+    min-width: 220px;
+  }
+
+  &__footer-note {
+    margin: 0;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: $color-text-light;
+  }
+
   // Responsive — kept inside the block for co-location with the component
   @media (max-width: $breakpoint-sm) {
     &__cards {
@@ -312,6 +333,16 @@
     &__lead,
     &__text {
       font-size: 0.95rem;
+    }
+
+    &__footer {
+      margin-top: 1.5rem;
+      gap: 0.7rem;
+    }
+
+    &__footer-cta {
+      width: 100%;
+      max-width: 360px;
     }
   }
 }

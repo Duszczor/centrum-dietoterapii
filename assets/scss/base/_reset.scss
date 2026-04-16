@@ -77,6 +77,27 @@ button {
   border: none;
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 9999;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  background: $color-primary-dark;
+  color: $color-white;
+  font-size: 0.9rem;
+  font-weight: $font-weight-medium;
+  transform: translateY(-130%);
+  transition: transform 0.2s ease;
+
+  &:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid $color-white;
+    outline-offset: 2px;
+  }
+}
+
 // Prevent body scroll when mobile menu is open
 .no-scroll {
   overflow: hidden;

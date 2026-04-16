@@ -3,8 +3,16 @@
 <section
     class="contact-banner"
     id="contact-banner"
-    style="background-image: url('<?php echo $contact_banner_image; ?>');"
     aria-labelledby="contact-banner-title">
+
+    <picture class="contact-banner__media" aria-hidden="true">
+        <img
+            class="contact-banner__image"
+            src="<?php echo $contact_banner_image; ?>"
+            alt=""
+            loading="lazy"
+            decoding="async">
+    </picture>
 
     <div class="contact-banner__overlay" aria-hidden="true"></div>
 

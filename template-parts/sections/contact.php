@@ -1,4 +1,7 @@
-<?php $contact = dietitian_get_contact_data(); ?>
+<?php
+$contact = dietitian_get_contact_data();
+$map_accordion_open = wp_is_mobile() ? '' : ' open';
+?>
 
 <section class="contact" id="contact" aria-labelledby="contact-title">
     <div class="contact__container">
@@ -77,14 +80,17 @@
                 </ul>
                 <a class="contact__map-link" href="<?php echo $contact['map_url']; ?>" target="_blank" rel="noreferrer">Otwórz w Google Maps</a>
             </div>
-            <div class="contact__map-frame">
-                <iframe
-                    src="<?php echo $contact['map_embed_url']; ?>"
-                    title="Mapa dojazdu do gabinetu przy ulicy Tuszewskiej 76 w Łowiczu"
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    allowfullscreen></iframe>
-            </div>
+            <details class="contact__map-accordion" <?php echo $map_accordion_open; ?>>
+                <summary class="contact__map-summary">Pokaż mapę dojazdu</summary>
+                <div class="contact__map-frame">
+                    <iframe
+                        src="<?php echo $contact['map_embed_url']; ?>"
+                        title="Mapa dojazdu do gabinetu przy ulicy Tuszewskiej 76 w Łowiczu"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allowfullscreen></iframe>
+                </div>
+            </details>
         </div>
     </div>
 </section>

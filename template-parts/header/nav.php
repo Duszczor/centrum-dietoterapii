@@ -18,13 +18,18 @@ $site_name = get_bloginfo('name');
 
     <ul class="site-nav__menu" id="primary-menu">
         <?php foreach ($navigation_items as $item) : ?>
-            <?php $item_classes = 'site-nav__link' . ($item['href'] === '#contact' ? ' site-nav__link--contact' : ''); ?>
+            <?php if ($item['href'] === '#contact') continue; ?>
+            <?php $item_classes = 'site-nav__link'; ?>
             <li>
                 <a href="<?php echo $item['href']; ?>" class="<?php echo $item_classes; ?>">
                     <?php echo $item['label']; ?>
                 </a>
             </li>
         <?php endforeach; ?>
+
+        <li>
+            <a href="#contact" class="site-nav__link site-nav__link--contact">Kontakt</a>
+        </li>
     </ul>
 
     <a href="#contact" class="site-nav__cta">Kontakt</a>

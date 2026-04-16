@@ -36,10 +36,13 @@
             <a class="btn btn--primary consultation-preview__cta" href="#contact">UMÓW SIĘ</a>
         </div>
 
-        <div
-            class="consultation-preview__media"
-            style="background-image: url('<?php echo $consultation_preview_image; ?>');"
-            role="img"
-            aria-label="Zdjęcie dietetyczki podczas konsultacji"></div>
+        <figure class="consultation-preview__media">
+            <img
+                class="consultation-preview__image"
+                src="<?php echo $consultation_preview_image; ?>"
+                alt="Zdjęcie dietetyczki podczas konsultacji"
+                loading="lazy"
+                decoding="async">
+        </figure>
     </div>
 </section>

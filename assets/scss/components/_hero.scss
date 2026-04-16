@@ -110,6 +110,13 @@
     font-size: clamp(0.95rem, 1vw, 1.05rem);
   }
 
+  &__cta-note {
+    margin: -0.85rem 0 0;
+    font-size: clamp(0.84rem, 1vw, 0.92rem);
+    line-height: 1.5;
+    color: rgba($color-white, 0.72);
+  }
+
   &__scroll {
     position: absolute;
     bottom: 2rem;
@@ -171,6 +178,15 @@
 
     &__title {
       font-size: clamp(2rem, 10vw, 3rem);
+    }
+
+    &__desc-secondary {
+      display: none;
+    }
+
+    &__cta-note {
+      margin-top: -0.5rem;
+      max-width: 34ch;
     }
   }
 }

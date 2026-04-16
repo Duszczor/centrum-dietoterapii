@@ -2,8 +2,8 @@
 
 <section class="pricing" id="pricing">
     <div class="pricing__container">
-        <h2 class="pricing__title">Cennik</h2>
-        <p class="pricing__subtitle">Porównaj zakres współpracy i wybierz formę wsparcia dopasowaną do etapu, na którym jesteś.</p>
+        <h2 class="pricing__title">Wybierz formę współpracy</h2>
+        <p class="pricing__subtitle">Porównaj pakiety i wybierz wariant, który najlepiej odpowiada Twoim potrzebom oraz etapowi, na którym teraz jesteś.</p>
 
         <div class="pricing__cards">
             <?php foreach ($pricing_plans as $plan) : ?>
@@ -57,6 +57,11 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+        </div>
+
+        <div class="pricing__footer">
+            <a href="#contact" class="btn btn--primary pricing__footer-cta">Umów konsultację</a>
+            <p class="pricing__footer-note">Masz wątpliwości? Napisz lub zadzwoń, pomogę wybrać najlepszą opcję.</p>
         </div>
     </div>
 </section>

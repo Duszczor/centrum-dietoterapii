@@ -51,6 +51,15 @@ function dietitian_enqueue_assets(): void
         true
     );
 
+    // Homepage motion module
+    wp_enqueue_script(
+        'dietitian-page-motion-module',
+        get_template_directory_uri() . '/assets/js/modules/page-motion.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/modules/page-motion.js'),
+        true
+    );
+
     // Main JavaScript file (bootstrap/composition layer)
     wp_enqueue_script(
         'dietitian-main',
@@ -59,6 +68,7 @@ function dietitian_enqueue_assets(): void
             'dietitian-navigation-module',
             'dietitian-smooth-scroll-module',
             'dietitian-section-observer-module',
+            'dietitian-page-motion-module',
         ],
         filemtime(get_template_directory() . '/assets/js/main.js'),
         true // Load in footer
