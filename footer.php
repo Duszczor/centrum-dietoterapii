@@ -62,6 +62,19 @@ $footer_navigation_items = dietitian_get_footer_navigation_items();
     </div>
 </footer>
 
+<?php if (is_front_page()) : ?>
+    <a
+        id="zl-url"
+        class="zl-url"
+        href="https://www.znanylekarz.pl/natalia-polit/dietetyk/lowicz"
+        rel="nofollow"
+        data-zlw-doctor="natalia-polit"
+        data-zlw-type="button_calendar_floating_medium"
+        data-zlw-opinion="false"
+        data-zlw-hide-branding="true"
+        data-zlw-saas-only="false">Natalia Polit - ZnanyLekarz.pl</a>
+<?php endif; ?>
+
 <?php wp_footer(); ?>
 </body>
 

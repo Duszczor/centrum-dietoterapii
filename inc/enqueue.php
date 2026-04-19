@@ -60,6 +60,17 @@ function dietitian_enqueue_assets(): void
         true
     );
 
+    // ZnanyLekarz floating widget script (front page only)
+    if (is_front_page()) {
+        wp_enqueue_script(
+            'dietitian-znanylekarz-widget',
+            'https://platform.docplanner.com/js/widget.js',
+            [],
+            null,
+            true
+        );
+    }
+
     // Main JavaScript file (bootstrap/composition layer)
     wp_enqueue_script(
         'dietitian-main',
