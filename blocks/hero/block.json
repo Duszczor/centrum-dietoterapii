@@ -1,0 +1,79 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "dietitian/hero",
+  "version": "1.0.0",
+  "title": "Hero",
+  "category": "design",
+  "icon": "cover-image",
+  "description": "Hero section for the front page with editable copy and CTA.",
+  "textdomain": "dietitian-theme",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "multiple": false
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "Dietetyk kliniczny Łowicz"
+    },
+    "title": {
+      "type": "string",
+      "default": "Dietoterapia dopasowana do Twojego zdrowia i codzienności"
+    },
+    "name": {
+      "type": "string",
+      "default": "mgr Natalia Polit"
+    },
+    "descriptionPrimary": {
+      "type": "string",
+      "default": "Pomagam odzyskać energię, poprawić wyniki zdrowotne i zrozumieć przyczyny dolegliwości dzięki planowi żywieniowemu skrojonemu pod Ciebie."
+    },
+    "descriptionSecondary": {
+      "type": "string",
+      "default": "Wspólnie wprowadzamy zmiany, które są realne do utrzymania i działają długofalowo."
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Sprawdź obszary wsparcia"
+    },
+    "ctaUrl": {
+      "type": "string",
+      "default": "#offer"
+    },
+    "ctaNote": {
+      "type": "string",
+      "default": "Pierwszy krok: zobacz, w czym mogę Ci pomóc."
+    },
+    "layoutVariant": {
+      "type": "string",
+      "default": "content-left"
+    },
+    "overlayIntensity": {
+      "type": "string",
+      "default": "default"
+    },
+    "contentPosition": {
+      "type": "string",
+      "default": "center"
+    },
+    "imageId": {
+      "type": "number"
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "openInNewTab": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "editorStyle": "file:./build/index.css"
+}

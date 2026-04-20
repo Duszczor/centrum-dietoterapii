@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "dietitian/offer-cards",
+  "version": "1.0.0",
+  "title": "Offer Cards",
+  "category": "design",
+  "icon": "grid-view",
+  "description": "Editable specialization cards for the front page.",
+  "textdomain": "dietitian-theme",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "multiple": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Obszary Moich Specjalizacji"
+    },
+    "intro": {
+      "type": "string",
+      "default": "Specjalizuję się w dietoterapii ukierunkowanej na konkretne problemy zdrowotne. Poniżej znajdziesz trzy główne obszary, w których mogę Ci skutecznie pomóc:"
+    },
+    "cards": {
+      "type": "array",
+      "default": [
+        {
+          "modifier": "left",
+          "icon": "gut-health",
+          "title": "Zdrowe Jelita & Trawienie 🦠",
+          "subtitle": "Choroby autoimmunologiczne i chroniczne zapalenia",
+          "description": "Specjalizuję się w leczeniu dietetycznym chorób, które wpływają na Twoją codzienną jakość życia.",
+          "items": [
+            "Hashimoto, RZS, łuszczyca i inne",
+            "Zapalenia jelita (IBD, IBS, SIBO)",
+            "Wzdęcia, zaparcia, dysbioza",
+            "Problemy trawienne i bóle"
+          ]
+        },
+        {
+          "modifier": "featured",
+          "icon": "metabolic",
+          "title": "Metabolizm i Serce ❤️",
+          "subtitle": "Choroby metaboliczne i profilaktyka",
+          "description": "Pomagam zregulować ciśnienie, cholesterol i poziom cukru poprzez zmianę nawyków żywieniowych.",
+          "items": [
+            "Nadciśnienie i dyslipidemię",
+            "Cukrzycę i insulinooporność",
+            "Otyłość i nadawagę",
+            "Profilaktykę chorób serca"
+          ]
+        },
+        {
+          "modifier": "right",
+          "icon": "fertility-support",
+          "title": "Płodność i Hormony 👶",
+          "subtitle": "Wsparcie przed ciążą i zmiany nawyków",
+          "description": "Przygotowuję Cię do najważniejszych chwil i pomagam w zmianie trybu życia na lepszy.",
+          "items": [
+            "Przygotowaniu do ciąży",
+            "Problemach z płodnością",
+            "Zaburzeniach hormonalnych",
+            "Budowie masy i utracie wagi"
+          ]
+        }
+      ]
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "editorStyle": "file:./build/index.css"
+}
