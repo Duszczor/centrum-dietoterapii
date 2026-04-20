@@ -32,6 +32,13 @@ function dietitian_setup(): void
         'navigation-widgets',
     ]);
 
+    // Enable modern block editor layout controls
+    add_theme_support('align-wide');
+
+    // Reuse frontend styles inside the editor for closer visual parity
+    add_theme_support('editor-styles');
+    add_editor_style('assets/dist/style.css');
+
     // Register navigation menu locations
     register_nav_menus([
         'primary' => 'Primary Menu',

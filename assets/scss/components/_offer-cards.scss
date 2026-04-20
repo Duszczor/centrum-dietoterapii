@@ -3,8 +3,7 @@
 
 .offer-cards {
   padding: clamp(4rem, 9vw, 7rem) 1.5rem;
-  background:
-    radial-gradient(
+  background: radial-gradient(
       circle at 20% 0%,
       rgba($color-primary, 0.08),
       transparent 36%
@@ -66,9 +65,26 @@
   &:hover {
     @include hover-lift(-8px, 0 16px 32px rgba($color-primary-dark, 0.12));
     border-color: rgba($color-primary, 0.2);
+    transition-delay: 0s;
 
     .offer-card__icon {
       transform: scale(1.08);
+      transition-delay: 0s;
+    }
+  }
+
+  &.motion-reveal.is-visible:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba($color-primary-dark, 0.12);
+    border-color: rgba($color-primary, 0.2);
+    transition:
+      transform 0.3s ease-out,
+      box-shadow 0.3s ease-out,
+      border-color 0.3s ease-out;
+
+    .offer-card__icon {
+      transform: scale(1.08);
+      transition: transform 0.3s ease-out;
     }
   }
 
@@ -182,9 +198,26 @@
       transform: translateY(-8px);
       box-shadow: 0 16px 32px rgba($color-primary-dark, 0.12);
       border-color: rgba($color-primary, 0.2);
+      transition-delay: 0s;
 
       .offer-card__icon {
         transform: scale(1.08);
+        transition-delay: 0s;
+      }
+    }
+
+    &.motion-reveal.is-visible:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 32px rgba($color-primary-dark, 0.12);
+      border-color: rgba($color-primary, 0.2);
+      transition:
+        transform 0.3s ease-out,
+        box-shadow 0.3s ease-out,
+        border-color 0.3s ease-out;
+
+      .offer-card__icon {
+        transform: scale(1.08);
+        transition: transform 0.3s ease-out;
       }
     }
 
@@ -252,10 +285,24 @@
   .offer-card {
     &:hover {
       transform: translateY(-4px);
+      transition-delay: 0s;
+      transition-duration: 0.3s;
+    }
+
+    &.motion-reveal.is-visible:hover {
+      transform: translateY(-4px);
+      transition: transform 0.3s ease-out;
     }
 
     &--featured:hover {
       transform: translateY(-6px);
+      transition-delay: 0s;
+      transition-duration: 0.3s;
+    }
+
+    &--featured.motion-reveal.is-visible:hover {
+      transform: translateY(-6px);
+      transition: transform 0.3s ease-out;
     }
   }
 }

@@ -211,7 +211,6 @@ export default function Edit({ attributes, setAttributes }) {
   return (
     <>
       <InspectorControls>
-
         <PanelBody title={__("Layout", THEME_TEXT_DOMAIN)} initialOpen>
           <SelectControl
             label={__("Hero layout variant", THEME_TEXT_DOMAIN)}

@@ -13,6 +13,7 @@ body.motion-enabled {
     &.is-visible {
       opacity: 1;
       transform: translate3d(0, 0, 0);
+      transition-delay: 0s;
     }
   }
 
@@ -27,8 +28,8 @@ body.motion-enabled {
 @media (prefers-reduced-motion: no-preference) {
   .home {
     .site-header {
-      animation: motion-header-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1)
-        0.04s both;
+      animation: motion-header-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.04s
+        both;
     }
 
     .hero__media {
@@ -47,11 +48,17 @@ body.motion-enabled {
     .hero__title,
     .hero__name,
     .hero__desc p,
-    .hero__cta,
     .hero__cta-note {
       opacity: 0.01;
       transform: translate3d(0, 0.85rem, 0);
       animation: motion-hero-copy 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    // Keep CTA entrance subtle without animating transform,
+    // so button hover lift can control transform cleanly.
+    .hero__cta {
+      opacity: 0.01;
+      animation: motion-hero-fade 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
     .hero__label {
@@ -126,6 +133,16 @@ body.motion-enabled {
     to {
       opacity: 1;
       transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes motion-hero-fade {
+    from {
+      opacity: 0.01;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 

@@ -1,7 +1,47 @@
 @use "../base/variables" as *;
 
 // =============================================================================
-// HERO — Full-width background image, single headline
+// HERO OVERLAY GRADIENTS
+// =============================================================================
+// Gradient intensity levels from left to right for text readability
+
+$hero-overlay-default: linear-gradient(
+  to right,
+  rgba(0, 0, 0, 0.6) 0%,
+  rgba(0, 0, 0, 0.3) 55%,
+  transparent 100%
+);
+
+$hero-overlay-soft: linear-gradient(
+  to right,
+  rgba(0, 0, 0, 0.42) 0%,
+  rgba(0, 0, 0, 0.18) 55%,
+  transparent 100%
+);
+
+$hero-overlay-strong: linear-gradient(
+  to right,
+  rgba(0, 0, 0, 0.78) 0%,
+  rgba(0, 0, 0, 0.48) 55%,
+  rgba(0, 0, 0, 0.18) 100%
+);
+
+$hero-overlay-centered: linear-gradient(
+  180deg,
+  rgba(0, 0, 0, 0.62) 0%,
+  rgba(0, 0, 0, 0.38) 52%,
+  rgba(0, 0, 0, 0.2) 100%
+);
+
+$hero-overlay-mobile: linear-gradient(
+  to right,
+  rgba(0, 0, 0, 0.86) 0%,
+  rgba(0, 0, 0, 0.72) 55%,
+  rgba(0, 0, 0, 0.54) 100%
+);
+
+// =============================================================================
+// HERO SECTION — Full-width background image with overlay and content
 // =============================================================================
 
 .hero {
@@ -11,6 +51,7 @@
   flex-direction: column;
   background-color: $color-primary-dark; // fallback while image loads
 
+  // Media layer: image container
   &__media {
     position: absolute;
     inset: 0;
@@ -26,17 +67,26 @@
     object-position: center 40%;
   }
 
+  // Overlay layer: gradient for text contrast
   &__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.3) 55%,
-      transparent 100%
-    );
+    background: $hero-overlay-default;
     z-index: 0;
   }
+
+  // Overlay intensity variants
+  &--overlay-soft .hero__overlay {
+    background: $hero-overlay-soft;
+  }
+
+  &--overlay-strong .hero__overlay {
+    background: $hero-overlay-strong;
+  }
+
+  // ==========================================================================
+  // Content layer
+  // ==========================================================================
 
   &__content {
     position: relative;
@@ -51,6 +101,21 @@
       clamp(4rem, 8vh, 6rem) clamp(2rem, 8vw, 6rem);
     text-align: left;
   }
+
+  // Content position variants
+  &--content-top .hero__content {
+    justify-content: flex-start;
+    padding-top: clamp(8rem, 12vh, 10rem);
+  }
+
+  &--content-bottom .hero__content {
+    justify-content: flex-end;
+    padding-bottom: clamp(5rem, 10vh, 7rem);
+  }
+
+  // ==========================================================================
+  // Typography
+  // ==========================================================================
 
   &__label {
     margin: 0 0 0.5rem;
@@ -117,6 +182,58 @@
     color: rgba($color-white, 0.72);
   }
 
+  // ==========================================================================
+  // Layout variants
+  // ==========================================================================
+
+  &--centered {
+    .hero__overlay {
+      background: $hero-overlay-centered;
+    }
+
+    .hero__content {
+      align-items: center;
+      text-align: center;
+      width: min(100%, 56rem);
+      margin-inline: auto;
+      padding-inline: clamp(1.5rem, 6vw, 4.5rem);
+    }
+
+    .hero__heading,
+    .hero__desc {
+      align-items: center;
+    }
+
+    .hero__title,
+    .hero__desc,
+    .hero__cta-note {
+      max-width: 34rem;
+    }
+  }
+
+  &--compact {
+    min-height: clamp(38rem, 86vh, 48rem);
+
+    .hero__content {
+      gap: 1.25rem;
+      padding-top: clamp(8rem, 12vh, 10rem);
+      padding-bottom: clamp(3rem, 6vh, 4.5rem);
+    }
+
+    .hero__title {
+      font-size: clamp(1.7rem, 3vw, 2.7rem);
+      max-width: 18ch;
+    }
+
+    .hero__desc {
+      max-width: 28rem;
+    }
+  }
+
+  // ==========================================================================
+  // Scroll indicator
+  // ==========================================================================
+
   &__scroll {
     position: absolute;
     bottom: 2rem;
@@ -150,6 +267,10 @@
     filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.5));
   }
 
+  // ==========================================================================
+  // Animations
+  // ==========================================================================
+
   @keyframes hero-scroll-bounce {
     0%,
     100% {
@@ -160,7 +281,23 @@
     }
   }
 
+  // ==========================================================================
+  // Mobile responsiveness
+  // ==========================================================================
+
   @media (max-width: $breakpoint-sm) {
+    &--centered {
+      .hero__content {
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .hero__heading,
+      .hero__desc {
+        align-items: flex-start;
+      }
+    }
+
     &__image {
       object-position: 73% 50%;
       transform: scale(1.12);
@@ -168,12 +305,7 @@
     }
 
     &__overlay {
-      background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.86) 0%,
-        rgba(0, 0, 0, 0.72) 55%,
-        rgba(0, 0, 0, 0.54) 100%
-      );
+      background: $hero-overlay-mobile;
     }
 
     &__title {

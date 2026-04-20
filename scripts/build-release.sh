@@ -27,6 +27,7 @@ rsync -a \
   --exclude='release/' \
   --exclude='scripts/' \
   --exclude='assets/scss/' \
+  --exclude='blocks/**/src/' \
   --exclude='package.json' \
   --exclude='package-lock.json' \
   --exclude='.gitignore' \

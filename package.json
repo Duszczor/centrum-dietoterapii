@@ -4,16 +4,35 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "sass assets/scss/style.scss assets/dist/style.css --watch",
-    "build": "sass assets/scss/style.scss assets/dist/style.css --style=compressed",
+    "dev": "npm run dev:styles",
+    "dev:styles": "sass assets/scss/style.scss assets/dist/style.css --watch",
+    "dev:blocks": "bash scripts/dev-blocks.sh",
+    "build": "npm run build:styles && npm run build:blocks",
+    "build:styles": "sass assets/scss/style.scss assets/dist/style.css --style=compressed",
+    "build:blocks": "bash scripts/build-blocks.sh",
     "release": "npm run build && bash scripts/build-release.sh",
     "release:zip": "npm run release && bash scripts/zip-release.sh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
-    "sass": "^1.97.3"
+    "@wordpress/scripts": "^32.0.0",
+    "sass": "^1.99.0"
+  },
+  "overrides": {
+    "copy-webpack-plugin": {
+      "serialize-javascript": "^7.0.5"
+    },
+    "@sentry/node": {
+      "minimatch": "^9.0.9"
+    },
+    "markdownlint-cli": {
+      "minimatch": "^3.1.5"
+    },
+    "glob": {
+      "minimatch": "^3.1.5"
+    },
+    "webpack-dev-server": "^5.2.2"
   }
 }

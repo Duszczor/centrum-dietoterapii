@@ -97,13 +97,23 @@ function dietitian_preload_hero_image(): void
         return;
     }
 
-    $hero_image_uri = dietitian_get_asset_uri('images/hero/hero-bg.webp');
-    $hero_image_768_uri = dietitian_get_asset_uri('images/hero/hero-bg-768.webp');
-    $hero_image_1280_uri = dietitian_get_asset_uri('images/hero/hero-bg-1280.webp');
-    $hero_image_1920_uri = dietitian_get_asset_uri('images/hero/hero-bg-1920.webp');
-    $hero_image_srcset = $hero_image_768_uri . ' 768w, ' . $hero_image_1280_uri . ' 1280w, ' . $hero_image_1920_uri . ' 1920w, ' . $hero_image_uri . ' 2560w';
+    $hero_block = dietitian_get_front_page_hero_block();
+    $hero_attributes = is_array($hero_block) ? ($hero_block['attrs'] ?? []) : [];
+    $hero_image = dietitian_get_hero_image_data(is_array($hero_attributes) ? $hero_attributes : []);
 
-    echo '<link rel="preload" as="image" href="' . $hero_image_1280_uri . '" imagesrcset="' . $hero_image_srcset . '" imagesizes="100vw" type="image/webp" fetchpriority="high">';
+    if (empty($hero_image['src'])) {
+        return;
+    }
+
+    $preload_tag = '<link rel="preload" as="image" href="' . esc_url($hero_image['src']) . '"';
+
+    if (!empty($hero_image['srcset'])) {
+        $preload_tag .= ' imagesrcset="' . esc_attr((string) $hero_image['srcset']) . '"';
+    }
+
+    $preload_tag .= ' imagesizes="100vw" fetchpriority="high">';
+
+    echo $preload_tag;
 }
 
 add_action('wp_head', 'dietitian_preload_hero_image', 1);
