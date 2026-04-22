@@ -1,0 +1,68 @@
+// =============================================================================
+// VARIABLES — Section and Surface Tokens
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Section Backgrounds
+// -----------------------------------------------------------------------------
+$color-bg-warm: #eef1e4; // Pricing section — warm muted green
+$color-bg-neutral: #f6f6f6; // Consultation-preview — light neutral gray
+
+// -----------------------------------------------------------------------------
+// Borders & Dividers
+// -----------------------------------------------------------------------------
+$color-border-default: #e0e0e0; // Default card border
+$color-border-section: #ecefe8; // Subtle section separator (pricing price row)
+$color-border-split: #dfe6d6; // Very subtle split/divider line
+
+// -----------------------------------------------------------------------------
+// Card Backgrounds
+// -----------------------------------------------------------------------------
+$color-card-featured-bg: #f8fbf7; // Featured / highlighted card background
+
+// -----------------------------------------------------------------------------
+// Decorative Accent
+// -----------------------------------------------------------------------------
+$color-primary-vivid: #6faf9d; // Brighter brand green — decorative use only (footer, banners)
+
+// -----------------------------------------------------------------------------
+// Status
+// -----------------------------------------------------------------------------
+$color-danger: #a64534; // Destructive / alert text color
+
+// -----------------------------------------------------------------------------
+// Footer
+// -----------------------------------------------------------------------------
+$color-footer-gradient-start: #233831;
+$color-footer-gradient-end: #16231f;
+$color-footer-accent: #a6d0c2;
+$color-footer-link-hover: #d9f1e8;
+
+// -----------------------------------------------------------------------------
+// Neutral Surfaces
+// -----------------------------------------------------------------------------
+$color-surface-soft: #f8fbfa;
+$color-surface-plain: #fefefe;
+$color-surface-muted: #dfe8dc;
+
+// -----------------------------------------------------------------------------
+// Consultation Preview
+// -----------------------------------------------------------------------------
+$color-consultation-title: #1f2422;
+$color-consultation-line: #345e3a;
+$color-consultation-strong: #1f4b28;
+
+// -----------------------------------------------------------------------------
+// Contact
+// -----------------------------------------------------------------------------
+$color-contact-gradient-start: #fbfcf8;
+$color-contact-gradient-end: #f3f5ec;
+$color-contact-card-gradient-end: #f7fbf9;
+$color-contact-map-gradient-end: #f7f9f3;
+
+// -----------------------------------------------------------------------------
+// Offer Cards
+// -----------------------------------------------------------------------------
+$color-offer-icon-accent-left: #7aa958;
+$color-offer-icon-accent-featured: #d25566;
+$color-offer-icon-accent-right: #c58a37;

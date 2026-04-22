@@ -34,13 +34,13 @@ get_header();
             if ($offer_cards_block !== null) {
                 echo render_block($offer_cards_block);
             } else {
-                get_template_part('template-parts/sections/' . $section_slug);
+                get_template_part('template-parts/sections/' . $section_slug . '/' . $section_slug);
             }
             continue;
         }
 
         // Render all other sections via template partials
-        get_template_part('template-parts/sections/' . $section_slug);
+        get_template_part('template-parts/sections/' . $section_slug . '/' . $section_slug);
     }
     ?>
 </main>

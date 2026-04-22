@@ -1,5 +1,4 @@
-@use "../base/variables" as *;
-@use "../base/mixins" as *;
+@use "../../../assets/scss/base/variables" as *;
 
 .pricing {
   padding: clamp(4rem, 8vw, 8rem) 0;
@@ -42,12 +41,10 @@
   }
 
   &__card {
-    @include card-surface(
-      $border-color: $color-border-default,
-      $radius: 18px,
-      $background: $color-white,
-      $shadow: 0 22px 40px rgba(43, 51, 39, 0.12)
-    );
+    background-color: $color-white;
+    border: 1px solid $color-border-default;
+    border-radius: 18px;
+    box-shadow: 0 22px 40px rgba(43, 51, 39, 0.12);
     border-width: 2px;
     padding: clamp(1.7rem, 2.2vw, 2.3rem);
     display: flex;
@@ -60,7 +57,8 @@
       border-color 0.3s ease;
 
     &:hover {
-      @include hover-lift(-4px, 0 26px 46px rgba(43, 51, 39, 0.16));
+      transform: translateY(-4px);
+      box-shadow: 0 26px 46px rgba(43, 51, 39, 0.16);
       border-color: $color-primary;
     }
 

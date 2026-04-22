@@ -13,10 +13,4 @@
 
     <?php wp_body_open(); ?>
 
-    <a class="skip-link" href="#main-content">Przejdz do tresci</a>
-
-    <header class="site-header" id="site-header">
-        <div class="container">
-            <?php get_template_part('template-parts/header/nav'); ?>
-        </div>
-    </header>
+    <?php get_template_part('template-parts/header/site-header/site-header'); ?>

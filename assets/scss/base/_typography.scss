@@ -34,6 +34,12 @@ h3 {
 h4 {
   font-size: $font-size-xl;
 }
+h5 {
+  font-size: $font-size-lg;
+}
+h6 {
+  font-size: $font-size-base;
+}
 
 // -----------------------------------------------------------------------------
 // Body Text
@@ -59,6 +65,15 @@ p {
   h3 {
     font-size: $font-size-xl;
   }
+  h4 {
+    font-size: $font-size-lg;
+  }
+  h5 {
+    font-size: $font-size-base;
+  }
+  h6 {
+    font-size: $font-size-sm;
+  }
 }
 
 @media (max-width: $breakpoint-sm) {
@@ -67,5 +82,17 @@ p {
   }
   h2 {
     font-size: $font-size-xl;
+  }
+  h3 {
+    font-size: $font-size-lg;
+  }
+  h4 {
+    font-size: $font-size-base;
+  }
+  h5 {
+    font-size: $font-size-sm;
+  }
+  h6 {
+    font-size: $font-size-sm;
   }
 }

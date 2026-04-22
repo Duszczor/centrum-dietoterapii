@@ -1,4 +1,4 @@
-@use "../base/variables" as *;
+@use "../../../assets/scss/base/variables" as *;
 
 .consultation-preview {
   padding: clamp(4rem, 8vw, 6.5rem) 1.5rem;
@@ -22,7 +22,7 @@
     font-family: $font-body;
     font-size: clamp(2.05rem, 3vw, 2.95rem);
     font-weight: $font-weight-bold;
-    color: #1f2422;
+    color: $color-consultation-title;
     line-height: 1.12;
   }
 
@@ -32,7 +32,7 @@
     height: 3px;
     margin-top: 1rem;
     border-radius: 999px;
-    background: #345e3a;
+    background: $color-consultation-line;
   }
 
   p {
@@ -42,7 +42,7 @@
     color: rgba($color-text, 0.84);
 
     strong {
-      color: #1f4b28;
+      color: $color-consultation-strong;
       font-weight: 700;
     }
   }

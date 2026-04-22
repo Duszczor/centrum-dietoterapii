@@ -1,35 +1,51 @@
-@use "../base/variables" as *;
+/* ========================
+   MOTION TOKENS
+======================== */
+
+$motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+$motion-duration-sm: 0.55s;
+$motion-duration-md: 0.7s;
+$motion-duration-lg: 1.35s;
+
+/* ========================
+   BASE REVEAL (scroll / intersection)
+======================== */
 
 body.motion-enabled {
   .motion-reveal {
     opacity: 0.01;
-    transform: translate3d(0, 1.1rem, 0);
+    transform: translateY(1.1rem);
+
     transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity $motion-duration-md $motion-ease,
+      transform $motion-duration-md $motion-ease;
+
     transition-delay: var(--motion-delay, 0s);
-    will-change: opacity, transform;
 
     &.is-visible {
       opacity: 1;
-      transform: translate3d(0, 0, 0);
+      transform: translateY(0);
       transition-delay: 0s;
     }
   }
 
+  /* settle animation tylko tam gdzie potrzebne */
   .offer-card.is-visible .offer-card__icon-wrap,
   .pricing__card.is-visible,
   .contact__card.is-visible {
-    animation: motion-settle 0.68s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: motion-settle 0.68s $motion-ease both;
     animation-delay: calc(var(--motion-delay, 0s) + 0.02s);
   }
 }
 
+/* ========================
+   HERO / ENTRY ANIMATIONS
+======================== */
+
 @media (prefers-reduced-motion: no-preference) {
   .home {
     .site-header {
-      animation: motion-header-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.04s
-        both;
+      animation: motion-header-enter $motion-duration-sm $motion-ease 0.04s both;
     }
 
     .hero__media {
@@ -37,28 +53,31 @@ body.motion-enabled {
     }
 
     .hero__image {
-      animation: motion-hero-image 1.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: motion-hero-image $motion-duration-lg $motion-ease both;
+      will-change: transform;
     }
 
     .hero__overlay {
-      animation: motion-hero-overlay 0.9s ease-out both;
+      animation: motion-hero-fade 0.9s ease-out both;
     }
 
+    /* COPY (stagger system ready) */
     .hero__label,
     .hero__title,
     .hero__name,
     .hero__desc p,
     .hero__cta-note {
       opacity: 0.01;
-      transform: translate3d(0, 0.85rem, 0);
-      animation: motion-hero-copy 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      transform: translateY(0.85rem);
+
+      animation: motion-hero-copy $motion-duration-md $motion-ease both;
     }
 
-    // Keep CTA entrance subtle without animating transform,
-    // so button hover lift can control transform cleanly.
+    /* CTA bez transform (żeby hover działał poprawnie) */
     .hero__cta {
       opacity: 0.01;
-      animation: motion-hero-fade 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: motion-hero-fade $motion-duration-md $motion-ease both;
+      animation-delay: 0.42s;
     }
 
     .hero__label {
@@ -81,58 +100,43 @@ body.motion-enabled {
       animation-delay: 0.36s;
     }
 
-    .hero__cta {
-      animation-delay: 0.42s;
-    }
-
     .hero__cta-note {
       animation-delay: 0.48s;
     }
   }
 
+  /* ========================
+     KEYFRAMES
+  ======================== */
+
   @keyframes motion-header-enter {
     from {
       opacity: 0;
-      transform: translate3d(0, -0.55rem, 0);
+      transform: translateY(-0.55rem);
     }
-
     to {
       opacity: 1;
-      transform: translate3d(0, 0, 0);
+      transform: translateY(0);
     }
   }
 
   @keyframes motion-hero-image {
     from {
       transform: scale(1.035);
-      filter: saturate(0.96) contrast(1.02);
     }
-
     to {
       transform: scale(1);
-      filter: saturate(1) contrast(1);
-    }
-  }
-
-  @keyframes motion-hero-overlay {
-    from {
-      opacity: 0.02;
-    }
-
-    to {
-      opacity: 1;
     }
   }
 
   @keyframes motion-hero-copy {
     from {
       opacity: 0.01;
-      transform: translate3d(0, 0.85rem, 0);
+      transform: translateY(0.85rem);
     }
-
     to {
       opacity: 1;
-      transform: translate3d(0, 0, 0);
+      transform: translateY(0);
     }
   }
 
@@ -140,19 +144,42 @@ body.motion-enabled {
     from {
       opacity: 0.01;
     }
-
     to {
       opacity: 1;
     }
   }
 
   @keyframes motion-settle {
-    0% {
-      transform: translate3d(0, 0.28rem, 0);
+    from {
+      transform: translateY(0.28rem);
     }
+    to {
+      transform: translateY(0);
+    }
+  }
+}
 
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
+/* ========================
+   REDUCED MOTION (FULL CONTROL)
+======================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal,
+  .offer-card.is-visible .offer-card__icon-wrap,
+  .pricing__card.is-visible,
+  .contact__card.is-visible,
+  .hero__image,
+  .hero__overlay,
+  .hero__label,
+  .hero__title,
+  .hero__name,
+  .hero__desc p,
+  .hero__cta-note,
+  .hero__cta,
+  .site-header {
+    animation: none;
+    transition: none;
+    transform: none;
+    opacity: 1;
   }
 }

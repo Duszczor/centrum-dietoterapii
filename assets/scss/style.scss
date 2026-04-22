@@ -5,18 +5,11 @@
 // -----------------------------------------------------------------------------
 // 1. Base — Variables first, everything else depends on them
 // -----------------------------------------------------------------------------
-@use "base/variables" as *;
 @use "base/reset";
 @use "base/typography";
-@use "layout/grid";
-@use "layout/header";
-@use "components/button";
-@use "components/nav";
-@use "components/hero";
-@use "components/offer-cards";
-@use "components/contact-banner";
-@use "components/consultation-preview";
-@use "components/pricing";
-@use "components/contact";
-@use "components/footer";
-@use "components/motion";
+@use "layout/container";
+@use "components";
+@use "../../template-parts/header/site-header/site-header";
+@use "../../template-parts/header/nav/nav";
+@use "../../template-parts/footer/site-footer/site-footer";
+@use "../../template-parts/sections";

@@ -1,5 +1,15 @@
-@use "../base/variables" as *;
-@use "../base/mixins" as *;
+@use "../../../assets/scss/base/variables" as *;
+
+@mixin offer-card-hover-state($offset-y, $shadow) {
+  transform: translateY($offset-y);
+  box-shadow: $shadow;
+  border-color: rgba($color-primary, 0.2);
+
+  .offer-card__icon {
+    transform: scale(1.08);
+    transition: transform 0.3s ease-out;
+  }
+}
 
 .offer-cards {
   padding: clamp(4rem, 9vw, 7rem) 1.5rem;
@@ -51,41 +61,25 @@
   text-align: left;
   height: 100%;
   padding: clamp(2rem, 3vw, 2.5rem);
-  @include card-surface(
-    $border-color: rgba($color-primary-dark, 0.08),
-    $radius: 12px,
-    $background: $color-white,
-    $shadow: none
-  );
+  background-color: $color-white;
+  border: 1px solid rgba($color-primary-dark, 0.08);
+  border-radius: 12px;
+  box-shadow: none;
   transition:
     transform 0.3s ease-out,
     box-shadow 0.3s ease-out,
     border-color 0.3s ease-out;
 
-  &:hover {
-    @include hover-lift(-8px, 0 16px 32px rgba($color-primary-dark, 0.12));
-    border-color: rgba($color-primary, 0.2);
-    transition-delay: 0s;
-
-    .offer-card__icon {
-      transform: scale(1.08);
-      transition-delay: 0s;
-    }
-  }
-
+  &:hover,
   &.motion-reveal.is-visible:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 32px rgba($color-primary-dark, 0.12);
-    border-color: rgba($color-primary, 0.2);
+    @include offer-card-hover-state(
+      -8px,
+      0 16px 32px rgba($color-primary-dark, 0.12)
+    );
     transition:
       transform 0.3s ease-out,
       box-shadow 0.3s ease-out,
       border-color 0.3s ease-out;
-
-    .offer-card__icon {
-      transform: scale(1.08);
-      transition: transform 0.3s ease-out;
-    }
   }
 
   &__icon-wrap {
@@ -98,7 +92,7 @@
     margin-bottom: 1.5rem;
     flex-shrink: 0;
     color: $color-primary;
-    --icon-accent: #7aa958;
+    --icon-accent: #{$color-offer-icon-accent-left};
     background: rgba($color-primary, 0.08);
     border: 1px solid rgba($color-primary, 0.1);
     transition:
@@ -194,36 +188,21 @@
     background-color: $color-white;
     box-shadow: 0 4px 12px rgba($color-primary-dark, 0.06);
 
-    &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 32px rgba($color-primary-dark, 0.12);
-      border-color: rgba($color-primary, 0.2);
-      transition-delay: 0s;
-
-      .offer-card__icon {
-        transform: scale(1.08);
-        transition-delay: 0s;
-      }
-    }
-
+    &:hover,
     &.motion-reveal.is-visible:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 32px rgba($color-primary-dark, 0.12);
-      border-color: rgba($color-primary, 0.2);
+      @include offer-card-hover-state(
+        -8px,
+        0 16px 32px rgba($color-primary-dark, 0.12)
+      );
       transition:
         transform 0.3s ease-out,
         box-shadow 0.3s ease-out,
         border-color 0.3s ease-out;
-
-      .offer-card__icon {
-        transform: scale(1.08);
-        transition: transform 0.3s ease-out;
-      }
     }
 
     .offer-card__icon-wrap {
       color: $color-primary;
-      --icon-accent: #d25566;
+      --icon-accent: #{$color-offer-icon-accent-featured};
       background: rgba($color-primary, 0.08);
     }
 
@@ -250,13 +229,13 @@
 
   &--left {
     .offer-card__icon-wrap {
-      --icon-accent: #7aa958;
+      --icon-accent: #{$color-offer-icon-accent-left};
     }
   }
 
   &--right {
     .offer-card__icon-wrap {
-      --icon-accent: #c58a37;
+      --icon-accent: #{$color-offer-icon-accent-right};
     }
   }
 }
@@ -283,12 +262,7 @@
   }
 
   .offer-card {
-    &:hover {
-      transform: translateY(-4px);
-      transition-delay: 0s;
-      transition-duration: 0.3s;
-    }
-
+    &:hover,
     &.motion-reveal.is-visible:hover {
       transform: translateY(-4px);
       transition: transform 0.3s ease-out;

@@ -1,15 +1,18 @@
-@use "../base/variables" as *;
+@use "../../../assets/scss/base/variables" as *;
 
 .site-footer {
   position: relative;
   color: rgba(255, 255, 255, 0.88);
-  background:
-    radial-gradient(
+  background: radial-gradient(
       circle at top left,
       rgba($color-primary-vivid, 0.2),
       transparent 28%
     ),
-    linear-gradient(180deg, #233831 0%, #16231f 100%);
+    linear-gradient(
+      180deg,
+      $color-footer-gradient-start 0%,
+      $color-footer-gradient-end 100%
+    );
 
   &__container {
     padding-top: clamp(3.75rem, 7vw, 5.5rem);

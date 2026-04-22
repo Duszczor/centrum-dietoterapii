@@ -27,6 +27,7 @@ rsync -a \
   --exclude='release/' \
   --exclude='scripts/' \
   --exclude='assets/scss/' \
+  --exclude='template-parts/**/*.scss' \
   --exclude='blocks/**/src/' \
   --exclude='package.json' \
   --exclude='package-lock.json' \
