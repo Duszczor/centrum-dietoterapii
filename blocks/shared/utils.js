@@ -51,13 +51,3 @@ export function getFieldGuidance(length, thresholds) {
 export function sanitizeSelectValue(value, options, fallback) {
   return options.some((option) => option.value === value) ? value : fallback;
 }
-
-/**
- * Normalize a list of select options for consistent structure.
- * Maps label/value options to ensure consistent shape.
- * @param {Array} options - Array of options to normalize
- * @returns {Array} Normalized options with label and value
- */
-export function normalizeSelectOptions(options) {
-  return options.map(({ label, value }) => ({ label, value }));
-}

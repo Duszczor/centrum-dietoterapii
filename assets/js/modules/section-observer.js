@@ -23,25 +23,45 @@
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (entryA, entryB) =>
-              entryB.intersectionRatio - entryA.intersectionRatio,
-          )[0];
+    let observer = null;
 
-        if (visibleEntry && visibleEntry.target && visibleEntry.target.id) {
-          setActiveLink(`#${visibleEntry.target.id}`);
-        }
+    const createObserver = () => {
+      if (observer) {
+        observer.disconnect();
+      }
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          const visibleEntry = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort(
+              (entryA, entryB) =>
+                entryB.intersectionRatio - entryA.intersectionRatio,
+            )[0];
+
+          if (visibleEntry?.target?.id) {
+            setActiveLink(`#${visibleEntry.target.id}`);
+          }
+        },
+        {
+          rootMargin: `-${getHeaderOffset()}px 0px -45% 0px`,
+          threshold: [0.2, 0.45, 0.7],
+        },
+      );
+
+      observedSections.forEach((section) => observer.observe(section));
+    };
+
+    createObserver();
+
+    let resizeTimer;
+    window.addEventListener(
+      "resize",
+      () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(createObserver, 150);
       },
-      {
-        rootMargin: `-${getHeaderOffset()}px 0px -45% 0px`,
-        threshold: [0.2, 0.45, 0.7],
-      },
+      { passive: true },
     );
-
-    observedSections.forEach((section) => observer.observe(section));
   };
 })();

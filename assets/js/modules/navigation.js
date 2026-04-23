@@ -11,6 +11,12 @@
       return;
     }
 
+    if (window.Dietitian._navigationInitialized) {
+      return;
+    }
+
+    window.Dietitian._navigationInitialized = true;
+
     const navigationLinks = Array.from(
       navigationMenu.querySelectorAll("a[href]"),
     );
@@ -63,7 +69,7 @@
 
     navigationLinks.forEach((link) => {
       link.addEventListener("click", () => {
-        closeNavigation();
+        closeNavigation({ returnFocus: mobileNavigationQuery.matches });
       });
     });
 
@@ -118,14 +124,10 @@
       syncNavigationState(false);
     };
 
-    if (typeof mobileNavigationQuery.addEventListener === "function") {
-      mobileNavigationQuery.addEventListener(
-        "change",
-        handleNavigationViewportChange,
-      );
-    } else if (typeof mobileNavigationQuery.addListener === "function") {
-      mobileNavigationQuery.addListener(handleNavigationViewportChange);
-    }
+    mobileNavigationQuery.addEventListener(
+      "change",
+      handleNavigationViewportChange,
+    );
 
     handleNavigationViewportChange(mobileNavigationQuery);
   };

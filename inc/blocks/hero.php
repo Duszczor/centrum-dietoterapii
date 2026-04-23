@@ -214,7 +214,7 @@ function dietitian_render_hero_block(array $attributes = [], string $content = '
                 alt="<?php echo esc_attr($image['alt']); ?>"
                 fetchpriority="high"
                 loading="eager"
-                decoding="async">
+                decoding="sync">
         </picture>
 
         <div class="hero__overlay" aria-hidden="true"></div>

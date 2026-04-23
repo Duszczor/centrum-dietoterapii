@@ -4,8 +4,20 @@
 
 $motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
 $motion-duration-sm: 0.55s;
-$motion-duration-md: 0.7s;
+$motion-duration-md: 1.45s;
 $motion-duration-lg: 1.35s;
+$hero-copy-duration: 1.45s;
+$hero-copy-delay-start: 0.34s;
+$hero-copy-delay-step: 0.16s;
+$hero-copy-offset: 135%;
+$motion-reveal-offset: 2.4rem;
+$hero-delay-label: $hero-copy-delay-start;
+$hero-delay-title: $hero-copy-delay-start + $hero-copy-delay-step;
+$hero-delay-name: $hero-copy-delay-start + ($hero-copy-delay-step * 2);
+$hero-delay-desc-primary: $hero-copy-delay-start + ($hero-copy-delay-step * 3);
+$hero-delay-desc-secondary: $hero-copy-delay-start + ($hero-copy-delay-step * 4);
+$hero-delay-cta: $hero-copy-delay-start + ($hero-copy-delay-step * 5);
+$hero-delay-cta-note: $hero-copy-delay-start + ($hero-copy-delay-step * 6);
 
 /* ========================
    BASE REVEAL (scroll / intersection)
@@ -14,7 +26,7 @@ $motion-duration-lg: 1.35s;
 body.motion-enabled {
   .motion-reveal {
     opacity: 0.01;
-    transform: translateY(1.1rem);
+    transform: translateY($motion-reveal-offset);
 
     transition:
       opacity $motion-duration-md $motion-ease,
@@ -25,7 +37,6 @@ body.motion-enabled {
     &.is-visible {
       opacity: 1;
       transform: translateY(0);
-      transition-delay: 0s;
     }
   }
 
@@ -33,8 +44,8 @@ body.motion-enabled {
   .offer-card.is-visible .offer-card__icon-wrap,
   .pricing__card.is-visible,
   .contact__card.is-visible {
-    animation: motion-settle 0.68s $motion-ease both;
-    animation-delay: calc(var(--motion-delay, 0s) + 0.02s);
+    animation: motion-settle $motion-duration-md $motion-ease both;
+    animation-delay: calc(var(--motion-delay, 0s) + 0.06s);
   }
 }
 
@@ -45,7 +56,8 @@ body.motion-enabled {
 @media (prefers-reduced-motion: no-preference) {
   .home {
     .site-header {
-      animation: motion-header-enter $motion-duration-sm $motion-ease 0.04s both;
+      opacity: 0;
+      animation: motion-header-enter 1.65s $motion-ease 0.08s both;
     }
 
     .hero__media {
@@ -65,43 +77,60 @@ body.motion-enabled {
     .hero__label,
     .hero__title,
     .hero__name,
+    .hero__cta,
     .hero__desc p,
     .hero__cta-note {
-      opacity: 0.01;
-      transform: translateY(0.85rem);
+      opacity: 0;
+      transform: translateY($hero-copy-offset);
 
-      animation: motion-hero-copy $motion-duration-md $motion-ease both;
+      animation: motion-hero-copy $hero-copy-duration $motion-ease both;
     }
 
-    /* CTA bez transform (żeby hover działał poprawnie) */
-    .hero__cta {
-      opacity: 0.01;
-      animation: motion-hero-fade $motion-duration-md $motion-ease both;
-      animation-delay: 0.42s;
+    // Keep secondary paragraph on the same animation path even if selector
+    // matching differs between template variants.
+    .hero__desc > .hero__desc-secondary {
+      opacity: 0;
+      transform: translateY($hero-copy-offset);
+      will-change: transform, opacity;
+      animation-delay: $hero-delay-desc-secondary;
     }
 
     .hero__label {
-      animation-delay: 0.12s;
+      animation-delay: $hero-delay-label;
     }
 
     .hero__title {
-      animation-delay: 0.18s;
+      animation-delay: $hero-delay-title;
     }
 
     .hero__name {
-      animation-delay: 0.24s;
+      animation-delay: $hero-delay-name;
     }
 
     .hero__desc p:first-child {
-      animation-delay: 0.3s;
+      animation-delay: $hero-delay-desc-primary;
     }
 
-    .hero__desc-secondary {
-      animation-delay: 0.36s;
+    .hero__cta {
+      animation-delay: $hero-delay-cta;
     }
 
     .hero__cta-note {
-      animation-delay: 0.48s;
+      animation-delay: $hero-delay-cta-note;
+    }
+  }
+
+  .zl-widget-motion {
+    opacity: 0;
+    translate: 120vw 0;
+    transition:
+      opacity $motion-duration-md $motion-ease,
+      translate $motion-duration-md $motion-ease;
+    transition-delay: 0.62s;
+
+    &.is-visible {
+      opacity: 1;
+      translate: 0 0;
     }
   }
 
@@ -112,7 +141,7 @@ body.motion-enabled {
   @keyframes motion-header-enter {
     from {
       opacity: 0;
-      transform: translateY(-0.55rem);
+      transform: translateY(-120%);
     }
     to {
       opacity: 1;
@@ -131,8 +160,8 @@ body.motion-enabled {
 
   @keyframes motion-hero-copy {
     from {
-      opacity: 0.01;
-      transform: translateY(0.85rem);
+      opacity: 0;
+      transform: translateY($hero-copy-offset);
     }
     to {
       opacity: 1;
@@ -142,7 +171,7 @@ body.motion-enabled {
 
   @keyframes motion-hero-fade {
     from {
-      opacity: 0.01;
+      opacity: 0;
     }
     to {
       opacity: 1;
@@ -176,10 +205,12 @@ body.motion-enabled {
   .hero__desc p,
   .hero__cta-note,
   .hero__cta,
-  .site-header {
+  .site-header,
+  .zl-widget-motion {
     animation: none;
     transition: none;
     transform: none;
+    translate: 0 0;
     opacity: 1;
   }
 }

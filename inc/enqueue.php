@@ -51,12 +51,82 @@ function dietitian_enqueue_assets(): void
         true
     );
 
-    // Homepage motion module
+    // Homepage motion config
+    wp_enqueue_script(
+        'dietitian-page-motion-config',
+        get_template_directory_uri() . '/assets/js/modules/page-motion/config.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/modules/page-motion/config.js'),
+        true
+    );
+
+    // Homepage motion widget module
+    wp_enqueue_script(
+        'dietitian-page-motion-widget',
+        get_template_directory_uri() . '/assets/js/modules/page-motion/widget.js',
+        ['dietitian-page-motion-config'],
+        filemtime(get_template_directory() . '/assets/js/modules/page-motion/widget.js'),
+        true
+    );
+
+    // Homepage motion reveal module
+    wp_enqueue_script(
+        'dietitian-page-motion-reveal',
+        get_template_directory_uri() . '/assets/js/modules/page-motion/reveal.js',
+        ['dietitian-page-motion-config'],
+        filemtime(get_template_directory() . '/assets/js/modules/page-motion/reveal.js'),
+        true
+    );
+
+    // Homepage motion orchestrator
     wp_enqueue_script(
         'dietitian-page-motion-module',
         get_template_directory_uri() . '/assets/js/modules/page-motion.js',
-        [],
+        [
+            'dietitian-page-motion-config',
+            'dietitian-page-motion-widget',
+            'dietitian-page-motion-reveal',
+        ],
         filemtime(get_template_directory() . '/assets/js/modules/page-motion.js'),
+        true
+    );
+
+    // Bootstrap constants
+    wp_enqueue_script(
+        'dietitian-bootstrap-constants',
+        get_template_directory_uri() . '/assets/js/bootstrap/constants.js',
+        [],
+        filemtime(get_template_directory() . '/assets/js/bootstrap/constants.js'),
+        true
+    );
+
+    // Bootstrap page context factory
+    wp_enqueue_script(
+        'dietitian-bootstrap-create-page-context',
+        get_template_directory_uri() . '/assets/js/bootstrap/create-page-context.js',
+        ['dietitian-bootstrap-constants'],
+        filemtime(get_template_directory() . '/assets/js/bootstrap/create-page-context.js'),
+        true
+    );
+
+    // Bootstrap module initializer
+    wp_enqueue_script(
+        'dietitian-bootstrap-init-modules',
+        get_template_directory_uri() . '/assets/js/bootstrap/init-modules.js',
+        ['dietitian-bootstrap-constants'],
+        filemtime(get_template_directory() . '/assets/js/bootstrap/init-modules.js'),
+        true
+    );
+
+    // Bootstrap app orchestrator
+    wp_enqueue_script(
+        'dietitian-bootstrap-app',
+        get_template_directory_uri() . '/assets/js/bootstrap/bootstrap-app.js',
+        [
+            'dietitian-bootstrap-create-page-context',
+            'dietitian-bootstrap-init-modules',
+        ],
+        filemtime(get_template_directory() . '/assets/js/bootstrap/bootstrap-app.js'),
         true
     );
 
@@ -80,6 +150,7 @@ function dietitian_enqueue_assets(): void
             'dietitian-smooth-scroll-module',
             'dietitian-section-observer-module',
             'dietitian-page-motion-module',
+            'dietitian-bootstrap-app',
         ],
         filemtime(get_template_directory() . '/assets/js/main.js'),
         true // Load in footer

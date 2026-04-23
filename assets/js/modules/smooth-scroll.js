@@ -32,7 +32,14 @@
           window.scrollY -
           getHeaderOffset();
 
-        window.scrollTo({ top: targetTop, behavior: "smooth" });
+        const prefersReduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        window.scrollTo({
+          top: targetTop,
+          behavior: prefersReduced ? "instant" : "smooth",
+        });
         setActiveLink(targetSelector);
       });
     });
