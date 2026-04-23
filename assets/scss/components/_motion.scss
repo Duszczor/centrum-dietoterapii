@@ -3,14 +3,15 @@
 ======================== */
 
 $motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
-$motion-duration-sm: 0.55s;
 $motion-duration-md: 1.45s;
 $motion-duration-lg: 1.35s;
+$motion-reveal-offset: 2.4rem;
+
 $hero-copy-duration: 1.45s;
 $hero-copy-delay-start: 0.34s;
 $hero-copy-delay-step: 0.16s;
 $hero-copy-offset: 135%;
-$motion-reveal-offset: 2.4rem;
+
 $hero-delay-label: $hero-copy-delay-start;
 $hero-delay-title: $hero-copy-delay-start + $hero-copy-delay-step;
 $hero-delay-name: $hero-copy-delay-start + ($hero-copy-delay-step * 2);
@@ -20,18 +21,69 @@ $hero-delay-cta: $hero-copy-delay-start + ($hero-copy-delay-step * 5);
 $hero-delay-cta-note: $hero-copy-delay-start + ($hero-copy-delay-step * 6);
 
 /* ========================
-   BASE REVEAL (scroll / intersection)
+   KEYFRAMES
+======================== */
+
+@keyframes motion-header-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes motion-hero-image {
+  from {
+    transform: scale(1.035);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes motion-hero-copy {
+  from {
+    opacity: 0;
+    transform: translateY($hero-copy-offset);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes motion-hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes motion-settle {
+  from {
+    transform: translateY(0.28rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* ========================
+   BASE REVEAL (all sections)
 ======================== */
 
 body.motion-enabled {
   .motion-reveal {
     opacity: 0.01;
     transform: translateY($motion-reveal-offset);
-
     transition:
       opacity $motion-duration-md $motion-ease,
       transform $motion-duration-md $motion-ease;
-
     transition-delay: var(--motion-delay, 0s);
 
     &.is-visible {
@@ -39,18 +91,10 @@ body.motion-enabled {
       transform: translateY(0);
     }
   }
-
-  /* settle animation tylko tam gdzie potrzebne */
-  .offer-card.is-visible .offer-card__icon-wrap,
-  .pricing__card.is-visible,
-  .contact__card.is-visible {
-    animation: motion-settle $motion-duration-md $motion-ease both;
-    animation-delay: calc(var(--motion-delay, 0s) + 0.06s);
-  }
 }
 
 /* ========================
-   HERO / ENTRY ANIMATIONS
+   HEADER + HERO
 ======================== */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -73,7 +117,6 @@ body.motion-enabled {
       animation: motion-hero-fade 0.9s ease-out both;
     }
 
-    /* COPY (stagger system ready) */
     .hero__label,
     .hero__title,
     .hero__name,
@@ -82,12 +125,9 @@ body.motion-enabled {
     .hero__cta-note {
       opacity: 0;
       transform: translateY($hero-copy-offset);
-
       animation: motion-hero-copy $hero-copy-duration $motion-ease both;
     }
 
-    // Keep secondary paragraph on the same animation path even if selector
-    // matching differs between template variants.
     .hero__desc > .hero__desc-secondary {
       opacity: 0;
       transform: translateY($hero-copy-offset);
@@ -133,69 +173,76 @@ body.motion-enabled {
       translate: 0 0;
     }
   }
+}
 
-  /* ========================
-     KEYFRAMES
-  ======================== */
+/* ========================
+   OFFER CARDS
+======================== */
 
-  @keyframes motion-header-enter {
-    from {
-      opacity: 0;
-      transform: translateY(-120%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+body.motion-enabled {
+  .offer-card.is-visible .offer-card__icon-wrap {
+    animation: motion-settle $motion-duration-md $motion-ease both;
+    animation-delay: calc(var(--motion-delay, 0s) + 0.06s);
+  }
+}
+
+/* ========================
+   PRICING
+======================== */
+
+body.motion-enabled {
+  .pricing__card.motion-reveal.is-visible {
+    transition:
+      transform 0.16s ease-out,
+      box-shadow 0.2s ease-out,
+      border-color 0.2s ease-out;
   }
 
-  @keyframes motion-hero-image {
-    from {
-      transform: scale(1.035);
-    }
-    to {
-      transform: scale(1);
-    }
+  .pricing__card.motion-reveal.is-visible:hover {
+    transform: translateY(-4px);
   }
 
-  @keyframes motion-hero-copy {
-    from {
-      opacity: 0;
-      transform: translateY($hero-copy-offset);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .pricing__card.pricing__card--featured.motion-reveal.is-visible {
+    transform: translateY(-0.85rem);
   }
 
-  @keyframes motion-hero-fade {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  .pricing__card.pricing__card--featured.motion-reveal.is-visible:hover {
+    transform: translateY(-1rem);
   }
 
-  @keyframes motion-settle {
-    from {
-      transform: translateY(0.28rem);
+  @media (max-width: 1100px) {
+    .pricing__card.pricing__card--featured.motion-reveal.is-visible {
+      transform: none;
     }
-    to {
-      transform: translateY(0);
+
+    .pricing__card.pricing__card--featured.motion-reveal.is-visible:hover {
+      transform: translateY(-4px);
     }
   }
 }
 
 /* ========================
-   REDUCED MOTION (FULL CONTROL)
+   CONTACT
+======================== */
+
+body.motion-enabled {
+  .contact__card.motion-reveal.is-visible:hover {
+    transform: translateY(-2px);
+  }
+
+  .contact__card.is-visible {
+    animation: motion-settle $motion-duration-md $motion-ease both;
+    animation-delay: calc(var(--motion-delay, 0s) + 0.06s);
+  }
+}
+
+/* ========================
+   REDUCED MOTION
 ======================== */
 
 @media (prefers-reduced-motion: reduce) {
   .motion-reveal,
   .offer-card.is-visible .offer-card__icon-wrap,
-  .pricing__card.is-visible,
   .contact__card.is-visible,
   .hero__image,
   .hero__overlay,

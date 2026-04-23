@@ -138,6 +138,43 @@ $nav-transition-base: 0.25s;
       }
     }
 
+    .site-nav__link--blog {
+      min-height: 48px;
+      padding: 0.6rem 0.9rem;
+      border-radius: 999px;
+      letter-spacing: 0.015em;
+      font-weight: $font-weight-medium;
+      background-color: rgba($color-white, 0.045);
+      box-shadow: inset 0 0 0 1px rgba($color-white, 0.14);
+      transition:
+        color $nav-transition-fast ease,
+        background-color $nav-transition-fast ease,
+        box-shadow $nav-transition-fast ease;
+
+      &::after {
+        left: 0.85rem;
+        right: 0.85rem;
+        bottom: 0.55rem;
+        transform-origin: left;
+        transform: scaleX(0);
+        opacity: 0;
+      }
+
+      &:hover,
+      &:focus-visible,
+      &.is-active {
+        background-color: rgba($color-white, 0.085);
+        box-shadow: inset 0 0 0 1px rgba($color-white, 0.24);
+      }
+
+      &:hover::after,
+      &:focus-visible::after,
+      &.is-active::after {
+        transform: scaleX(1);
+        opacity: 0.95;
+      }
+    }
+
     // =============================================================================
     // ACTIVE STATES
     // Supports both custom .is-active and native WordPress current-menu classes.
@@ -334,6 +371,41 @@ $nav-transition-base: 0.25s;
           background-color: rgba($color-primary, 0.08);
         }
         @include nav-link-underline(1rem, 1rem, 0.7rem);
+      }
+
+      .site-nav__link--blog {
+        padding: 0.9rem 1rem;
+        border-radius: 14px;
+        letter-spacing: 0.015em;
+        background-color: rgba($color-primary, 0.04);
+        box-shadow: inset 0 0 0 1px rgba($color-primary, 0.12);
+        transition:
+          color $nav-transition-fast ease,
+          background-color $nav-transition-fast ease,
+          box-shadow $nav-transition-fast ease;
+
+        &::after {
+          left: 1rem;
+          right: 1rem;
+          bottom: 0.7rem;
+          transform: scaleX(0);
+          transform-origin: left;
+          opacity: 0;
+        }
+
+        &:hover,
+        &:focus-visible,
+        &.is-active {
+          background-color: rgba($color-primary, 0.085);
+          box-shadow: inset 0 0 0 1px rgba($color-primary, 0.18);
+        }
+
+        &:hover::after,
+        &:focus-visible::after,
+        &.is-active::after {
+          transform: scaleX(1);
+          opacity: 1;
+        }
       }
 
       :is(

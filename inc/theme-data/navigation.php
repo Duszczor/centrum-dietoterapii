@@ -21,6 +21,10 @@ function dietitian_get_primary_navigation_items(): array
             'href'  => '#pricing',
         ],
         [
+            'label' => 'Blog',
+            'href'  => home_url('/blog/'),
+        ],
+        [
             'label' => 'Kontakt',
             'href'  => '#contact',
         ],
