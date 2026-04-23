@@ -1,0 +1,375 @@
+@use "../../../assets/scss/base/variables" as *;
+
+// Prevent page scroll while mobile navigation is open.
+body.no-scroll {
+  overflow: hidden;
+}
+
+// =============================================================================
+// NAV TOKENS
+// Local values used only by this component.
+// =============================================================================
+$nav-z-top: 120;
+$nav-z-panel: 110;
+$nav-transition-fast: 0.24s;
+$nav-transition-base: 0.25s;
+
+// =============================================================================
+// NAV MIXINS
+// Shared underline animation for desktop and mobile nav links.
+// =============================================================================
+@mixin nav-link-underline($left: 0, $right: 0, $bottom: 0.8rem) {
+  text-decoration: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: $left;
+    right: $right;
+    bottom: $bottom;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background-color: currentColor;
+    transition: transform $nav-transition-fast ease;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+.site-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 90px;
+  margin: 0;
+  padding-block: 0.35rem;
+  transition:
+    min-height 0.28s ease,
+    padding 0.28s ease,
+    transform 0.28s ease;
+
+  &__logo {
+    position: relative;
+    z-index: $nav-z-top;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    transition:
+      transform $nav-transition-base ease,
+      opacity $nav-transition-base ease;
+
+    &:hover {
+      transform: scale(1.02);
+      opacity: 0.94;
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba($color-white, 0.7);
+      outline-offset: 0.35rem;
+      border-radius: $border-radius-md;
+    }
+  }
+
+  &__logo-image {
+    display: block;
+    width: auto;
+    height: clamp(36px, 3.5vw, 46px);
+    object-fit: contain;
+  }
+
+  &__logo-fallback {
+    font-family: $font-heading;
+    font-size: clamp(1.2rem, 1rem + 0.55vw, 1.55rem);
+    font-weight: $font-weight-bold;
+    letter-spacing: 0.01em;
+    color: $color-white;
+  }
+
+  &__menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 2vw, 2.25rem);
+    padding: 0;
+    white-space: nowrap;
+
+    li {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+
+    a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0.85rem 0;
+      font-family: $font-body;
+      font-size: clamp(1rem, 0.95rem + 0.2vw, 1.08rem);
+      font-weight: $font-weight-medium;
+      letter-spacing: 0.01em;
+      color: rgba($color-white, 0.9);
+      transition:
+        color $nav-transition-fast ease,
+        transform $nav-transition-fast ease;
+      @include nav-link-underline();
+
+      &:hover,
+      &:focus-visible {
+        color: $color-white;
+      }
+
+      &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 0.35rem;
+        border-radius: 8px;
+      }
+    }
+
+    :is(
+        .site-nav__link.is-active,
+        .current-menu-parent > a,
+        .current-menu-item > a,
+        .current_page_item > a,
+        .current-menu-ancestor > a,
+        .current-page-ancestor > a
+      )::after {
+      transform: scaleX(1);
+    }
+
+    :is(
+        .site-nav__link.is-active,
+        .current-menu-parent > a,
+        .current-menu-item > a,
+        .current_page_item > a,
+        .current-menu-ancestor > a,
+        .current-page-ancestor > a
+      ) {
+      color: $color-white;
+    }
+  }
+
+  &__cta {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 2rem;
+    min-height: 44px;
+    border-radius: $border-radius-pill;
+    background: $color-white;
+    color: $color-text;
+    font-family: $font-body;
+    font-size: clamp(0.88rem, 0.85rem + 0.15vw, 0.98rem);
+    font-weight: $font-weight-medium;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    transition:
+      background-color 0.22s ease,
+      box-shadow 0.22s ease,
+      transform 0.22s ease;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba($color-white, 0.88);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+      transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-white;
+      outline-offset: 0.25rem;
+    }
+  }
+
+  .site-nav__link--contact {
+    display: none;
+  }
+
+  &__toggle {
+    position: relative;
+    z-index: $nav-z-top;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 5px;
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid rgba($color-white, 0.7);
+    border-radius: 14px;
+    background: transparent;
+    color: $color-white;
+    transition:
+      background-color $nav-transition-fast ease,
+      border-color $nav-transition-fast ease,
+      transform $nav-transition-fast ease;
+
+    &:hover {
+      background-color: rgba($color-white, 0.14);
+      border-color: $color-white;
+      transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba($color-white, 0.7);
+      outline-offset: 0.25rem;
+      border-radius: 14px;
+    }
+  }
+
+  &__toggle-bar {
+    display: block;
+    width: 26px;
+    height: 2px;
+    border-radius: $border-radius-pill;
+    background-color: currentColor;
+    transition:
+      transform $nav-transition-base ease,
+      opacity $nav-transition-base ease;
+  }
+
+  &__toggle[aria-expanded="true"] {
+    .site-nav__toggle-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .site-nav__toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-nav__toggle-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    justify-content: space-between;
+    min-height: 84px;
+    gap: $spacing-md;
+
+    &__toggle {
+      display: inline-flex;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    &__cta {
+      display: none;
+      padding: 0.5rem 1.1rem;
+      min-height: 38px;
+      font-size: 0.88rem;
+    }
+
+    &__menu {
+      position: absolute;
+      top: calc(100% + 0.85rem);
+      right: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      margin-left: 0;
+      padding: 0.7rem;
+      border: 1px solid rgba($color-text, 0.08);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.99);
+      box-shadow: 0 24px 46px rgba(0, 0, 0, 0.14);
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-10px) scale(0.985);
+      transition:
+        opacity $nav-transition-base ease,
+        transform $nav-transition-base ease,
+        visibility $nav-transition-base ease;
+      z-index: $nav-z-panel;
+
+      .site-nav__link--contact {
+        display: inline-flex;
+      }
+
+      li {
+        width: 100%;
+      }
+
+      a {
+        width: 100%;
+        min-height: 3.5rem;
+        justify-content: flex-start;
+        padding: 0.9rem 1rem;
+        color: $color-text;
+        font-size: 1rem;
+        border-radius: 14px;
+
+        &:hover,
+        &:focus-visible,
+        &.is-active {
+          background-color: rgba($color-primary, 0.08);
+        }
+
+        @include nav-link-underline(1rem, 1rem, 0.7rem);
+      }
+
+      :is(
+          .current-menu-item,
+          .current_page_item,
+          .current-menu-ancestor,
+          .current-page-ancestor
+        )
+        > a {
+        background-color: rgba($color-primary, 0.08);
+      }
+
+      &.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    &__logo-image {
+      height: 52px;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    gap: $spacing-sm;
+
+    &__menu {
+      top: calc(100% + 0.65rem);
+      padding: 0.65rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &__logo,
+    &__menu,
+    &__cta,
+    &__toggle,
+    &__toggle-bar,
+    &__menu a,
+    &__menu a::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}

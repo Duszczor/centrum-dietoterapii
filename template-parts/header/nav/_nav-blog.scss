@@ -1,0 +1,100 @@
+@use "../../../assets/scss/base/variables" as *;
+
+.site-nav--blog {
+  .site-nav__logo {
+    padding: 0.35rem 0.55rem;
+    border-radius: 14px;
+    background-color: rgba($color-primary-dark, 0.82);
+    box-shadow: 0 8px 18px rgba($color-primary-dark, 0.24);
+
+    &:hover {
+      background-color: rgba($color-primary-dark, 0.88);
+    }
+
+    &:focus-visible {
+      outline-color: rgba($color-primary-dark, 0.4);
+    }
+  }
+
+  .site-nav__logo-image {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  }
+
+  .site-nav__menu {
+    position: static;
+    left: auto;
+    transform: none;
+    margin-inline: auto;
+    gap: clamp(1rem, 1.7vw, 1.6rem);
+  }
+
+  .site-nav__menu a {
+    color: rgba($color-text, 0.84);
+
+    &::after {
+      display: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: $color-text;
+    }
+  }
+
+  .site-nav__menu
+    :is(
+      .site-nav__link.is-active,
+      .current-menu-parent > a,
+      .current-menu-item > a,
+      .current_page_item > a,
+      .current-menu-ancestor > a,
+      .current-page-ancestor > a
+    ) {
+    color: $color-text;
+  }
+
+  .site-nav__spacer {
+    display: inline-block;
+    flex: 0 0 clamp(92px, 9vw, 132px);
+  }
+
+  .site-nav__toggle {
+    border-color: rgba($color-text, 0.28);
+    color: $color-text;
+
+    &:hover {
+      background-color: rgba($color-primary, 0.08);
+      border-color: rgba($color-primary, 0.45);
+    }
+
+    &:focus-visible {
+      outline-color: rgba($color-primary, 0.42);
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding-inline: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+
+    .site-nav__menu {
+      position: absolute;
+      left: 0;
+      transform: none;
+      margin-inline: 0;
+      gap: 0;
+    }
+
+    .site-nav__spacer {
+      display: none;
+    }
+
+    .site-nav__logo {
+      padding: 0.25rem 0.35rem;
+      border-radius: 12px;
+    }
+  }
+}
