@@ -76,14 +76,6 @@ $hero-overlay-mobile: linear-gradient(
   }
 
   // Overlay intensity variants
-  &--overlay-soft .hero__overlay {
-    background: $hero-overlay-soft;
-  }
-
-  &--overlay-strong .hero__overlay {
-    background: $hero-overlay-strong;
-  }
-
   // ==========================================================================
   // Content layer
   // ==========================================================================
@@ -100,17 +92,6 @@ $hero-overlay-mobile: linear-gradient(
     padding: clamp(9rem, 14vh, 12rem) clamp(1.5rem, 6vw, 4rem)
       clamp(4rem, 8vh, 6rem) clamp(2rem, 8vw, 6rem);
     text-align: left;
-  }
-
-  // Content position variants
-  &--content-top .hero__content {
-    justify-content: flex-start;
-    padding-top: clamp(8rem, 12vh, 10rem);
-  }
-
-  &--content-bottom .hero__content {
-    justify-content: flex-end;
-    padding-bottom: clamp(5rem, 10vh, 7rem);
   }
 
   // ==========================================================================
@@ -183,54 +164,6 @@ $hero-overlay-mobile: linear-gradient(
   }
 
   // ==========================================================================
-  // Layout variants
-  // ==========================================================================
-
-  &--centered {
-    .hero__overlay {
-      background: $hero-overlay-centered;
-    }
-
-    .hero__content {
-      align-items: center;
-      text-align: center;
-      width: min(100%, 56rem);
-      margin-inline: auto;
-      padding-inline: clamp(1.5rem, 6vw, 4.5rem);
-    }
-
-    .hero__heading,
-    .hero__desc {
-      align-items: center;
-    }
-
-    .hero__title,
-    .hero__desc,
-    .hero__cta-note {
-      max-width: 34rem;
-    }
-  }
-
-  &--compact {
-    min-height: clamp(38rem, 86vh, 48rem);
-
-    .hero__content {
-      gap: 1.25rem;
-      padding-top: clamp(8rem, 12vh, 10rem);
-      padding-bottom: clamp(3rem, 6vh, 4.5rem);
-    }
-
-    .hero__title {
-      font-size: clamp(1.7rem, 3vw, 2.7rem);
-      max-width: 18ch;
-    }
-
-    .hero__desc {
-      max-width: 28rem;
-    }
-  }
-
-  // ==========================================================================
   // Scroll indicator
   // ==========================================================================
 
@@ -286,18 +219,6 @@ $hero-overlay-mobile: linear-gradient(
   // ==========================================================================
 
   @media (max-width: $breakpoint-sm) {
-    &--centered {
-      .hero__content {
-        align-items: flex-start;
-        text-align: left;
-      }
-
-      .hero__heading,
-      .hero__desc {
-        align-items: flex-start;
-      }
-    }
-
     &__image {
       object-position: 73% 50%;
       transform: scale(1.12);

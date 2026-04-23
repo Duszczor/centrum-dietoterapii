@@ -8,53 +8,23 @@ import {
   Button,
   Notice,
   PanelBody,
-  SelectControl,
-  TextareaControl,
   TextControl,
   ToolbarButton,
   ToolbarGroup,
 } from "@wordpress/components";
-import { useEffect, useMemo, useState } from "@wordpress/element";
+import { useEffect, useState } from "@wordpress/element";
 import { __, sprintf } from "@wordpress/i18n";
-import {
-  THEME_TEXT_DOMAIN,
-  getFieldGuidance,
-  getPlainTextLength,
-} from "../../shared/utils";
+import { THEME_TEXT_DOMAIN } from "../../shared/i18n";
 import "./editor.scss";
 
 // ============================================================================
-// Configuration: Card modifiers, icon options, and defaults
+// Configuration: Default cards and fixed presentation variants
 // ============================================================================
 
-const CARD_MODIFIER_OPTIONS = [
-  { label: __("Left", THEME_TEXT_DOMAIN), value: "left" },
-  { label: __("Featured", THEME_TEXT_DOMAIN), value: "featured" },
-  { label: __("Right", THEME_TEXT_DOMAIN), value: "right" },
-];
-
-const CARD_ICON_OPTIONS = [
-  {
-    label: __("Gut health", THEME_TEXT_DOMAIN),
-    value: "gut-health",
-    symbol: "🦠",
-  },
-  {
-    label: __("Metabolic", THEME_TEXT_DOMAIN),
-    value: "metabolic",
-    symbol: "❤️",
-  },
-  {
-    label: __("Fertility support", THEME_TEXT_DOMAIN),
-    value: "fertility-support",
-    symbol: "👶",
-  },
-];
+const CARD_VARIANTS = ["left", "featured", "right"];
 
 const DEFAULT_CARDS = [
   {
-    modifier: "left",
-    icon: "gut-health",
     title: "Zdrowe Jelita & Trawienie 🦠",
     subtitle: "Choroby autoimmunologiczne i chroniczne zapalenia",
     description:
@@ -67,8 +37,6 @@ const DEFAULT_CARDS = [
     ],
   },
   {
-    modifier: "featured",
-    icon: "metabolic",
     title: "Metabolizm i Serce ❤️",
     subtitle: "Choroby metaboliczne i profilaktyka",
     description:
@@ -81,8 +49,6 @@ const DEFAULT_CARDS = [
     ],
   },
   {
-    modifier: "right",
-    icon: "fertility-support",
     title: "Płodność i Hormony 👶",
     subtitle: "Wsparcie przed ciążą i zmiany nawyków",
     description:
@@ -95,17 +61,6 @@ const DEFAULT_CARDS = [
     ],
   },
 ];
-
-// ============================================================================
-// Content guidelines: Character count thresholds for card fields
-// ============================================================================
-
-const CONTENT_GUIDELINES = {
-  title: { softMax: 44, hardMax: 62 },
-  subtitle: { softMax: 78, hardMax: 110 },
-  description: { softMax: 120, hardMax: 170 },
-  intro: { softMax: 220, hardMax: 300 },
-};
 
 // ============================================================================
 // Helper functions: Card normalization, validation, and utilities
@@ -130,16 +85,6 @@ function normalizeCards(cards) {
 }
 
 /**
- * Get icon option config by slug, with fallback to first option.
- */
-function getIconOption(iconSlug) {
-  return (
-    CARD_ICON_OPTIONS.find((option) => option.value === iconSlug) ||
-    CARD_ICON_OPTIONS[0]
-  );
-}
-
-/**
  * Clamp card index to valid range [0, cardsLength-1].
  */
 function sanitizeCardIndex(index, cardsLength) {
@@ -147,26 +92,6 @@ function sanitizeCardIndex(index, cardsLength) {
   if (index < 0) return 0;
   if (index >= cardsLength) return cardsLength - 1;
   return index;
-}
-
-/**
- * Build guidance objects for active card fields.
- */
-function buildCardFieldGuidance(card) {
-  const fields = [
-    { key: "title", label: __("Title", THEME_TEXT_DOMAIN) },
-    { key: "subtitle", label: __("Subtitle", THEME_TEXT_DOMAIN) },
-    { key: "description", label: __("Description", THEME_TEXT_DOMAIN) },
-  ];
-
-  return fields.map((field) => {
-    const value = card[field.key];
-    const length = getPlainTextLength(value);
-    const limits = CONTENT_GUIDELINES[field.key];
-    const level = getFieldGuidance(length, limits);
-
-    return { ...field, value, length, limits, level };
-  });
 }
 
 // ============================================================================
@@ -196,14 +121,6 @@ export default function Edit({ attributes, setAttributes }) {
       cardIndex === index ? { ...card, ...patch } : card,
     );
     setAttributes({ cards: nextCards });
-  };
-
-  const updateCardItems = (index, value) => {
-    const items = value
-      .split("\n")
-      .map((item) => item.trim())
-      .filter(Boolean);
-    updateCard(index, { items });
   };
 
   const updateCardItem = (cardIndex, itemIndex, value) => {
@@ -241,13 +158,6 @@ export default function Edit({ attributes, setAttributes }) {
     (card) => card.title.trim() === "" || card.items.length === 0,
   );
 
-  const activeCardGuidance = useMemo(() => {
-    return activeCard ? buildCardFieldGuidance(activeCard) : [];
-  }, [activeCard]);
-
-  const introLength = getPlainTextLength(attributes.intro || "");
-  const introGuidance = getFieldGuidance(introLength, CONTENT_GUIDELINES.intro);
-
   // =========================================================================
   // Render
   // =========================================================================
@@ -272,28 +182,6 @@ export default function Edit({ attributes, setAttributes }) {
 
       <InspectorControls>
         <PanelBody
-          title={__("Section structure", THEME_TEXT_DOMAIN)}
-          initialOpen
-        >
-          <p className="offer-cards__inspector-note">
-            {__(
-              "This block keeps the existing three-card layout. Edit copy, icon and emphasis for each card without changing the front-end structure.",
-              THEME_TEXT_DOMAIN,
-            )}
-          </p>
-          <p
-            className={`offer-cards__inspector-guidance offer-cards__inspector-guidance--${
-              introGuidance || "ok"
-            }`}
-          >
-            {sprintf(
-              __("Intro length: %d characters", THEME_TEXT_DOMAIN),
-              introLength,
-            )}
-          </p>
-        </PanelBody>
-
-        <PanelBody
           title={sprintf(
             __("Card %d settings", THEME_TEXT_DOMAIN),
             currentCardIndex + 1,
@@ -311,40 +199,6 @@ export default function Edit({ attributes, setAttributes }) {
               </Button>
             ))}
           </div>
-
-          {activeCardGuidance.map((field) => (
-            <p
-              key={field.key}
-              className={`offer-cards__inspector-guidance offer-cards__inspector-guidance--${
-                field.level || "ok"
-              }`}
-            >
-              <strong>{field.label}:</strong>{" "}
-              {sprintf(
-                __("%d chars (recommended up to %d)", THEME_TEXT_DOMAIN),
-                field.length,
-                field.limits.softMax,
-              )}
-            </p>
-          ))}
-
-          <SelectControl
-            label={__("Card emphasis", THEME_TEXT_DOMAIN)}
-            value={activeCard.modifier}
-            options={CARD_MODIFIER_OPTIONS}
-            onChange={(value) =>
-              updateCard(currentCardIndex, { modifier: value })
-            }
-          />
-          <SelectControl
-            label={__("Icon", THEME_TEXT_DOMAIN)}
-            value={activeCard.icon}
-            options={CARD_ICON_OPTIONS.map(({ label, value }) => ({
-              label,
-              value,
-            }))}
-            onChange={(value) => updateCard(currentCardIndex, { icon: value })}
-          />
 
           <div className="offer-cards__inspector-items">
             <p className="offer-cards__inspector-items-title">
@@ -385,17 +239,6 @@ export default function Edit({ attributes, setAttributes }) {
             </div>
           </div>
         </PanelBody>
-
-        <PanelBody
-          title={__("Quick paste items", THEME_TEXT_DOMAIN)}
-          initialOpen={false}
-        >
-          <TextareaControl
-            label={__("Paste list (one item per line)", THEME_TEXT_DOMAIN)}
-            value={activeCard.items.join("\n")}
-            onChange={(value) => updateCardItems(currentCardIndex, value)}
-          />
-        </PanelBody>
       </InspectorControls>
 
       <section
@@ -432,13 +275,13 @@ export default function Edit({ attributes, setAttributes }) {
 
           <div className="offer-cards__grid">
             {cards.map((card, index) => {
-              const iconOption = getIconOption(card.icon);
               const isActive = index === currentCardIndex;
+              const cardVariant = CARD_VARIANTS[index] || CARD_VARIANTS[0];
 
               return (
                 <article
                   key={index}
-                  className={`offer-card offer-card--${card.modifier} ${
+                  className={`offer-card offer-card--${cardVariant} ${
                     isActive ? "is-active" : ""
                   }`}
                 >
@@ -452,12 +295,6 @@ export default function Edit({ attributes, setAttributes }) {
                       index + 1,
                     )}
                   </button>
-
-                  <span className="offer-card__icon-wrap" aria-hidden="true">
-                    <span className="offer-card__icon-preview">
-                      {iconOption.symbol}
-                    </span>
-                  </span>
 
                   <div className="offer-card__content">
                     <RichText

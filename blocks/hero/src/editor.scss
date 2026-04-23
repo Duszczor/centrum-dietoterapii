@@ -14,26 +14,11 @@
   width: min(100%, 46rem);
 }
 
-.wp-block-dietitian-hero .hero__inspector-guidance {
-  margin: 0 0 0.75rem;
-  font-size: 0.82rem;
-  line-height: 1.45;
-}
-
-.wp-block-dietitian-hero .hero__inspector-guidance--soft {
-  color: #8a5a11;
-}
-
-.wp-block-dietitian-hero .hero__inspector-guidance--hard {
-  color: #a61b1b;
-}
-
 .wp-block-dietitian-hero .hero__label,
 .wp-block-dietitian-hero .hero__title,
 .wp-block-dietitian-hero .hero__name,
 .wp-block-dietitian-hero .hero__desc p,
-.wp-block-dietitian-hero .hero__cta-note,
-.wp-block-dietitian-hero .hero__editor-url {
+.wp-block-dietitian-hero .hero__cta-note {
   color: inherit;
 }
 
@@ -54,84 +39,9 @@
   padding-inline: 1.4rem;
 }
 
-.wp-block-dietitian-hero .hero__editor-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.wp-block-dietitian-hero .hero__editor-guidance-list {
-  display: grid;
-  gap: 0.65rem;
-}
-
-.wp-block-dietitian-hero .hero__editor-guidance {
-  margin: 0;
-  padding: 0.6rem 0.85rem;
-  border-radius: 0.85rem;
-  font-size: 0.86rem;
-  line-height: 1.45;
-}
-
-.wp-block-dietitian-hero .hero__editor-guidance--soft {
-  color: #fff3cb;
-  background: rgba(158, 101, 30, 0.28);
-  border: 1px solid rgba(255, 210, 108, 0.35);
-}
-
-.wp-block-dietitian-hero .hero__editor-guidance--hard {
-  color: #ffe1e1;
-  background: rgba(142, 31, 31, 0.32);
-  border: 1px solid rgba(255, 152, 152, 0.38);
-}
-
-.wp-block-dietitian-hero .hero__editor-url {
-  margin: 0;
-  padding: 0.55rem 0.85rem;
-  border-radius: 0.85rem;
-  font-size: 0.86rem;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.86);
-  background: rgba(255, 255, 255, 0.14);
-  overflow-wrap: anywhere;
-}
-
-.wp-block-dietitian-hero .hero__editor-warning {
-  margin: 0;
-  padding: 0.55rem 0.85rem;
-  border: 1px solid rgba(255, 209, 102, 0.38);
-  border-radius: 0.85rem;
-  font-size: 0.86rem;
-  line-height: 1.4;
-  color: #fff4cf;
-  background: rgba(196, 117, 45, 0.24);
-}
-
-.wp-block-dietitian-hero.hero--centered .hero__content {
-  width: min(100%, 54rem);
-}
-
-.wp-block-dietitian-hero.hero--centered .hero__editor-meta {
-  justify-content: center;
-}
-
-.wp-block-dietitian-hero.hero--content-top .hero__content {
-  justify-content: flex-start;
-}
-
-.wp-block-dietitian-hero.hero--content-bottom .hero__content {
-  justify-content: flex-end;
-}
-
 @media (max-width: 782px) {
   .wp-block-dietitian-hero.hero {
     min-height: 42rem;
     border-radius: 1rem;
-  }
-
-  .wp-block-dietitian-hero.hero::after {
-    top: 0.75rem;
-    right: 0.75rem;
   }
 }

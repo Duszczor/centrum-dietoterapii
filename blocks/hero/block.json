@@ -10,6 +10,7 @@
   "textdomain": "dietitian-theme",
   "supports": {
     "anchor": true,
+    "customClassName": false,
     "html": false,
     "multiple": false
   },
@@ -45,18 +46,6 @@
     "ctaNote": {
       "type": "string",
       "default": "Pierwszy krok: zobacz, w czym mogę Ci pomóc."
-    },
-    "layoutVariant": {
-      "type": "string",
-      "default": "content-left"
-    },
-    "overlayIntensity": {
-      "type": "string",
-      "default": "default"
-    },
-    "contentPosition": {
-      "type": "string",
-      "default": "center"
     },
     "imageId": {
       "type": "number"

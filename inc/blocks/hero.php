@@ -14,105 +14,10 @@ function dietitian_get_default_hero_attributes(): array
         'ctaText' => 'Sprawdź obszary wsparcia',
         'ctaUrl' => '#offer',
         'ctaNote' => 'Pierwszy krok: zobacz, w czym mogę Ci pomóc.',
-        'layoutVariant' => 'content-left',
-        'overlayIntensity' => 'default',
-        'contentPosition' => 'center',
         'imageId' => 0,
         'imageAlt' => '',
         'openInNewTab' => false,
     ];
-}
-
-/**
- * Get allowed hero layout variants.
- */
-function dietitian_get_hero_layout_variants(): array
-{
-    return [
-        'content-left',
-        'centered',
-        'compact',
-    ];
-}
-
-/**
- * Get allowed hero overlay intensity values.
- */
-function dietitian_get_hero_overlay_intensities(): array
-{
-    return [
-        'soft',
-        'default',
-        'strong',
-    ];
-}
-
-/**
- * Get allowed hero content positions.
- */
-function dietitian_get_hero_content_positions(): array
-{
-    return [
-        'top',
-        'center',
-        'bottom',
-    ];
-}
-
-/**
- * Sanitize the selected hero layout variant.
- */
-function dietitian_sanitize_hero_layout_variant(string $layout_variant): string
-{
-    if (in_array($layout_variant, dietitian_get_hero_layout_variants(), true)) {
-        return $layout_variant;
-    }
-
-    return 'content-left';
-}
-
-/**
- * Sanitize the selected hero overlay intensity.
- */
-function dietitian_sanitize_hero_overlay_intensity(string $overlay_intensity): string
-{
-    if (in_array($overlay_intensity, dietitian_get_hero_overlay_intensities(), true)) {
-        return $overlay_intensity;
-    }
-
-    return 'default';
-}
-
-/**
- * Sanitize the selected hero content position.
- */
-function dietitian_sanitize_hero_content_position(string $content_position): string
-{
-    if (in_array($content_position, dietitian_get_hero_content_positions(), true)) {
-        return $content_position;
-    }
-
-    return 'center';
-}
-
-/**
- * Validate supported CTA URLs for the hero block.
- */
-function dietitian_is_valid_hero_cta_url(string $cta_url): bool
-{
-    if ($cta_url === '') {
-        return false;
-    }
-
-    if (str_starts_with($cta_url, '#') || str_starts_with($cta_url, '/')) {
-        return true;
-    }
-
-    if (str_starts_with($cta_url, 'mailto:') || str_starts_with($cta_url, 'tel:')) {
-        return true;
-    }
-
-    return wp_http_validate_url($cta_url) !== false;
 }
 
 /**
@@ -169,29 +74,13 @@ function dietitian_render_hero_block(array $attributes = [], string $content = '
     $cta_text = trim((string) ($attributes['ctaText'] ?? ''));
     $cta_url = trim((string) ($attributes['ctaUrl'] ?? ''));
     $cta_note = trim((string) ($attributes['ctaNote'] ?? ''));
-    $layout_variant = dietitian_sanitize_hero_layout_variant((string) ($attributes['layoutVariant'] ?? 'content-left'));
-    $overlay_intensity = dietitian_sanitize_hero_overlay_intensity((string) ($attributes['overlayIntensity'] ?? 'default'));
-    $content_position = dietitian_sanitize_hero_content_position((string) ($attributes['contentPosition'] ?? 'center'));
-
-    if (!dietitian_is_valid_hero_cta_url($cta_url)) {
-        $cta_url = '';
-    }
-
-    if ($cta_text === '') {
-        $cta_url = '';
-    }
 
     $open_in_new_tab = !empty($attributes['openInNewTab']) && preg_match('/^https?:\/\//i', $cta_url) === 1;
 
     $image = dietitian_get_hero_image_data($attributes);
     $title_id = wp_unique_id('hero-title-');
     $cta_rel = $open_in_new_tab ? 'noopener noreferrer' : '';
-    $hero_classes = implode(' ', [
-        'hero',
-        'hero--' . sanitize_html_class($layout_variant),
-        'hero--overlay-' . sanitize_html_class($overlay_intensity),
-        'hero--content-' . sanitize_html_class($content_position),
-    ]);
+    $hero_classes = 'hero';
     $hero_label = __('Hero section', 'dietitian-theme');
 
     ob_start();

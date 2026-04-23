@@ -1,30 +1,9 @@
 .offer-cards--editor {
-  .offer-cards__inspector-note {
-    margin: 0;
-    color: rgba(26, 47, 43, 0.76);
-    line-height: 1.5;
-  }
-
   .offer-cards__inspector-switcher {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.5rem;
     margin-bottom: 0.85rem;
-  }
-
-  .offer-cards__inspector-guidance {
-    margin: 0.3rem 0;
-    font-size: 12px;
-    color: rgba(26, 47, 43, 0.74);
-
-    &--soft {
-      color: #8a5a17;
-    }
-
-    &--hard {
-      color: #a2251f;
-      font-weight: 600;
-    }
   }
 
   .offer-cards__inspector-items {
@@ -53,15 +32,6 @@
 
   .components-notice {
     margin: 0 0 1.5rem;
-  }
-
-  .offer-card__icon-preview {
-    display: grid;
-    place-items: center;
-    width: 64px;
-    height: 64px;
-    font-size: 2rem;
-    line-height: 1;
   }
 
   .block-editor-rich-text__editable {

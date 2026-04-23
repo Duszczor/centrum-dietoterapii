@@ -10,6 +10,7 @@
   "textdomain": "dietitian-theme",
   "supports": {
     "anchor": true,
+    "customClassName": false,
     "html": false,
     "multiple": false
   },
@@ -26,8 +27,6 @@
       "type": "array",
       "default": [
         {
-          "modifier": "left",
-          "icon": "gut-health",
           "title": "Zdrowe Jelita & Trawienie 🦠",
           "subtitle": "Choroby autoimmunologiczne i chroniczne zapalenia",
           "description": "Specjalizuję się w leczeniu dietetycznym chorób, które wpływają na Twoją codzienną jakość życia.",
@@ -39,8 +38,6 @@
           ]
         },
         {
-          "modifier": "featured",
-          "icon": "metabolic",
           "title": "Metabolizm i Serce ❤️",
           "subtitle": "Choroby metaboliczne i profilaktyka",
           "description": "Pomagam zregulować ciśnienie, cholesterol i poziom cukru poprzez zmianę nawyków żywieniowych.",
@@ -52,8 +49,6 @@
           ]
         },
         {
-          "modifier": "right",
-          "icon": "fertility-support",
           "title": "Płodność i Hormony 👶",
           "subtitle": "Wsparcie przed ciążą i zmiany nawyków",
           "description": "Przygotowuję Cię do najważniejszych chwil i pomagam w zmianie trybu życia na lepszy.",

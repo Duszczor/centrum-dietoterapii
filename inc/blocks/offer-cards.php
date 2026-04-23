@@ -13,54 +13,6 @@ function dietitian_get_default_offer_cards_attributes(): array
 }
 
 /**
- * Get allowed offer card modifiers.
- */
-function dietitian_get_offer_card_modifiers(): array
-{
-    return [
-        'left',
-        'featured',
-        'right',
-    ];
-}
-
-/**
- * Get allowed offer card icons.
- */
-function dietitian_get_offer_card_icons(): array
-{
-    return [
-        'gut-health',
-        'metabolic',
-        'fertility-support',
-    ];
-}
-
-/**
- * Sanitize an offer card modifier.
- */
-function dietitian_sanitize_offer_card_modifier(string $modifier): string
-{
-    if (in_array($modifier, dietitian_get_offer_card_modifiers(), true)) {
-        return $modifier;
-    }
-
-    return 'left';
-}
-
-/**
- * Sanitize an offer card icon slug.
- */
-function dietitian_sanitize_offer_card_icon(string $icon): string
-{
-    if (in_array($icon, dietitian_get_offer_card_icons(), true)) {
-        return $icon;
-    }
-
-    return 'gut-health';
-}
-
-/**
  * Normalize and sanitize offer cards array.
  */
 function dietitian_sanitize_offer_cards(array $cards): array
@@ -74,8 +26,6 @@ function dietitian_sanitize_offer_cards(array $cards): array
         }
 
         $default_card = $default_cards[$index] ?? [
-            'modifier' => 'left',
-            'icon' => 'gut-health',
             'title' => '',
             'subtitle' => '',
             'description' => '',
@@ -93,8 +43,6 @@ function dietitian_sanitize_offer_cards(array $cards): array
         }
 
         $sanitized_cards[] = [
-            'modifier' => dietitian_sanitize_offer_card_modifier((string) ($card['modifier'] ?? $default_card['modifier'])),
-            'icon' => dietitian_sanitize_offer_card_icon((string) ($card['icon'] ?? $default_card['icon'])),
             'title' => trim(wp_strip_all_tags((string) ($card['title'] ?? $default_card['title']))),
             'subtitle' => trim(wp_strip_all_tags((string) ($card['subtitle'] ?? $default_card['subtitle']))),
             'description' => trim(wp_strip_all_tags((string) ($card['description'] ?? $default_card['description']))),
@@ -103,6 +51,27 @@ function dietitian_sanitize_offer_cards(array $cards): array
     }
 
     return $sanitized_cards;
+}
+
+/**
+ * Get fixed visual configuration for each offer card position.
+ */
+function dietitian_get_offer_card_visuals(): array
+{
+    return [
+        [
+            'modifier' => 'left',
+            'icon' => 'gut-health',
+        ],
+        [
+            'modifier' => 'featured',
+            'icon' => 'metabolic',
+        ],
+        [
+            'modifier' => 'right',
+            'icon' => 'fertility-support',
+        ],
+    ];
 }
 
 /**
@@ -115,8 +84,11 @@ function dietitian_render_offer_cards_block(array $attributes = [], string $cont
     $title = trim((string) ($attributes['title'] ?? ''));
     $intro = trim((string) ($attributes['intro'] ?? ''));
     $cards = dietitian_sanitize_offer_cards((array) ($attributes['cards'] ?? []));
+    $card_visuals = dietitian_get_offer_card_visuals();
     $section_title_id = wp_unique_id('offer-title-');
     $section_label = __('Offer cards section', 'dietitian-theme');
+    $section_anchor = trim((string) ($attributes['anchor'] ?? ''));
+    $section_id = $section_anchor !== '' ? sanitize_title($section_anchor) : 'offer';
 
     if ($cards === []) {
         return '';
@@ -126,7 +98,7 @@ function dietitian_render_offer_cards_block(array $attributes = [], string $cont
 ?>
     <section
         class="offer-cards"
-        id="offer"
+        id="<?php echo esc_attr($section_id); ?>"
         <?php if ($title !== '') : ?>aria-labelledby="<?php echo esc_attr($section_title_id); ?>" <?php else : ?>aria-label="<?php echo esc_attr($section_label); ?>" <?php endif; ?>>
         <div class="offer-cards__container">
             <div class="offer-cards__header">
@@ -139,10 +111,14 @@ function dietitian_render_offer_cards_block(array $attributes = [], string $cont
             </div>
 
             <div class="offer-cards__grid">
-                <?php foreach ($cards as $card) : ?>
-                    <article class="offer-card offer-card--<?php echo esc_attr($card['modifier']); ?>">
+                <?php foreach ($cards as $index => $card) : ?>
+                    <?php
+                    $card_variant = $card_visuals[$index]['modifier'] ?? 'left';
+                    $card_icon = $card_visuals[$index]['icon'] ?? 'gut-health';
+                    ?>
+                    <article class="offer-card offer-card--<?php echo esc_attr($card_variant); ?>">
                         <span class="offer-card__icon-wrap" aria-hidden="true">
-                            <?php echo dietitian_get_icon_svg($card['icon'], 'offer-card__icon'); ?>
+                            <?php echo dietitian_get_icon_svg($card_icon, 'offer-card__icon'); ?>
                         </span>
 
                         <div class="offer-card__content">

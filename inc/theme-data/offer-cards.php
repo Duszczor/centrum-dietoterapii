@@ -3,14 +3,12 @@
 /**
  * Get service offer cards
  *
- * @return array Service cards with modifier, icon, title, and items
+ * @return array Service cards with title, subtitle, description, and items
  */
 function dietitian_get_offer_cards(): array
 {
     return [
         [
-            'modifier'     => 'left',
-            'icon'         => 'gut-health',
             'title'        => 'Zdrowe Jelita & Trawienie 🦠',
             'subtitle'     => 'Choroby autoimmunologiczne i chroniczne zapalenia',
             'description'  => 'Specjalizuję się w leczeniu dietetycznym chorób, które wpływają na Twoją codzienną jakość życia.',
@@ -22,8 +20,6 @@ function dietitian_get_offer_cards(): array
             ],
         ],
         [
-            'modifier'     => 'featured',
-            'icon'         => 'metabolic',
             'title'        => 'Metabolizm i Serce ❤️',
             'subtitle'     => 'Choroby metaboliczne i profilaktyka',
             'description'  => 'Pomagam zregulować ciśnienie, cholesterol i poziom cukru poprzez zmianę nawyków żywieniowych.',
@@ -35,8 +31,6 @@ function dietitian_get_offer_cards(): array
             ],
         ],
         [
-            'modifier'     => 'right',
-            'icon'         => 'fertility-support',
             'title'        => 'Płodność i Hormony 👶',
             'subtitle'     => 'Wsparcie przed ciążą i zmiany nawyków',
             'description'  => 'Przygotowuję Cię do najważniejszych chwil i pomagam w zmianie trybu życia na lepszy.',
