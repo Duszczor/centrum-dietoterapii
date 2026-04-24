@@ -1,16 +1,23 @@
 @use "../../../assets/scss/base/variables" as *;
+@use "nav-shared" as navShared;
 
+// Blog nav layout: logo left, menu centered, CTA right
 .site-nav--blog {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
   .site-nav__logo {
     padding: 0.35rem 0.55rem;
     border-radius: 14px;
     background-color: rgba($color-primary-dark, 0.82);
     box-shadow: 0 8px 18px rgba($color-primary-dark, 0.24);
-
+    flex: 0 0 auto;
+    margin-right: 1.2rem;
     &:hover {
       background-color: rgba($color-primary-dark, 0.88);
     }
-
     &:focus-visible {
       outline-color: rgba($color-primary-dark, 0.4);
     }
@@ -21,19 +28,46 @@
   }
 
   .site-nav__menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0%;
     position: static;
     left: auto;
     transform: none;
-    margin-inline: auto;
+    margin-inline: 0;
     gap: clamp(1rem, 1.7vw, 1.6rem);
   }
 
+  .site-nav__cta--blog {
+    flex: 0 0 auto;
+    margin-left: 1.2rem;
+    padding-left: 2.1rem;
+    padding-right: 2.1rem;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: $border-radius-pill;
+    box-shadow: 0 4px 18px rgba($color-primary-dark, 0.13);
+    letter-spacing: 0.01em;
+    transition: box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    @media (max-width: 600px) {
+      margin-left: 0.7rem;
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+      font-size: 0.98rem;
+    }
+    &:hover,
+    &:focus-visible {
+      box-shadow: 0 8px 24px rgba($color-primary-dark, 0.19);
+    }
+  }
+
+  // .site-nav__logo { z-index: 4; }
+
   .site-nav__menu a {
     color: rgba($color-text, 0.84);
-
-    &::after {
-      display: none;
-    }
+    @include navShared.nav-link-underline();
 
     &:hover,
     &:focus-visible {
@@ -54,8 +88,30 @@
   }
 
   .site-nav__spacer {
-    display: inline-block;
-    flex: 0 0 clamp(92px, 9vw, 132px);
+    display: none;
+  }
+
+  .site-nav__cta--blog {
+    margin-left: clamp(1.2rem, 3vw, 2.6rem);
+    padding-left: 2.1rem;
+    padding-right: 2.1rem;
+    font-size: 1.08rem;
+    font-weight: 600;
+    border-radius: $border-radius-pill;
+    box-shadow: 0 4px 18px rgba($color-primary-dark, 0.13);
+    letter-spacing: 0.01em;
+    transition: box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    @media (max-width: 600px) {
+      margin-left: 0.7rem;
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+      font-size: 0.98rem;
+    }
+    &:hover,
+    &:focus-visible {
+      box-shadow: 0 8px 24px rgba($color-primary-dark, 0.19);
+    }
   }
 
   .site-nav__toggle {

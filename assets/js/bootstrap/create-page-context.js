@@ -18,7 +18,8 @@
   window.DietitianBootstrap.createPageContext = function createPageContext() {
     const header = document.getElementById("site-header");
     const navigationToggle = document.querySelector(".site-nav__toggle");
-    const navigationMenu = document.getElementById("primary-menu");
+    // Obsługuje zarówno nav-main (id="primary-menu"), jak i nav-blog (id="primary-menu-blog")
+    const navigationMenu = document.querySelector(".site-nav__menu");
     const mobileNavigationQuery = window.matchMedia(
       `(max-width: ${getBreakpointMd()})`,
     );

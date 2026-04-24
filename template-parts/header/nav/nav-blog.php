@@ -6,14 +6,8 @@ $posts_page_url = $posts_page_id > 0 ? get_permalink($posts_page_id) : home_url(
 $posts_page_url = is_string($posts_page_url) ? $posts_page_url : home_url('/blog/');
 $posts_page_url = trailingslashit($posts_page_url);
 
-$is_posts_listing_context =
-    is_home() ||
-    is_category() ||
-    is_tag() ||
-    is_author() ||
-    is_date() ||
-    is_post_type_archive('post') ||
-    is_search();
+
+$is_all_posts_context = is_home() && !is_category() && !is_tag() && !is_author() && !is_date() && !is_search();
 
 $is_single_post_context = is_singular('post');
 
@@ -36,15 +30,12 @@ $blog_navigation_items = [
 ];
 
 $blog_navigation_items = array_map(
-    static function (array $item) use ($is_posts_listing_context): array {
+    static function (array $item) use ($is_all_posts_context): array {
         $item_key = (string) ($item['key'] ?? '');
         $is_current = false;
         $item_classes = [];
 
-        if ($item_key === 'all-posts' && $is_posts_listing_context) {
-            $is_current = true;
-            $item_classes[] = 'is-active';
-        } elseif ($item_key === 'categories' && is_category()) {
+        if ($item_key === 'categories' && is_category()) {
             $is_current = true;
             $item_classes[] = 'is-active';
         }
@@ -69,5 +60,7 @@ get_template_part('template-parts/header/nav/nav-render', null, [
     'menu_items'      => $blog_navigation_items,
     'spacer_enabled'  => true,
     'is_blog_variant' => true,
+    'cta_href'        => home_url('/kontakt/'),
+    'cta_label'       => 'Umów konsultację',
 ]);
 ?>

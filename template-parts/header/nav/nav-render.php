@@ -49,7 +49,11 @@ $is_blog_variant = !empty($args['is_blog_variant']);
         <span class="site-nav__spacer" aria-hidden="true"></span>
     <?php endif; ?>
 
-    <?php if (!$is_blog_variant && $cta_href !== '' && $cta_label !== '') : ?>
+    <?php if ($is_blog_variant && $cta_href !== '' && $cta_label !== '') : ?>
+        <a href="<?php echo esc_url($cta_href); ?>" class="site-nav__cta btn btn--primary site-nav__cta--blog">
+            <?php echo esc_html($cta_label); ?>
+        </a>
+    <?php elseif (!$is_blog_variant && $cta_href !== '' && $cta_label !== '') : ?>
         <a href="<?php echo esc_url($cta_href); ?>" class="site-nav__cta"><?php echo esc_html($cta_label); ?></a>
     <?php endif; ?>
 </nav>
