@@ -2,6 +2,7 @@
 $posts_page_id = (int) get_option('page_for_posts');
 $posts_page_url = $posts_page_id > 0 ? get_permalink($posts_page_id) : home_url('/blog/');
 $posts_page_url = is_string($posts_page_url) ? $posts_page_url : home_url('/blog/');
+$posts_page_url = trailingslashit($posts_page_url);
 
 $blog_title = 'Blog dietetyczny';
 $blog_intro = 'Rzetelne artykuly o odzywianiu, zdrowiu metabolicznym i praktycznych zmianach, ktore da sie wdrozyc w codziennym zyciu.';
@@ -24,6 +25,10 @@ $category_chips = get_categories([
     'number'     => 8,
 ]);
 
+$is_all_posts_context = is_home() && !is_search() && !is_category() && !is_tag() && !is_author() && !is_date();
+$is_filtered_blog_context = is_search() || is_category() || is_tag() || is_author() || is_date();
+$current_category_id = is_category() ? (int) get_queried_object_id() : 0;
+
 $is_first_posts_page = (int) get_query_var('paged', 1) <= 1;
 $featured_post = null;
 
@@ -41,26 +46,67 @@ if (is_home() && !is_search() && $is_first_posts_page && have_posts() && count($
 
             <form class="blog-index__search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
                 <label class="screen-reader-text" for="blog-search-input">Szukaj na blogu</label>
-                <input
-                    id="blog-search-input"
-                    class="blog-index__search-input"
-                    type="search"
-                    name="s"
-                    value="<?php echo esc_attr(get_search_query()); ?>"
-                    placeholder="Szukaj tematow, np. insulinoopornosc, PCOS, odchudzanie">
+                <div class="blog-index__search-field">
+                    <span class="blog-index__search-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </span>
+                    <input
+                        id="blog-search-input"
+                        class="blog-index__search-input"
+                        type="search"
+                        name="s"
+                        value="<?php echo esc_attr(get_search_query()); ?>"
+                        placeholder="Szukaj tematow, np. insulinoopornosc, PCOS, odchudzanie">
+                    <button
+                        class="blog-index__search-clear"
+                        type="button"
+                        aria-label="Wyczysc pole wyszukiwania"
+                        data-search-clear>
+                        <img src="<?php echo esc_url(dietitian_get_asset_uri('images/icon-x-grey.svg')); ?>" alt="">
+                    </button>
+                </div>
                 <input type="hidden" name="post_type" value="post">
                 <button class="blog-index__search-button" type="submit">Szukaj</button>
             </form>
 
-            <?php if (!empty($category_chips)) : ?>
-                <div class="blog-index__chips" id="blog-categories" aria-label="Popularne tematy">
-                    <?php foreach ($category_chips as $chip) : ?>
-                        <a class="blog-index__chip" href="<?php echo esc_url(get_category_link($chip->term_id)); ?>">
-                            <?php echo esc_html($chip->name); ?>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+            <div class="blog-index__chips" id="blog-categories" aria-label="Popularne tematy">
+                <?php
+                $all_posts_chip_classes = ['blog-index__chip', 'blog-index__chip--all'];
+
+                if ($is_filtered_blog_context) {
+                    $all_posts_chip_classes[] = 'blog-index__chip--return';
+                }
+
+                if ($is_all_posts_context) {
+                    $all_posts_chip_classes[] = 'is-current';
+                }
+                ?>
+                <a
+                    class="<?php echo esc_attr(implode(' ', $all_posts_chip_classes)); ?>"
+                    href="<?php echo esc_url($posts_page_url); ?>"
+                    <?php if ($is_all_posts_context) : ?>aria-current="page" <?php endif; ?>>
+                    Wszystkie wpisy
+                </a>
+
+                <?php foreach ($category_chips as $chip) : ?>
+                    <?php
+                    $chip_classes = ['blog-index__chip'];
+                    $is_current_chip = $current_category_id > 0 && (int) $chip->term_id === $current_category_id;
+
+                    if ($is_current_chip) {
+                        $chip_classes[] = 'is-current';
+                    }
+                    ?>
+                    <a
+                        class="<?php echo esc_attr(implode(' ', $chip_classes)); ?>"
+                        href="<?php echo esc_url(get_category_link($chip->term_id)); ?>"
+                        <?php if ($is_current_chip) : ?>aria-current="page" <?php endif; ?>>
+                        <?php echo esc_html($chip->name); ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
         </div>
     </section>
 

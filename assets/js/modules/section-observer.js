@@ -39,9 +39,9 @@
                 entryB.intersectionRatio - entryA.intersectionRatio,
             )[0];
 
-          if (visibleEntry?.target?.id) {
-            setActiveLink(`#${visibleEntry.target.id}`);
-          }
+          setActiveLink(
+            visibleEntry?.target?.id ? `#${visibleEntry.target.id}` : null,
+          );
         },
         {
           rootMargin: `-${getHeaderOffset()}px 0px -45% 0px`,

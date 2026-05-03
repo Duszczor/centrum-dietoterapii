@@ -49,6 +49,13 @@ $blog_navigation_items = array_map(
     },
     $blog_navigation_items
 );
+
+$blog_navigation_items[] = [
+    'label'      => 'Umów konsultację',
+    'href'       => home_url('/#contact'),
+    'classes'    => ['site-nav__link--cta-mobile'],
+    'is_current' => false,
+];
 ?>
 
 <?php
@@ -60,7 +67,7 @@ get_template_part('template-parts/header/nav/nav-render', null, [
     'menu_items'      => $blog_navigation_items,
     'spacer_enabled'  => true,
     'is_blog_variant' => true,
-    'cta_href'        => home_url('/kontakt/'),
+    'cta_href'        => home_url('/#contact'),
     'cta_label'       => 'Umów konsultację',
 ]);
 ?>

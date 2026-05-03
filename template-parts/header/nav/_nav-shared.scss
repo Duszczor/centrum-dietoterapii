@@ -325,6 +325,10 @@ $nav-transition-base: 0.25s;
         }
 
         @include nav-link-underline(1rem, 1rem, 0.7rem);
+
+        &.is-active::after {
+          transform: scaleX(0);
+        }
       }
 
       :is(
