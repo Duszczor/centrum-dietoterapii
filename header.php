@@ -49,55 +49,55 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <?php if ($no_seo_plugin) : ?>
-    <?php
-    // --- Open Graph + Twitter Card ---
-    $og_title   = is_singular() ? wp_strip_all_tags(get_the_title()) : get_bloginfo('name');
-    $og_url     = $canonical_url ?: home_url('/');
-    $og_type    = is_singular('post') ? 'article' : 'website';
-    $og_image   = (is_singular() && has_post_thumbnail())
-                    ? (string) get_the_post_thumbnail_url(null, 'large')
-                    : esc_url(get_template_directory_uri() . '/assets/images/logo/logo.png');
-    ?>
-    <meta property="og:type"        content="<?php echo esc_attr($og_type); ?>">
-    <meta property="og:title"       content="<?php echo esc_attr($og_title); ?>">
-    <meta property="og:description" content="<?php echo esc_attr($meta_desc); ?>">
-    <meta property="og:url"         content="<?php echo esc_url($og_url); ?>">
-    <meta property="og:site_name"   content="<?php echo esc_attr(get_bloginfo('name')); ?>">
-    <meta property="og:locale"      content="pl_PL">
-    <?php if ($og_image) : ?>
-    <meta property="og:image"       content="<?php echo esc_url($og_image); ?>">
-    <?php endif; ?>
-    <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="<?php echo esc_attr($og_title); ?>">
-    <meta name="twitter:description" content="<?php echo esc_attr($meta_desc); ?>">
-    <?php if ($og_image) : ?>
-    <meta name="twitter:image"       content="<?php echo esc_url($og_image); ?>">
-    <?php endif; ?>
+        <?php
+        // --- Open Graph + Twitter Card ---
+        $og_title   = is_singular() ? wp_strip_all_tags(get_the_title()) : get_bloginfo('name');
+        $og_url     = $canonical_url ?: home_url('/');
+        $og_type    = is_singular('post') ? 'article' : 'website';
+        $og_image   = (is_singular() && has_post_thumbnail())
+            ? (string) get_the_post_thumbnail_url(null, 'large')
+            : esc_url(get_template_directory_uri() . '/assets/images/logo/logo.png');
+        ?>
+        <meta property="og:type" content="<?php echo esc_attr($og_type); ?>">
+        <meta property="og:title" content="<?php echo esc_attr($og_title); ?>">
+        <meta property="og:description" content="<?php echo esc_attr($meta_desc); ?>">
+        <meta property="og:url" content="<?php echo esc_url($og_url); ?>">
+        <meta property="og:site_name" content="<?php echo esc_attr(get_bloginfo('name')); ?>">
+        <meta property="og:locale" content="pl_PL">
+        <?php if ($og_image) : ?>
+            <meta property="og:image" content="<?php echo esc_url($og_image); ?>">
+        <?php endif; ?>
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="<?php echo esc_attr($og_title); ?>">
+        <meta name="twitter:description" content="<?php echo esc_attr($meta_desc); ?>">
+        <?php if ($og_image) : ?>
+            <meta name="twitter:image" content="<?php echo esc_url($og_image); ?>">
+        <?php endif; ?>
     <?php endif; ?>
     <?php if (is_front_page()) : ?>
-    <script type="application/ld+json">
-    <?php
-    $schema = [
-        '@context'          => 'https://schema.org',
-        '@type'             => 'MedicalBusiness',
-        'name'              => 'Centrum Dietoterapii',
-        'description'       => 'Dietetyka kliniczna, indywidualne plany żywienia, leczenie dietą.',
-        'url'               => home_url('/'),
-        'telephone'         => '+48668156568',
-        'email'             => 'kontakt@centrum-dietoterapii.pl',
-        'medicalSpecialty'  => 'DietNutrition',
-        'priceRange'        => '$$',
-        'address'           => [
-            '@type'           => 'PostalAddress',
-            'streetAddress'   => 'Tuszewska 76 m.109',
-            'addressLocality' => 'Łowicz',
-            'postalCode'      => '99-400',
-            'addressCountry'  => 'PL',
-        ],
-    ];
-    echo wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-    ?>
-    </script>
+        <script type="application/ld+json">
+            <?php
+            $schema = [
+                '@context'          => 'https://schema.org',
+                '@type'             => 'MedicalBusiness',
+                'name'              => 'Centrum Dietoterapii',
+                'description'       => 'Dietetyka kliniczna, indywidualne plany żywienia, leczenie dietą.',
+                'url'               => home_url('/'),
+                'telephone'         => '+48668156568',
+                'email'             => 'kontakt@centrum-dietoterapii.pl',
+                'medicalSpecialty'  => 'DietNutrition',
+                'priceRange'        => '$$',
+                'address'           => [
+                    '@type'           => 'PostalAddress',
+                    'streetAddress'   => 'Tuszewska 76 m.109',
+                    'addressLocality' => 'Łowicz',
+                    'postalCode'      => '99-400',
+                    'addressCountry'  => 'PL',
+                ],
+            ];
+            echo wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+            ?>
+        </script>
     <?php endif; ?>
     <link rel="icon" type="image/png" href="<?php echo esc_url(dietitian_get_asset_uri('images/logo/navicon.png')); ?>">
     <link rel="apple-touch-icon" href="<?php echo esc_url(dietitian_get_asset_uri('images/logo/navicon.png')); ?>">
