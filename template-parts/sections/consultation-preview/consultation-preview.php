@@ -39,8 +39,10 @@
         <figure class="consultation-preview__media">
             <img
                 class="consultation-preview__image"
-                src="<?php echo $consultation_preview_image; ?>"
+                src="<?php echo esc_url($consultation_preview_image); ?>"
                 alt="Zdjęcie dietetyczki podczas konsultacji"
+                width="3951"
+                height="5939"
                 loading="lazy"
                 decoding="async">
         </figure>

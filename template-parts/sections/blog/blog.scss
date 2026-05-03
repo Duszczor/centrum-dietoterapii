@@ -155,6 +155,10 @@
 
   &__search-button {
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
     min-width: 7.2rem;
     height: 3rem;
     padding: 0 1.2rem;
@@ -273,6 +277,7 @@
 
   &__media {
     min-height: 320px;
+    aspect-ratio: 16 / 10;
     display: block;
 
     img,
@@ -461,6 +466,7 @@
 
   &__media {
     display: block;
+    aspect-ratio: 16 / 10;
     min-height: 190px;
 
     img,

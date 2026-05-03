@@ -1,8 +1,8 @@
 <?php $pricing_plans = dietitian_get_pricing_plans(); ?>
 
-<section class="pricing" id="pricing">
+<section class="pricing" id="pricing" aria-labelledby="pricing-title">
     <div class="pricing__container">
-        <h2 class="pricing__title">Wybierz formę współpracy</h2>
+        <h2 class="pricing__title" id="pricing-title">Wybierz formę współpracy</h2>
         <p class="pricing__subtitle">Porównaj pakiety i wybierz wariant, który najlepiej odpowiada Twoim potrzebom oraz etapowi, na którym teraz jesteś.</p>
 
         <div class="pricing__cards">

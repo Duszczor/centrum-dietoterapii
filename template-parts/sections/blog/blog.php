@@ -5,7 +5,7 @@ $posts_page_url = is_string($posts_page_url) ? $posts_page_url : home_url('/blog
 $posts_page_url = trailingslashit($posts_page_url);
 
 $blog_title = 'Blog dietetyczny';
-$blog_intro = 'Rzetelne artykuly o odzywianiu, zdrowiu metabolicznym i praktycznych zmianach, ktore da sie wdrozyc w codziennym zyciu.';
+$blog_intro = 'Rzetelne artykuły o odżywianiu, zdrowiu metabolicznym i praktycznych zmianach, które da się wdrożyć w codziennym życiu.';
 
 if (is_search()) {
     $blog_title = sprintf('Wyniki wyszukiwania: %s', get_search_query());
@@ -75,7 +75,12 @@ if (is_home() && !is_search() && $is_first_posts_page) {
                     </button>
                 </div>
                 <input type="hidden" name="post_type" value="post">
-                <button class="blog-index__search-button" type="submit">Szukaj</button>
+                <button class="blog-index__search-button" type="submit">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16" focusable="false">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                    Szukaj
+                </button>
             </form>
 
             <div class="blog-index__chips" id="blog-categories" aria-label="Popularne tematy">
@@ -141,7 +146,7 @@ if (is_home() && !is_search() && $is_first_posts_page) {
                             <a href="<?php echo esc_url(get_permalink($featured_post)); ?>"><?php echo esc_html(get_the_title($featured_post)); ?></a>
                         </h2>
                         <p class="blog-featured__meta">
-                            <span><?php echo esc_html(get_the_date('j F Y', $featured_post)); ?></span>
+                            <time datetime="<?php echo esc_attr(get_the_date('c', $featured_post)); ?>"><?php echo esc_html(get_the_date('j F Y', $featured_post)); ?></time>
                             <span aria-hidden="true">•</span>
                             <span><?php echo esc_html($featured_read_time); ?> min czytania</span>
                         </p>
@@ -184,7 +189,7 @@ if (is_home() && !is_search() && $is_first_posts_page) {
                                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                 </h3>
                                 <p class="blog-card__meta">
-                                    <span><?php echo esc_html(get_the_date()); ?></span>
+                                    <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
                                     <span aria-hidden="true">•</span>
                                     <span><?php echo esc_html($post_read_time); ?> min</span>
                                 </p>

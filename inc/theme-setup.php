@@ -12,7 +12,6 @@ function dietitian_setup(): void
     add_theme_support('title-tag');
 
     // Enable featured images on posts and pages
-    add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
 
     // Enable custom logo support (used in the header/nav)
@@ -48,11 +47,45 @@ function dietitian_setup(): void
 
 add_action('after_setup_theme', 'dietitian_setup');
 
-add_filter('document_title', 'dietitian_custom_title');
-function dietitian_custom_title($title)
+add_filter('document_title_parts', 'dietitian_custom_title_parts');
+function dietitian_custom_title_parts(array $parts): array
 {
+    $site_name = get_bloginfo('name');
+
     if (is_front_page()) {
-        return 'Centrum Dietoterapii | Dietetyk, Łowicz';
+        $parts['title'] = 'Centrum Dietoterapii | Dietetyk, Łowicz';
+        unset($parts['tagline'], $parts['site']);
+        return $parts;
     }
-    return $title;
+
+    if (is_home()) {
+        $parts['title'] = 'Blog dietetyczny';
+        $parts['site']  = $site_name;
+        return $parts;
+    }
+
+    if (is_category()) {
+        $parts['title'] = single_cat_title('', false);
+        $parts['site']  = $site_name;
+        return $parts;
+    }
+
+    if (is_tag()) {
+        $parts['title'] = single_tag_title('', false);
+        $parts['site']  = $site_name;
+        return $parts;
+    }
+
+    if (is_search()) {
+        /* translators: %s: search query */
+        $parts['title'] = sprintf('Wyniki dla: %s', get_search_query());
+        $parts['site']  = $site_name;
+        return $parts;
+    }
+
+    if (!isset($parts['site'])) {
+        $parts['site'] = $site_name;
+    }
+
+    return $parts;
 }

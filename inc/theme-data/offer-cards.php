@@ -9,7 +9,7 @@ function dietitian_get_offer_cards(): array
 {
     return [
         [
-            'title'        => 'Zdrowe Jelita & Trawienie 🦠',
+            'title'        => 'Zdrowe Jelita i Trawienie',
             'subtitle'     => 'Choroby autoimmunologiczne i chroniczne zapalenia',
             'description'  => 'Specjalizuję się w leczeniu dietetycznym chorób, które wpływają na Twoją codzienną jakość życia.',
             'items'        => [
@@ -20,7 +20,7 @@ function dietitian_get_offer_cards(): array
             ],
         ],
         [
-            'title'        => 'Metabolizm i Serce ❤️',
+            'title'        => 'Metabolizm i Serce',
             'subtitle'     => 'Choroby metaboliczne i profilaktyka',
             'description'  => 'Pomagam zregulować ciśnienie, cholesterol i poziom cukru poprzez zmianę nawyków żywieniowych.',
             'items'        => [
@@ -31,7 +31,7 @@ function dietitian_get_offer_cards(): array
             ],
         ],
         [
-            'title'        => 'Płodność i Hormony 👶',
+            'title'        => 'Płodność i Hormony',
             'subtitle'     => 'Wsparcie przed ciążą i zmiany nawyków',
             'description'  => 'Przygotowuję Cię do najważniejszych chwil i pomagam w zmianie trybu życia na lepszy.',
             'items'        => [

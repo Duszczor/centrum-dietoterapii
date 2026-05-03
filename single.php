@@ -19,9 +19,9 @@ $posts_page_url = is_string($posts_page_url) ? $posts_page_url : home_url('/blog
                 <div class="container blog-single__hero-inner">
                     <a class="blog-single__back-link" href="<?php echo esc_url($posts_page_url); ?>">Wróć do bloga</a>
                     <p class="blog-single__kicker"><?php echo esc_html($primary_category_name); ?></p>
-                    <h1 class="blog-single__title"><?php the_title(); ?></h1>
+                    <h1 class="blog-single__title"><?php echo esc_html(get_the_title()); ?></h1>
                     <p class="blog-single__meta">
-                        <span><?php echo esc_html(get_the_date('j F Y')); ?></span>
+                        <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('j F Y')); ?></time>
                         <span aria-hidden="true">•</span>
                         <span><?php echo esc_html($read_time); ?> min czytania</span>
                     </p>
@@ -76,9 +76,9 @@ $posts_page_url = is_string($posts_page_url) ? $posts_page_url : home_url('/blog
             ?>
 
             <?php if ($related_query->have_posts()) : ?>
-                <section class="blog-single__related" aria-label="Powiazane artykuly">
+                <section class="blog-single__related" aria-label="Powiązane artykuły">
                     <div class="container">
-                        <h2 class="blog-single__related-title">Powiazane artykuly</h2>
+                        <h2 class="blog-single__related-title">Powiązane artykuły</h2>
                         <div class="blog-single__related-grid">
                             <?php while ($related_query->have_posts()) : $related_query->the_post(); ?>
                                 <article class="blog-card">
@@ -96,7 +96,7 @@ $posts_page_url = is_string($posts_page_url) ? $posts_page_url : home_url('/blog
                                             echo esc_html(!empty($related_category) ? $related_category[0]->name : 'Poradnik');
                                             ?>
                                         </p>
-                                        <h3 class="blog-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                        <h3 class="blog-card__title"><a href="<?php the_permalink(); ?>"><?php echo esc_html(get_the_title()); ?></a></h3>
                                         <p class="blog-card__excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt(), 18)); ?></p>
                                     </div>
                                 </article>

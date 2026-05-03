@@ -25,7 +25,7 @@ $is_blog_variant = !empty($args['is_blog_variant']);
         </picture>
     </a>
 
-    <button class="site-nav__toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="<?php echo esc_attr($menu_id); ?>" type="button">
+    <button class="site-nav__toggle" aria-label="Otwórz menu nawigacji" aria-expanded="false" aria-controls="<?php echo esc_attr($menu_id); ?>" type="button">
         <span class="site-nav__toggle-bar"></span>
         <span class="site-nav__toggle-bar"></span>
         <span class="site-nav__toggle-bar"></span>
