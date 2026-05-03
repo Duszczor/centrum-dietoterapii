@@ -12,9 +12,17 @@ $is_blog_variant = !empty($args['is_blog_variant']);
 
 <nav class="<?php echo esc_attr($nav_classes); ?>" aria-label="<?php echo esc_attr($nav_label); ?>">
     <a href="<?php echo esc_url(home_url('/')); ?>" class="site-nav__logo" aria-label="<?php echo esc_attr($site_name); ?>">
-        <img src="<?php echo esc_url(dietitian_get_asset_uri('images/logo/logo.png')); ?>"
-            alt="<?php echo esc_attr($site_name); ?>"
-            class="site-nav__logo-image">
+        <picture>
+            <source srcset="<?php echo esc_url(dietitian_get_asset_uri('images/logo/logo.webp')); ?>" type="image/webp">
+            <img src="<?php echo esc_url(dietitian_get_asset_uri('images/logo/logo.png')); ?>"
+                alt="<?php echo esc_attr($site_name); ?>"
+                class="site-nav__logo-image"
+                width="606"
+                height="202"
+                fetchpriority="high"
+                loading="eager"
+                decoding="async">
+        </picture>
     </a>
 
     <button class="site-nav__toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="<?php echo esc_attr($menu_id); ?>" type="button">

@@ -32,8 +32,15 @@ $current_category_id = is_category() ? (int) get_queried_object_id() : 0;
 $is_first_posts_page = (int) get_query_var('paged', 1) <= 1;
 $featured_post = null;
 
-if (is_home() && !is_search() && $is_first_posts_page && have_posts() && count($wp_query->posts) > 1) {
-    $featured_post = $wp_query->posts[0] ?? null;
+if (is_home() && !is_search() && $is_first_posts_page) {
+    $featured_posts = get_posts([
+        'posts_per_page' => 2,
+        'post_type'      => 'post',
+    ]);
+
+    if (count($featured_posts) > 1) {
+        $featured_post = $featured_posts[0];
+    }
 }
 ?>
 

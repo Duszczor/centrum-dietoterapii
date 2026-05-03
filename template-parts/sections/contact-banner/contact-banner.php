@@ -1,6 +1,8 @@
 <?php
-$banner_image_url = dietitian_get_asset_uri('images/contact-banner/contact-banner.jpg');
-$banner_style = "background-image: url('{$banner_image_url}');";
+$banner_image_webp = dietitian_get_asset_uri('images/contact-banner/contact-banner.webp');
+$banner_image_jpg  = dietitian_get_asset_uri('images/contact-banner/contact-banner.jpg');
+// Use WebP (supported by all modern browsers since 2020+); fall back to JPG via <noscript> or CSS cascade
+$banner_style = "background-image: url('{$banner_image_webp}');";
 ?>
 <section
     class="contact-banner"

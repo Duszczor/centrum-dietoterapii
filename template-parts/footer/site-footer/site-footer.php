@@ -10,10 +10,16 @@ $footer_navigation_items = dietitian_get_footer_navigation_items();
         <div class="site-footer__top">
             <div class="site-footer__brand">
                 <a href="<?php echo $home_url; ?>" class="site-footer__logo" aria-label="<?php echo get_bloginfo('name'); ?>">
-                    <img
-                        src="<?php echo get_template_directory_uri() . '/assets/images/logo/logo.png'; ?>"
-                        alt="<?php echo get_bloginfo('name'); ?>"
-                        class="site-footer__logo-image">
+                    <picture>
+                        <source srcset="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo/logo.webp'); ?>" type="image/webp">
+                        <img
+                            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo/logo.png'); ?>"
+                            alt="<?php echo get_bloginfo('name'); ?>"
+                            class="site-footer__logo-image"
+                            width="606"
+                            height="202"
+                            loading="lazy">
+                    </picture>
                 </a>
                 <h2 class="site-footer__title" id="site-footer-title"><?php bloginfo('name'); ?></h2>
                 <p class="site-footer__description">Dietetyka kliniczna oparta na spokojnym prowadzeniu, jasnych zaleceniach i współpracy dopasowanej do Twojej sytuacji.</p>
