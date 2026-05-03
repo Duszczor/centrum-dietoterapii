@@ -6,8 +6,6 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  // Resolved from compiled assets/dist/style.css in production.
-  background-image: url("../images/contact-banner/contact-banner.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -69,6 +67,8 @@
 
 @media (max-width: $breakpoint-md) {
   .contact-banner {
+    background-attachment: scroll;
+
     &__container {
       justify-content: center;
       padding-block: clamp(3rem, 8vw, 4rem);

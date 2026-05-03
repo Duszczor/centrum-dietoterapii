@@ -31,6 +31,7 @@ rsync -a \
   --exclude='blocks/**/src/' \
   --exclude='package.json' \
   --exclude='package-lock.json' \
+  --exclude='.stylelintrc.json' \
   --exclude='.gitignore' \
   --exclude='.DS_Store' \
   "$ROOT_DIR/" "$TARGET_DIR/"

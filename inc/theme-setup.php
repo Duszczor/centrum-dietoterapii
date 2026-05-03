@@ -12,6 +12,7 @@ function dietitian_setup(): void
     add_theme_support('title-tag');
 
     // Enable featured images on posts and pages
+    add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
 
     // Enable custom logo support (used in the header/nav)
@@ -46,3 +47,12 @@ function dietitian_setup(): void
 }
 
 add_action('after_setup_theme', 'dietitian_setup');
+
+add_filter('document_title', 'dietitian_custom_title');
+function dietitian_custom_title($title)
+{
+    if (is_front_page()) {
+        return 'Centrum Dietoterapii | Dietetyk, Łowicz';
+    }
+    return $title;
+}

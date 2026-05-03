@@ -1,7 +1,12 @@
+<?php
+$banner_image_url = dietitian_get_asset_uri('images/contact-banner/contact-banner.jpg');
+$banner_style = "background-image: url('{$banner_image_url}');";
+?>
 <section
     class="contact-banner"
     id="contact-banner"
-    aria-labelledby="contact-banner-title">
+    aria-labelledby="contact-banner-title"
+    style="<?php echo esc_attr($banner_style); ?>">
 
     <div class="contact-banner__overlay" aria-hidden="true"></div>
 
