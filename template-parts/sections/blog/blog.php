@@ -9,7 +9,7 @@ $blog_intro = 'Rzetelne artykuły o odżywianiu, zdrowiu metabolicznym i praktyc
 
 if (is_search()) {
     $blog_title = sprintf('Wyniki wyszukiwania: %s', get_search_query());
-    $blog_intro = 'Sprawdz wyniki i wybierz material, ktory najlepiej odpowiada na Twoje pytanie.';
+    $blog_intro = 'Sprawdź wyniki i wybierz materiał, który najlepiej odpowiada na Twoje pytanie.';
 } elseif (is_category() || is_tag() || is_author() || is_date()) {
     $blog_title = wp_strip_all_tags(get_the_archive_title());
     $archive_description = wp_strip_all_tags(get_the_archive_description());
@@ -65,11 +65,11 @@ if (is_home() && !is_search() && $is_first_posts_page) {
                         type="search"
                         name="s"
                         value="<?php echo esc_attr(get_search_query()); ?>"
-                        placeholder="Szukaj tematow, np. insulinoopornosc, PCOS, odchudzanie">
+                        placeholder="Szukaj tematów, np. insulinooporność, PCOS, odchudzanie">
                     <button
                         class="blog-index__search-clear"
                         type="button"
-                        aria-label="Wyczysc pole wyszukiwania"
+                        aria-label="Wyczyść pole wyszukiwania"
                         data-search-clear>
                         <img src="<?php echo esc_url(dietitian_get_asset_uri('images/icon-x-grey.svg')); ?>" alt="">
                     </button>

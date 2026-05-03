@@ -29,7 +29,7 @@ $posts_page_url = is_string($posts_page_url) ? $posts_page_url : home_url('/blog
             </header>
 
             <?php if (has_post_thumbnail()) : ?>
-                <section class="blog-single__cover" aria-label="Obraz wyrozniajacy wpisu">
+                <section class="blog-single__cover" aria-label="Obraz wyróżniający wpisu">
                     <div class="container">
                         <figure class="blog-single__cover-frame">
                             <?php the_post_thumbnail('large', ['loading' => 'eager']); ?>
