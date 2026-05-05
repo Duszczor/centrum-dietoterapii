@@ -34,7 +34,6 @@ rsync -a \
   --exclude='.stylelintrc.json' \
   --exclude='.gitignore' \
   --exclude='.DS_Store' \
-  --exclude='inc/dev-seed.php' \
   "$ROOT_DIR/" "$TARGET_DIR/"
 
 # rsync --exclude does not recurse into subdirectories for .DS_Store, so clean manually.

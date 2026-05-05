@@ -15,4 +15,3 @@ require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/blocks.php';
 require get_template_directory() . '/inc/theme-icons.php';
 require get_template_directory() . '/inc/theme-data.php';
-require get_template_directory() . '/inc/dev-seed.php';
