@@ -61,25 +61,9 @@ function dietitian_get_front_page_hero_block(): ?array
 }
 
 /**
- * Return first offer cards block from current front-page content.
- */
-function dietitian_get_front_page_offer_cards_block(): ?array
-{
-    return dietitian_get_front_page_block('dietitian/offer-cards');
-}
-
-/**
  * Whether front page contains the custom hero block.
  */
 function dietitian_front_page_has_hero_block(): bool
 {
     return dietitian_get_front_page_hero_block() !== null;
-}
-
-/**
- * Whether front page contains the custom offer cards block.
- */
-function dietitian_front_page_has_offer_cards_block(): bool
-{
-    return dietitian_get_front_page_offer_cards_block() !== null;
 }

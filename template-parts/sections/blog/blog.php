@@ -127,7 +127,6 @@ if (is_home() && !is_search() && $is_first_posts_page) {
         $featured_category = get_the_category($featured_post->ID);
         $featured_category_name = !empty($featured_category) ? $featured_category[0]->name : 'Poradnik';
         $featured_excerpt = get_the_excerpt($featured_post->ID);
-        $featured_content = (string) get_post_field('post_content', $featured_post->ID);
         $featured_read_time = dietitian_get_read_time($featured_post->ID);
         ?>
         <section class="blog-featured" aria-label="Wyrozniony artykul">
@@ -223,30 +222,31 @@ if (is_home() && !is_search() && $is_first_posts_page) {
         </div>
     </section>
 
-    <?php
-    $popular_query = new WP_Query([
-        'post_type'           => 'post',
-        'posts_per_page'      => 3,
-        'ignore_sticky_posts' => true,
-        'orderby'             => 'comment_count',
-        'order'               => 'DESC',
-    ]);
-    ?>
-
-    <?php if ($popular_query->have_posts() && !is_search()) : ?>
-        <section class="blog-popular" id="blog-popular" aria-label="Popularne artykuly">
-            <div class="container">
-                <h2 class="blog-popular__title">Popularne tematy</h2>
-                <div class="blog-popular__list">
-                    <?php while ($popular_query->have_posts()) : $popular_query->the_post(); ?>
-                        <article class="blog-popular__item">
-                            <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                            <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 18)); ?></p>
-                        </article>
-                    <?php endwhile; ?>
+    <?php if (!is_search()) : ?>
+        <?php
+        $popular_query = new WP_Query([
+            'post_type'           => 'post',
+            'posts_per_page'      => 3,
+            'ignore_sticky_posts' => true,
+            'orderby'             => 'comment_count',
+            'order'               => 'DESC',
+        ]);
+        ?>
+        <?php if ($popular_query->have_posts()) : ?>
+            <section class="blog-popular" id="blog-popular" aria-label="Popularne artykuly">
+                <div class="container">
+                    <h2 class="blog-popular__title">Popularne tematy</h2>
+                    <div class="blog-popular__list">
+                        <?php while ($popular_query->have_posts()) : $popular_query->the_post(); ?>
+                            <article class="blog-popular__item">
+                                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 18)); ?></p>
+                            </article>
+                        <?php endwhile; ?>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        <?php endif; ?>
     <?php endif; ?>
 
     <?php wp_reset_postdata(); ?>

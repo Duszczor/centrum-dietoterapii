@@ -3,8 +3,8 @@
 /**
  * Theme Setup
  *
- * Registers theme supports and navigation menus.
- * Hooked into 'after_setup_theme' for proper load order.
+ * Registers theme supports, navigation menus, and title filters.
+ * Core setup is hooked into 'after_setup_theme' for proper load order.
  */
 function dietitian_setup(): void
 {
@@ -47,7 +47,6 @@ function dietitian_setup(): void
 
 add_action('after_setup_theme', 'dietitian_setup');
 
-add_filter('document_title_parts', 'dietitian_custom_title_parts');
 function dietitian_custom_title_parts(array $parts): array
 {
     $site_name = get_bloginfo('name');
@@ -89,3 +88,13 @@ function dietitian_custom_title_parts(array $parts): array
 
     return $parts;
 }
+
+add_filter('document_title_parts', 'dietitian_custom_title_parts');
+
+// Ładny tytuł archiwum kategorii: "Kategoria: [Nazwa kategorii]"
+add_filter('get_the_archive_title', function ($title) {
+    if (is_category()) {
+        $title = 'Kategoria: ' . single_cat_title('', false);
+    }
+    return $title;
+});

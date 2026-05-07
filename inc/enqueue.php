@@ -30,7 +30,7 @@ function dietitian_enqueue_assets(): void
         get_template_directory_uri() . '/assets/js/modules/navigation.js',
         [],
         filemtime(get_template_directory() . '/assets/js/modules/navigation.js'),
-        true
+        ['in_footer' => true, 'strategy' => 'defer']
     );
 
     // Smooth-scroll module
@@ -39,7 +39,7 @@ function dietitian_enqueue_assets(): void
         get_template_directory_uri() . '/assets/js/modules/smooth-scroll.js',
         [],
         filemtime(get_template_directory() . '/assets/js/modules/smooth-scroll.js'),
-        true
+        ['in_footer' => true, 'strategy' => 'defer']
     );
 
     // Section observer module
@@ -48,7 +48,7 @@ function dietitian_enqueue_assets(): void
         get_template_directory_uri() . '/assets/js/modules/section-observer.js',
         [],
         filemtime(get_template_directory() . '/assets/js/modules/section-observer.js'),
-        true
+        ['in_footer' => true, 'strategy' => 'defer']
     );
 
     if (is_front_page()) {
@@ -58,7 +58,7 @@ function dietitian_enqueue_assets(): void
             get_template_directory_uri() . '/assets/js/modules/page-motion/config.js',
             [],
             filemtime(get_template_directory() . '/assets/js/modules/page-motion/config.js'),
-            true
+            ['in_footer' => true, 'strategy' => 'defer']
         );
 
         // Homepage motion widget module
@@ -67,7 +67,7 @@ function dietitian_enqueue_assets(): void
             get_template_directory_uri() . '/assets/js/modules/page-motion/widget.js',
             ['dietitian-page-motion-config'],
             filemtime(get_template_directory() . '/assets/js/modules/page-motion/widget.js'),
-            true
+            ['in_footer' => true, 'strategy' => 'defer']
         );
 
         // Homepage motion reveal module
@@ -76,7 +76,7 @@ function dietitian_enqueue_assets(): void
             get_template_directory_uri() . '/assets/js/modules/page-motion/reveal.js',
             ['dietitian-page-motion-config'],
             filemtime(get_template_directory() . '/assets/js/modules/page-motion/reveal.js'),
-            true
+            ['in_footer' => true, 'strategy' => 'defer']
         );
 
         // Homepage motion orchestrator
@@ -89,7 +89,7 @@ function dietitian_enqueue_assets(): void
                 'dietitian-page-motion-reveal',
             ],
             filemtime(get_template_directory() . '/assets/js/modules/page-motion.js'),
-            true
+            ['in_footer' => true, 'strategy' => 'defer']
         );
     }
 
@@ -99,7 +99,7 @@ function dietitian_enqueue_assets(): void
         get_template_directory_uri() . '/assets/js/bootstrap/constants.js',
         [],
         filemtime(get_template_directory() . '/assets/js/bootstrap/constants.js'),
-        true
+        ['in_footer' => true, 'strategy' => 'defer']
     );
 
     // Bootstrap page context factory
@@ -108,7 +108,7 @@ function dietitian_enqueue_assets(): void
         get_template_directory_uri() . '/assets/js/bootstrap/create-page-context.js',
         ['dietitian-bootstrap-constants'],
         filemtime(get_template_directory() . '/assets/js/bootstrap/create-page-context.js'),
-        true
+        ['in_footer' => true, 'strategy' => 'defer']
     );
 
     // Bootstrap module initializer
@@ -117,7 +117,7 @@ function dietitian_enqueue_assets(): void
         get_template_directory_uri() . '/assets/js/bootstrap/init-modules.js',
         ['dietitian-bootstrap-constants'],
         filemtime(get_template_directory() . '/assets/js/bootstrap/init-modules.js'),
-        true
+        ['in_footer' => true, 'strategy' => 'defer']
     );
 
     // Bootstrap app orchestrator
@@ -129,7 +129,7 @@ function dietitian_enqueue_assets(): void
             'dietitian-bootstrap-init-modules',
         ],
         filemtime(get_template_directory() . '/assets/js/bootstrap/bootstrap-app.js'),
-        true
+        ['in_footer' => true, 'strategy' => 'defer']
     );
 
     // Main JavaScript file (bootstrap/composition layer)
@@ -149,41 +149,17 @@ function dietitian_enqueue_assets(): void
         get_template_directory_uri() . '/assets/js/main.js',
         $main_dependencies,
         filemtime(get_template_directory() . '/assets/js/main.js'),
-        true // Load in footer
+        ['in_footer' => true, 'strategy' => 'defer']
     );
 
-    // Add defer to all custom scripts — they're already in footer, defer removes them
-    // from the critical request chain so they don't impact LCP timing.
-    $deferred_handles = [
-        'dietitian-navigation-module',
-        'dietitian-smooth-scroll-module',
-        'dietitian-section-observer-module',
-        'dietitian-bootstrap-constants',
-        'dietitian-bootstrap-create-page-context',
-        'dietitian-bootstrap-init-modules',
-        'dietitian-bootstrap-app',
-        'dietitian-main',
-    ];
-
+    // ZnanyLekarz floating widget (front page): loaded lazily on first user interaction.
     if (is_front_page()) {
-        $deferred_handles = array_merge($deferred_handles, [
-            'dietitian-page-motion-config',
-            'dietitian-page-motion-widget',
-            'dietitian-page-motion-reveal',
-            'dietitian-page-motion-module',
-        ]);
-    }
-
-    foreach ($deferred_handles as $handle) {
-        wp_script_add_data($handle, 'defer', true);
-    }
-
-    // ZnanyLekarz floating widget (front page): load only when browser is idle.
-    if (is_front_page()) {
-        wp_add_inline_script(
-            'dietitian-main',
-            "(function(){if(!document.getElementById('zl-url')){return;}var loaded=false;var events=['pointerdown','touchstart','scroll','keydown'];var loadWidget=function(){if(loaded||document.getElementById('dietitian-znanylekarz-script')){return;}loaded=true;events.forEach(function(e){window.removeEventListener(e,loadWidget,{passive:true});});var s=document.createElement('script');s.id='dietitian-znanylekarz-script';s.src='https://platform.docplanner.com/js/widget.js';s.async=true;document.body.appendChild(s);};events.forEach(function(e){window.addEventListener(e,loadWidget,{once:true,passive:true});});window.addEventListener('load',function(){window.setTimeout(loadWidget,10000);},{once:true});})();",
-            'after'
+        wp_enqueue_script(
+            'dietitian-zl-widget-loader',
+            get_template_directory_uri() . '/assets/js/modules/zl-widget-loader.js',
+            ['dietitian-main'],
+            filemtime(get_template_directory() . '/assets/js/modules/zl-widget-loader.js'),
+            ['in_footer' => true, 'strategy' => 'defer']
         );
     }
 }
@@ -208,23 +184,13 @@ add_filter('style_loader_tag', 'dietitian_optimize_google_fonts_stylesheet', 10,
 
 /**
  * Add preconnect hints for Google Fonts domains.
+ *
+ * Uses wp_head directly — wp_resource_hints was removed in WP 6.7.
  */
-function dietitian_add_google_fonts_resource_hints(array $urls, string $relation_type): array
-{
-    if ($relation_type !== 'preconnect') {
-        return $urls;
-    }
-
-    $urls[] = 'https://fonts.googleapis.com';
-    $urls[] = [
-        'href' => 'https://fonts.gstatic.com',
-        'crossorigin',
-    ];
-
-    return $urls;
-}
-
-add_filter('wp_resource_hints', 'dietitian_add_google_fonts_resource_hints', 10, 2);
+add_action('wp_head', function (): void {
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+}, 1);
 
 /**
  * Preload hero image on the front page to improve LCP.
@@ -269,20 +235,3 @@ function dietitian_preload_main_stylesheet(): void
 }
 
 add_action('wp_head', 'dietitian_preload_main_stylesheet', 1);
-
-/**
- * Output defer attribute for scripts that have the 'defer' data flag set.
- */
-function dietitian_add_defer_to_scripts(string $tag, string $handle): string
-{
-    if (wp_scripts()->get_data($handle, 'defer')) {
-        // Avoid doubling up if defer is already present (e.g. via another filter).
-        if (strpos($tag, ' defer') === false) {
-            $tag = str_replace(' src=', ' defer src=', $tag);
-        }
-    }
-
-    return $tag;
-}
-
-add_filter('script_loader_tag', 'dietitian_add_defer_to_scripts', 10, 2);

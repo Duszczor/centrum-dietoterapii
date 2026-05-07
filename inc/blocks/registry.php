@@ -7,7 +7,6 @@ function dietitian_get_block_render_callbacks(): array
 {
     return [
         'hero' => 'dietitian_render_hero_block',
-        'offer-cards' => 'dietitian_render_offer_cards_block',
     ];
 }
 
